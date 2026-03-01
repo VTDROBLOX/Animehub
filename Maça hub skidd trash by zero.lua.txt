@@ -2397,7 +2397,7 @@ QuestNeta = function()
 		};
 	end;
 	local Library = loadstring(game:HttpGet("https://pastefy.app/2NsMZRkm/raw"))():MakeWindow({
-    Title = "𝙏𝙖̀𝙮 𝙃𝙪𝙗",
+    Title = "Tày Hub",
     SubTitle = "by Tùng dz",
     SaveFolder = "Maça.json"
 })
@@ -2556,8 +2556,8 @@ local Setting = Library:MakeTab({
     Icon = "rbxassetid://7734053495"
 })
 Discord:AddDiscordInvite({
-    Name = "𝙑𝙏𝘿 𝙍𝙊𝘽𝙇𝙊𝙓 ",
-    Description = "vào sever ngay không = 𝙂𝙖𝙮",
+    Name = "VTD ROBLOX",
+    Description = "vào sever ngay không = GAY",
     Logo = "rbxassetid://104581093792126",
     Invite = "https://discord.gg/bdaczqK55h"
 })
@@ -2565,7 +2565,7 @@ local credits = Discord:AddParagraph({
     Title = "Credits For Someone Peoples",
     Desc = ""
 })
-credits:SetDesc("nigth mystic, astral, tboy kiddo etc,𝙑𝙏𝘿 𝙍𝙊𝘽𝙇𝙊𝙓 ")
+credits:SetDesc("nigth mystic, astral, tboy kiddo etc,vtdroblox ")
 
 Shop:AddSection("Fighting Shop")
 Shop:AddButton({
