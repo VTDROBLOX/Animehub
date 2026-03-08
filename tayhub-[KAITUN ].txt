@@ -1,5 +1,5 @@
--- [HDANH HUB KEY GATE]
---   HDANH HUB  KEY GATE
+-- [Tày Hub 1 lần = vĩnh viễn]
+--   Tày Hub 1 lần = vĩnh viễn KEY GATE
 -- =======================
 
 local Players      = game:GetService("Players")
@@ -8,8 +8,8 @@ local HttpService  = game:GetService("HttpService")
 local SoundService = game:GetService("SoundService")
 local plr          = Players.LocalPlayer
 
-local SERVER  = "http://eu.leonodes.xyz:24771"
-local DISCORD = "https://discord.gg/enxE3dEbTP"
+local SERVER  = "https://link4sub.com/ItRutr5UG4"
+local DISCORD = "https://discord.gg/ph5CznY9PU"
 local GETKEY  = SERVER.."/getkey"
 
 -- HWID
@@ -53,7 +53,7 @@ local C = {
 
 -- BUILD GUI
 local SG = Instance.new("ScreenGui")
-SG.Name="HDanhHub_Gate"; SG.ResetOnSpawn=false
+SG.Name="TàyHub_Gate"; SG.ResetOnSpawn=false
 SG.IgnoreGuiInset=true; SG.DisplayOrder=9999
 SG.ZIndexBehavior=Enum.ZIndexBehavior.Sibling
 SG.Parent=plr:WaitForChild("PlayerGui")
@@ -103,7 +103,7 @@ _.Color=ColorSequence.new(Color3.fromRGB(70,14,100),Color3.fromRGB(25,5,40))
 _.Rotation=135; _.Parent=Ring
 local Img=Instance.new("ImageLabel")
 Img.Size=UDim2.new(0,38,0,38); Img.Position=UDim2.new(.5,-19,.5,-19)
-Img.BackgroundTransparency=1; Img.Image="rbxassetid://123613996022560"
+Img.BackgroundTransparency=1; Img.Image="rbxassetid://73902065845651"
 Img.ScaleType=Enum.ScaleType.Fit; Img.ZIndex=5; Img.Parent=Ring
 
 -- Halo glow
@@ -115,7 +115,7 @@ Halo.ImageColor3=C.p3; Halo.ImageTransparency=0.55; Halo.ZIndex=3; Halo.Parent=P
 -- Title  y=84
 local Ttl=Instance.new("TextLabel")
 Ttl.Size=UDim2.new(1,-16,0,24); Ttl.Position=UDim2.new(0,8,0,84)
-Ttl.BackgroundTransparency=1; Ttl.Text="HDANH HUB"
+Ttl.BackgroundTransparency=1; Ttl.Text="Tày Hub lấy 1 lần = vĩnh viễn"
 Ttl.TextColor3=C.p2; Ttl.TextSize=20; Ttl.Font=Enum.Font.GothamBold
 Ttl.ZIndex=4; Ttl.Parent=Panel
 
@@ -237,7 +237,7 @@ SPS.TextXAlignment=Enum.TextXAlignment.Left; SPS.ZIndex=5; SPS.Parent=SP
 -- Footer  y=352
 local Ft=Instance.new("TextLabel")
 Ft.Size=UDim2.new(1,0,0,14); Ft.Position=UDim2.new(0,0,0,382)
-Ft.BackgroundTransparency=1; Ft.Text="HDANH HUB  v3.1"
+Ft.BackgroundTransparency=1; Ft.Text="Tày Hub 1 lần = vĩnh viễn  v3.1"
 Ft.TextColor3=C.pD; Ft.TextSize=9; Ft.Font=Enum.Font.Gotham
 Ft.ZIndex=4; Ft.Parent=Panel
 
@@ -326,7 +326,7 @@ local function doVerify()
 
                 -- ScreenGui
                 local wSG = Instance.new("ScreenGui")
-                wSG.Name           = "HDanhHub_KeyTimer"
+                wSG.Name           = "TàyHubHub_KeyTimer"
                 wSG.ResetOnSpawn   = false
                 wSG.IgnoreGuiInset = true
                 wSG.DisplayOrder   = 8888
@@ -398,7 +398,7 @@ local function doVerify()
 
                 -- Tao noi dung hien thi
                 local function makeText(timeStr)
-                    return "Thoi gian con lai: "..timeStr.." | Script by HDanh Hub"
+                    return "Thoi gian con lai: "..timeStr.." | Script by Tày Hub 1 lần = vĩnh viễn"
                 end
 
                 -- Tinh thoi gian
