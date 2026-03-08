@@ -1601,10 +1601,10 @@ gg.__namecall = newcclosure(function(...)
     end
     return old(...)
 end)
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/viplam087-png/Hjj/main/LibraryRedz.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
 local Window = Library:MakeWindow({
-  Title = "Hiru Hub : Blox Fruits",
-  SubTitle = "by Kiddo",
+  Title = "Tày Hub : Blox Fruits",
+  SubTitle = "by tùng dz",
   SaveFolder = "Hiru Hub | Blox Fruits.lua"
 })
 local Discord = Window:MakeTab({
