@@ -8,9 +8,9 @@ local HttpService  = game:GetService("HttpService")
 local SoundService = game:GetService("SoundService")
 local plr          = Players.LocalPlayer
 
-local SERVER  = "https://link4sub.com/ItRutr5UG4"
+local SERVER  = "https://link4sub.com/ItRutr5UG"
 local DISCORD = "https://discord.gg/ph5CznY9PU"
-local GETKEY  = SERVER.."/getkey"
+local GETKEY  = SERVER.."4"
 
 -- HWID
 local function getHWID()
