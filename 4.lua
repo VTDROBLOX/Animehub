@@ -12,37 +12,37 @@ getgenv().Nousigi = true
 
 local DisableAnimation = game.Players.LocalPlayer.PlayerGui:FindFirstChild('TouchGui')
 local T1UIColor = {
-	["Border Color"] = Color3.fromRGB(255,140,0),          -- roxo escuro
-	["Click Effect Color"] = Color3.fromRGB(200, 200, 200),
-	["Setting Icon Color"] = Color3.fromRGB(200, 200, 200),
+	["Border Color"] = Color3.fromRGB(100, 180, 220),          -- xanh nhat vien
+	["Click Effect Color"] = Color3.fromRGB(180, 230, 255),
+	["Setting Icon Color"] = Color3.fromRGB(80, 160, 210),
 	["Logo Image"] = "rbxassetid://133779423735605",
-	["Search Icon Color"] = Color3.fromRGB(200, 200, 200),
-	["Search Icon Highlight Color"] = Color3.fromRGB(60, 0, 100),
-	["GUI Text Color"] = Color3.fromRGB(220, 220, 220),
-	["Text Color"] = Color3.fromRGB(220, 220, 220),
-	["Placeholder Text Color"] = Color3.fromRGB(110, 110, 110),
-	["Title Text Color"] = Color3.fromRGB(255,140,0),
-	["Background Main Color"] = Color3.fromRGB(0, 0, 0),    -- full black
-	["Background 1 Color"] = Color3.fromRGB(0, 0, 0),       -- full black
-	["Background 1 Transparency"] = 0,                       -- sem transparencia
-	["Background 2 Color"] = Color3.fromRGB(0, 0, 0),
-	["Background 3 Color"] = Color3.fromRGB(0, 0, 0),
+	["Search Icon Color"] = Color3.fromRGB(80, 160, 210),
+	["Search Icon Highlight Color"] = Color3.fromRGB(140, 210, 240),
+	["GUI Text Color"] = Color3.fromRGB(30, 60, 90),
+	["Text Color"] = Color3.fromRGB(30, 60, 90),
+	["Placeholder Text Color"] = Color3.fromRGB(140, 180, 210),
+	["Title Text Color"] = Color3.fromRGB(0, 120, 190),
+	["Background Main Color"] = Color3.fromRGB(230, 245, 255),  -- trang xanh nhat
+	["Background 1 Color"] = Color3.fromRGB(220, 240, 255),     -- trang xanh nhat
+	["Background 1 Transparency"] = 0,
+	["Background 2 Color"] = Color3.fromRGB(205, 232, 252),
+	["Background 3 Color"] = Color3.fromRGB(215, 238, 255),
 	["Background Image"] = "",
-	["Page Selected Color"] = Color3.fromRGB(70, 0, 120),   -- roxo escuro selecionado
-	["Section Text Color"] = Color3.fromRGB(200, 200, 200),
-	["Section Underline Color"] = Color3.fromRGB(60, 0, 100),
-	["Toggle Border Color"] = Color3.fromRGB(60, 0, 100),
-	["Toggle Checked Color"] = Color3.fromRGB(255,160,40),
-	["Toggle Desc Color"] = Color3.fromRGB(150, 150, 150),
-	["Button Color"] = Color3.fromRGB(255,140,0),          -- roxo escuro
-	["Label Color"] = Color3.fromRGB(0, 0, 0),
-	["Dropdown Icon Color"] = Color3.fromRGB(200, 200, 200),
-	["Dropdown Selected Color"] = Color3.fromRGB(255,140,0),
-	["Dropdown Selected Check Color"] = Color3.fromRGB(40, 0, 80),
-	["Textbox Highlight Color"] = Color3.fromRGB(60, 0, 100),
-	["Box Highlight Color"] = Color3.fromRGB(60, 0, 100),
-	["Slider Line Color"] = Color3.fromRGB(60, 0, 100),
-	["Slider Highlight Color"] = Color3.fromRGB(40, 0, 80),
+	["Page Selected Color"] = Color3.fromRGB(160, 215, 245),   -- xanh nhat duoc chon
+	["Section Text Color"] = Color3.fromRGB(30, 90, 140),
+	["Section Underline Color"] = Color3.fromRGB(100, 180, 220),
+	["Toggle Border Color"] = Color3.fromRGB(100, 180, 220),
+	["Toggle Checked Color"] = Color3.fromRGB(0, 150, 210),
+	["Toggle Desc Color"] = Color3.fromRGB(80, 130, 170),
+	["Button Color"] = Color3.fromRGB(0, 140, 200),            -- xanh duong chinh
+	["Label Color"] = Color3.fromRGB(230, 245, 255),
+	["Dropdown Icon Color"] = Color3.fromRGB(80, 160, 210),
+	["Dropdown Selected Color"] = Color3.fromRGB(0, 140, 200),
+	["Dropdown Selected Check Color"] = Color3.fromRGB(180, 225, 250),
+	["Textbox Highlight Color"] = Color3.fromRGB(140, 210, 240),
+	["Box Highlight Color"] = Color3.fromRGB(140, 210, 240),
+	["Slider Line Color"] = Color3.fromRGB(120, 195, 230),
+	["Slider Highlight Color"] = Color3.fromRGB(0, 150, 210),
 	["Tween Animation 1 Speed"] = DisableAnimation and 0 or 0.25,
 	["Tween Animation 2 Speed"] = DisableAnimation and 0 or 0.5,
 	["Tween Animation 3 Speed"] = DisableAnimation and 0 or 0.1,
@@ -3760,28 +3760,28 @@ local Window = Library:CreateWindow({
 })
 
 local InfoTab = Window:AddTab("Tab | Discord")
-local ServerTab = Window:AddTab("Tab | Status and Server")
-local SettingsTab = Window:AddTab("Tab | Settings")
-local HoldAndSkillTab = Window:AddTab("Tab | Hold And Skill")
-local SeaSettingsTab = Window:AddTab("Tab | Sea Settings")
-local ShopTab = Window:AddTab("Tab | Shop")
-local MainTab = Window:AddTab("Tab | Main Farm")
+local ServerTab = Window:AddTab("Tab | Trạng Thái & Server")
+local SettingsTab = Window:AddTab("Tab | Cài Đặt")
+local HoldAndSkillTab = Window:AddTab("Tab | Kỹ Năng")
+local SeaSettingsTab = Window:AddTab("Tab | Cài Đặt Biển")
+local ShopTab = Window:AddTab("Tab | Cửa Hàng")
+local MainTab = Window:AddTab("Tab | Farm Chính")
 local MultiFarmTab = Window:AddTab("Tab | Multi Farm")
-local OthersTab = Window:AddTab("Tab | Others")
-local FarmingHopTab = Window:AddTab("Tab | Farming and Hop")
-local FruitTab = Window:AddTab("Tab | Fruit")
+local OthersTab = Window:AddTab("Tab | Khác")
+local FarmingHopTab = Window:AddTab("Tab | Farm & Hop")
+local FruitTab = Window:AddTab("Tab | Trái Cây")
 local RaidTab = Window:AddTab("Tab | Raid")
-local DungeonTab = Window:AddTab("Tab | Dungeon")
+local DungeonTab = Window:AddTab("Tab | Ngục Tối")
 local CombatTab = Window:AddTab("Tab | PvP")
-local RaceTab = Window:AddTab("Tab | Race")
+local RaceTab = Window:AddTab("Tab | Chủng Tộc")
 local DragonDojoTab = Window:AddTab("Tab | Dragon Dojo")
-local SeaEventTab = Window:AddTab("Tab | Sea Event")
-local SeaStackTab = Window:AddTab("Tab | Islands")
-local EspTab = Window:AddTab("Tab | Esp")
-local TeleportTab = Window:AddTab("Tab | Teleport")
-local LocalPlayerTab = Window:AddTab("Tab | Local Player")
-local StatsTab = Window:AddTab("Tab | Stats")
-local MiscTab = Window:AddTab("Tab | Misc")
+local SeaEventTab = Window:AddTab("Tab | Sự Kiện Biển")
+local SeaStackTab = Window:AddTab("Tab | Đảo")
+local EspTab = Window:AddTab("Tab | ESP")
+local TeleportTab = Window:AddTab("Tab | Dịch Chuyển")
+local LocalPlayerTab = Window:AddTab("Tab | Nhân Vật")
+local StatsTab = Window:AddTab("Tab | Chỉ Số")
+local MiscTab = Window:AddTab("Tab | Tiện Ích")
 
 
 
@@ -3795,24 +3795,24 @@ task.delay(2, function()
 			Duration = 6
 		});
 	end);
-	Library:Notify({Title = "Tày Hub", Content = "Script carregado! Bem-vindo, " .. game.Players.LocalPlayer.Name, Icon = "star", Duration = 5});
+	Library:Notify({Title = "Tày Hub", Content = "Script đã tải! Chào mừng, " .. game.Players.LocalPlayer.Name, Icon = "star", Duration = 5});
 end);
 
 InfoTab:AddSection(" Tày Hub ");
 InfoTab:AddParagraph({
 	Title = "Tày Hub",
-	Desc = "Version: R6.1 | Game: Blox Fruits\nMade for the Tày HubCommunity\nAll features are free to use."
+	Desc = "Phiên bản: R6.1 | Game: Blox Fruits\nDành cho cộng đồng Tày Hub\nTất cả tính năng đều miễn phí."
 });
 InfoTab:AddParagraph({
 	Title = " Discord Server",
-	Desc = "Join our community for updates, support and more!\nLink: discord.gg/f4K5sDwKkn"
+	Desc = "Tham gia cộng đồng để cập nhật, hỗ trợ và nhiều hơn!\nLink: discord.gg/f4K5sDwKkn"
 });
 InfoTab:AddButton({
-	Title = "Join Tày Hub Community Discord",
-	Desc = "Click to open the Discord invite link",
+	Title = "Tham Gia Discord Tày Hub",
+	Desc = "Nhấn để mở link mời Discord",
 	Callback = function()
 		setclipboard("https://discord.gg/f4K5sDwKkn");
-		Library:Notify({Title = "Tày Hub", Content = "Discord link copied to clipboard!\ndiscord.gg/f4K5sDwKkn", Icon = "bell", Duration = 5});
+		Library:Notify({Title = "Tày Hub", Content = "Đã sao chép link Discord!\ndiscord.gg/f4K5sDwKkn", Icon = "bell", Duration = 5});
 	end
 });
 InfoTab:AddParagraph({
@@ -3855,12 +3855,12 @@ local function SaveFH()
 end;
 
 -- SEA 1 FARMS
-FarmingHopTab:AddSection(" Sea 1 Farms");
+FarmingHopTab:AddSection("🌊 Farm Biển 1");
 
 local _FHAutoSaw = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Saw Sword"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Saw Sword [Sea 1]",
-	Desc = "Auto kill The Saw boss para Saw Sword",
+	Title = "Tự Động Saw Sword [Biển 1]",
+	Desc = "Tự động giết boss The Saw để lấy Saw Sword",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Saw Sword"] or false,
 	Callback = function(state)
 		_FHAutoSaw = state;
@@ -3890,8 +3890,8 @@ end);
 
 local _FHAutoSaber = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Saber Sword"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Saber Sword [Sea 1]",
-	Desc = "Auto complete Saber Expert quest chain - Sea 1",
+	Title = "Tự Động Saber Sword [Biển 1]",
+	Desc = "Tự động hoàn thành chuỗi nhiệm vụ Saber Expert - Biển 1",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Saber Sword"] or false,
 	Callback = function(state)
 		_FHAutoSaber = state;
@@ -3924,8 +3924,8 @@ end);
 
 local _FHAutoUsoap = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Usoap Hat"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Usoap's Hat [Sea 1]",
-	Desc = "Auto kill players perto para Usoap Hat",
+	Title = "Tự Động Usoap's Hat [Biển 1]",
+	Desc = "Tự động giết người chơi gần đó để lấy Usoap Hat",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Usoap Hat"] or false,
 	Callback = function(state)
 		_FHAutoUsoap = state;
@@ -3957,8 +3957,8 @@ end);
 
 local _FHobsFarm = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Observation"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Farm Observation [All Seas]",
-	Desc = "Auto farm Observation Haki (Ken) - Sea 1, 2 e 3",
+	Title = "Tự Động Farm Observation [Tất Cả Biển]",
+	Desc = "Tự động farm Haki Quan Sát (Ken) - Biển 1, 2 và 3",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Observation"] or false,
 	Callback = function(state)
 		_FHobsFarm = state;
@@ -4003,8 +4003,8 @@ end);
 
 local _FHBones = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Bones"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Random Bone [All Seas]",
-	Desc = "Auto buy Bones aleatoriamente para invocar bosses",
+	Title = "Tự Động Mua Xương Ngẫu Nhiên [Tất Cả Biển]",
+	Desc = "Tự động mua Xương ngẫu nhiên để triệu hồi boss",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Bones"] or false,
 	Callback = function(state)
 		_FHBones = state;
@@ -4025,8 +4025,8 @@ end);
 
 local _FHBisento = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Bisento"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Bisento V2 [Sea 1]",
-	Desc = "Auto kill Greybeard para Bisento - Sea 1",
+	Title = "Tự Động Bisento V2 [Biển 1]",
+	Desc = "Tự động giết Greybeard để lấy Bisento - Biển 1",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Bisento"] or false,
 	Callback = function(state)
 		_FHBisento = state;
@@ -4059,12 +4059,12 @@ end);
 
 
 -- SEA 2 FARMS
-FarmingHopTab:AddSection(" Sea 2 Farms");
+FarmingHopTab:AddSection("🌊 Farm Biển 2");
 
 local _FHDarkbeard = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Darkbeard"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Darkbeard [Sea 2 + Hop]",
-	Desc = "Auto kill Darkbeard - hops server se nao encontrado",
+	Title = "Tự Động Darkbeard [Biển 2 + Hop]",
+	Desc = "Tự động giết Darkbeard - chuyển server nếu không tìm thấy",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Darkbeard"] or false,
 	Callback = function(state)
 		_FHDarkbeard = state;
@@ -4097,8 +4097,8 @@ end);
 
 local _FHWarden = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Warden"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Warden Sword [Sea 2]",
-	Desc = "Auto kill Chief Warden para Warden Sword",
+	Title = "Tự Động Warden Sword [Biển 2]",
+	Desc = "Tự động giết Chief Warden để lấy Warden Sword",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Warden"] or false,
 	Callback = function(state)
 		_FHWarden = state;
@@ -4127,12 +4127,12 @@ spawn(function()
 end);
 
 -- SEA 3 FARMS
-FarmingHopTab:AddSection(" Sea 3 Farms");
+FarmingHopTab:AddSection("🌊 Farm Biển 3");
 
 local _FHEliteQuest = false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Elite Quest [Sea 3]",
-	Desc = "Vai ate Diablo/Urban/Deandre, mata o boss elite, hops se nao achar",
+	Title = "Tự Động Elite Quest [Biển 3]",
+	Desc = "Đi đến Diablo/Urban/Deandre, giết boss elite, hop server nếu không tìm thấy",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Elite Quest"] or false,
 	Callback = function(state)
 		_FHEliteQuest = state;
@@ -4191,8 +4191,8 @@ end);
 
 local _FHCitizenQuest = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Citizen Quest"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Citizen Quest / Ken V2 [Sea 3]",
-	Desc = "Auto Citizen Quest para desbloquear Ken V2",
+	Title = "Tự Động Citizen Quest / Ken V2 [Biển 3]",
+	Desc = "Tự động làm Citizen Quest để mở khóa Ken V2",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Citizen Quest"] or false,
 	Callback = function(state)
 		_FHCitizenQuest = state;
@@ -4222,8 +4222,8 @@ end);
 
 local _FHRipIndra = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Rip Indra"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Rip Indra [Sea 3 + Hop]",
-	Desc = "Auto kill Rip Indra - hops server se nao encontrado",
+	Title = "Tự Động Rip Indra [Biển 3 + Hop]",
+	Desc = "Tự động giết Rip Indra - chuyển server nếu không tìm thấy",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Rip Indra"] or false,
 	Callback = function(state)
 		_FHRipIndra = state;
@@ -4258,8 +4258,8 @@ end);
 
 local _FHMarineCoat = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Marine Coat"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Marine Coat [Sea 1 + Hop]",
-	Desc = "Auto farm Marine Coat - hops se Vice Admiral nao encontrado",
+	Title = "Tự Động Marine Coat [Biển 1 + Hop]",
+	Desc = "Tự động farm Marine Coat - hop server nếu không tìm thấy Vice Admiral",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Marine Coat"] or false,
 	Callback = function(state)
 		_FHMarineCoat = state;
@@ -4296,8 +4296,8 @@ end);
 
 local _FHSwanCoat = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Swan Coat"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto Swan Coat [Sea 2 + Hop]",
-	Desc = "Auto kill Don Swan para Swan Coat - Sea 2 Swan Room",
+	Title = "Tự Động Swan Coat [Biển 2 + Hop]",
+	Desc = "Tự động giết Don Swan để lấy Swan Coat - Biển 2 Swan Room",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Swan Coat"] or false,
 	Callback = function(state)
 		_FHSwanCoat = state;
@@ -4333,8 +4333,8 @@ end);
 
 local _FHGodChalice = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto God Chalice"]) or false;
 FarmingHopTab:AddToggle({
-	Title = "Auto God Chalice [Sea 3 + Hop]",
-	Desc = "Auto farm God Chalice - hops quando boss nao encontrado",
+	Title = "Tự Động God Chalice [Biển 3 + Hop]",
+	Desc = "Tự động farm God Chalice - hop server khi không tìm thấy boss",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto God Chalice"] or false,
 	Callback = function(state)
 		_FHGodChalice = state;
@@ -4365,9 +4365,9 @@ spawn(function()
 end);
 
 local _FHSkullGuitarMat = false;
-FarmingHopTab:AddSection(" Material Farm");
+FarmingHopTab:AddSection("⚙️ Farm Vật Liệu");
 FarmingHopTab:AddToggle({
-	Title = "Auto Farm Material Skull Guitar",
+	Title = "Tự Động Farm Vật Liệu Skull Guitar",
 	Desc = "Detecta e farma: 250 Ectoplasma (Haunted Ship Sea 2), 500 Bones (Haunted Castle Sea 2), 1 Dark Fragment (Darkbeard Sea 2). Ordem: Darkbeard > Ectoplasma > Ossos.",
 	Value = false,
 	Callback = function(state)
@@ -4436,8 +4436,8 @@ _G.Settings = {
 		["Selected Mon"] = nil,
 		["Auto Farm Mon"] = false,
 		["Selected Boss"] = nil,
-		["Auto Farm Boss"] = false,
-		["Auto Farm All Boss"] = false
+		["Tự Động Farm Boss"] = false,
+		["Tự Động Farm Tất Cả Boss"] = false
 	},
 	Event = {},
 	Farm = {
@@ -4446,7 +4446,7 @@ _G.Settings = {
 		["Selected Bone Farm Method"] = "Quest",
 		["Auto Farm Bone"] = false,
 		["Auto Random Surprise"] = false,
-		["Auto Pirate Raid"] = false,
+		["Tự Động Raid Cướp Biển"] = false,
 		["Auto Farm Chest Tween"] = false,
 		["Auto Farm Chest Instant"] = false,
 		["Auto Chest Hop"] = false,
@@ -4460,10 +4460,10 @@ _G.Settings = {
 		["Auto Farm Material"] = false
 	},
 	Multi = {
-		["Auto Fully Volcanic"] = false,
-		["Auto Reset After Complete"] = false,
-		["Auto Collect Egg"] = false,
-		["Auto Collect Bone"] = false,
+		["Tự Động Volcanic Đầy Đủ"] = false,
+		["Tự Động Reset Sau Khi Hoàn Thành"] = false,
+		["Tự Động Thu Thập Trứng"] = false,
+		["Tự Động Thu Thập Xương"] = false,
 		["Auto Farm Bounty"] = false,
 	},
 	Setting = {
@@ -6021,8 +6021,8 @@ task.spawn(function()
 		local farmActive = _G.Settings.Main["Auto Farm"]
 			or _G.Settings.Main["Auto Farm Mon"]
 			or _G.Settings.Main["Auto Farm Fast"]
-			or _G.Settings.Main["Auto Farm All Boss"]
-			or _G.Settings.Main["Auto Farm Boss"]
+			or _G.Settings.Main["Tự Động Farm Tất Cả Boss"]
+			or _G.Settings.Main["Tự Động Farm Boss"]
 			or _G.Settings.Main["Auto Farm Fruit Mastery"]
 			or _G.Settings.Main["Auto Farm Sword Mastery"]
 			or _G.Settings.Main["Auto Farm Gun Mastery"]
@@ -6410,7 +6410,7 @@ spawn(function()
 	pcall(function()
 		while wait() do
 			if World3 then
-				if _G.Settings.Farm["Auto Pirate Raid"] or _G.Settings.Race["Auto Race V3"] or _G.Settings.Farm["Auto Kill Cake Prince"] or _G.Settings.SeaStack["Tween To Kitsune Island"] or _G.Settings.SeaStack["Teleport To Frozen Dimension"] or _G.Settings.SeaStack["Sail To Frozen Dimension"] or _G.Settings.SeaStack["Summon Frozen Dimension"] or _G.Settings.SeaStack["Summon Kitsune Island"] or _G.Settings.SeaStack["Tween To Mirage Island"] or _G.Settings.Race["Auto Train"] or _G.Settings.Items["Auto Press Haki Button"] or _G.Settings.SeaEvent["Sail Boat"] or _G.Settings.Items["Auto Arena Trainer"] or _G.Settings.Race["Auto Kill Player After Trial"] or _G.Settings.Race["Tween To Highest Mirage"] or _G.Settings.Race["Auto Trial"] or _G.Settings.Race["Find Blue Gear"] or _G.Settings.Combat["Auto Kill Player Quest"] or _G.Settings.Items["Auto Cursed Dual Katana"] or _G.Settings.Farm["Auto Farm Bone"] or _G.Settings.Farm["Auto Kill Dough King"] or _G.Settings.Items["Auto Soul Guitar"] or _G.Settings.Items["Auto Tushita"] or _G.Settings.Farm["Auto Elite Hunter"] or _G.AutoKillSelectedPlayer or _G.Settings.Items["Auto Rainbow Haki"] or _G.Settings.Items["Auto Dark Dagger"] or _G.Settings.Farm["Auto Farm Ectoplasm"] or _G.Settings.Farm["Auto Observation V2"] or _G.Settings.Farm["Auto Musketeer Hat"] or _G.Settings.Items["Auto Holy Torch"] or _G.Settings.Items["Auto Hallow Scythe"] or _G.Settings.Farm["Auto Farm Katakuri"] or _G.Settings.Items["Auto Buddy Sword"] or _G.Settings.Items["Auto Canvander"] or _G.Settings.Raid["Auto Raid"] or _G.Settings.Main["Auto Summon Tyrant Of The Skies"] or _G.Settings.Main["Auto Kill Tyrant Of The Skies"] then
+				if _G.Settings.Farm["Tự Động Raid Cướp Biển"] or _G.Settings.Race["Auto Race V3"] or _G.Settings.Farm["Auto Kill Cake Prince"] or _G.Settings.SeaStack["Tween To Kitsune Island"] or _G.Settings.SeaStack["Teleport To Frozen Dimension"] or _G.Settings.SeaStack["Sail To Frozen Dimension"] or _G.Settings.SeaStack["Summon Frozen Dimension"] or _G.Settings.SeaStack["Summon Kitsune Island"] or _G.Settings.SeaStack["Tween To Mirage Island"] or _G.Settings.Race["Auto Train"] or _G.Settings.Items["Auto Press Haki Button"] or _G.Settings.SeaEvent["Sail Boat"] or _G.Settings.Items["Auto Arena Trainer"] or _G.Settings.Race["Auto Kill Player After Trial"] or _G.Settings.Race["Tween To Highest Mirage"] or _G.Settings.Race["Auto Trial"] or _G.Settings.Race["Find Blue Gear"] or _G.Settings.Combat["Auto Kill Player Quest"] or _G.Settings.Items["Auto Cursed Dual Katana"] or _G.Settings.Farm["Auto Farm Bone"] or _G.Settings.Farm["Auto Kill Dough King"] or _G.Settings.Items["Auto Soul Guitar"] or _G.Settings.Items["Auto Tushita"] or _G.Settings.Farm["Auto Elite Hunter"] or _G.AutoKillSelectedPlayer or _G.Settings.Items["Auto Rainbow Haki"] or _G.Settings.Items["Auto Dark Dagger"] or _G.Settings.Farm["Auto Farm Ectoplasm"] or _G.Settings.Farm["Auto Observation V2"] or _G.Settings.Farm["Auto Musketeer Hat"] or _G.Settings.Items["Auto Holy Torch"] or _G.Settings.Items["Auto Hallow Scythe"] or _G.Settings.Farm["Auto Farm Katakuri"] or _G.Settings.Items["Auto Buddy Sword"] or _G.Settings.Items["Auto Canvander"] or _G.Settings.Raid["Auto Raid"] or _G.Settings.Main["Auto Summon Tyrant Of The Skies"] or _G.Settings.Main["Auto Kill Tyrant Of The Skies"] then
 					if not (game:GetService("Players")).LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
 						local Noclip = Instance.new("BodyVelocity");
 						Noclip.Name = "BodyClip";
@@ -6427,7 +6427,7 @@ spawn(function()
 	pcall(function()
 		while wait() do
 			if World3 then
-				if _G.Settings.Farm["Auto Pirate Raid"] or _G.Settings.Race["Auto Race V3"] or _G.Settings.Farm["Auto Kill Cake Prince"] or _G.Settings.SeaStack["Tween To Kitsune Island"] or _G.Settings.SeaStack["Teleport To Frozen Dimension"] or _G.Settings.SeaStack["Sail To Frozen Dimension"] or _G.Settings.SeaStack["Summon Frozen Dimension"] or _G.Settings.SeaStack["Summon Kitsune Island"] or _G.Settings.SeaStack["Tween To Mirage Island"] or _G.Settings.Race["Auto Train"] or _G.Settings.Items["Auto Press Haki Button"] or _G.Settings.SeaEvent["Sail Boat"] or _G.Settings.Items["Auto Arena Trainer"] or _G.Settings.Race["Auto Kill Player After Trial"] or _G.Settings.Race["Tween To Highest Mirage"] or _G.Settings.Race["Auto Trial"] or _G.Settings.Race["Find Blue Gear"] or _G.Settings.Combat["Auto Kill Player Quest"] or _G.Settings.Items["Auto Cursed Dual Katana"] or _G.Settings.Farm["Auto Farm Bone"] or _G.Settings.Farm["Auto Kill Dough King"] or _G.Settings.Items["Auto Soul Guitar"] or _G.Settings.Items["Auto Tushita"] or _G.Settings.Farm["Auto Elite Hunter"] or _G.AutoKillSelectedPlayer or _G.Settings.Items["Auto Rainbow Haki"] or _G.Settings.Items["Auto Dark Dagger"] or _G.Settings.Farm["Auto Farm Ectoplasm"] or _G.Settings.Farm["Auto Observation V2"] or _G.Settings.Farm["Auto Musketeer Hat"] or _G.Settings.Items["Auto Holy Torch"] or _G.Settings.Items["Auto Hallow Scythe"] or _G.Settings.Farm["Auto Farm Katakuri"] or _G.Settings.Items["Auto Buddy Sword"] or _G.Settings.Items["Auto Canvander"] or _G.Settings.Farm["Auto Farm Leather"] or _G.Settings.Raid["Auto Raid"] or _G.Settings.Main["Auto Summon Tyrant Of The Skies"] or _G.Settings.Main["Auto Kill Tyrant Of The Skies"] then
+				if _G.Settings.Farm["Tự Động Raid Cướp Biển"] or _G.Settings.Race["Auto Race V3"] or _G.Settings.Farm["Auto Kill Cake Prince"] or _G.Settings.SeaStack["Tween To Kitsune Island"] or _G.Settings.SeaStack["Teleport To Frozen Dimension"] or _G.Settings.SeaStack["Sail To Frozen Dimension"] or _G.Settings.SeaStack["Summon Frozen Dimension"] or _G.Settings.SeaStack["Summon Kitsune Island"] or _G.Settings.SeaStack["Tween To Mirage Island"] or _G.Settings.Race["Auto Train"] or _G.Settings.Items["Auto Press Haki Button"] or _G.Settings.SeaEvent["Sail Boat"] or _G.Settings.Items["Auto Arena Trainer"] or _G.Settings.Race["Auto Kill Player After Trial"] or _G.Settings.Race["Tween To Highest Mirage"] or _G.Settings.Race["Auto Trial"] or _G.Settings.Race["Find Blue Gear"] or _G.Settings.Combat["Auto Kill Player Quest"] or _G.Settings.Items["Auto Cursed Dual Katana"] or _G.Settings.Farm["Auto Farm Bone"] or _G.Settings.Farm["Auto Kill Dough King"] or _G.Settings.Items["Auto Soul Guitar"] or _G.Settings.Items["Auto Tushita"] or _G.Settings.Farm["Auto Elite Hunter"] or _G.AutoKillSelectedPlayer or _G.Settings.Items["Auto Rainbow Haki"] or _G.Settings.Items["Auto Dark Dagger"] or _G.Settings.Farm["Auto Farm Ectoplasm"] or _G.Settings.Farm["Auto Observation V2"] or _G.Settings.Farm["Auto Musketeer Hat"] or _G.Settings.Items["Auto Holy Torch"] or _G.Settings.Items["Auto Hallow Scythe"] or _G.Settings.Farm["Auto Farm Katakuri"] or _G.Settings.Items["Auto Buddy Sword"] or _G.Settings.Items["Auto Canvander"] or _G.Settings.Farm["Auto Farm Leather"] or _G.Settings.Raid["Auto Raid"] or _G.Settings.Main["Auto Summon Tyrant Of The Skies"] or _G.Settings.Main["Auto Kill Tyrant Of The Skies"] then
 					for _, v in pairs((game:GetService("Players")).LocalPlayer.Character:GetDescendants()) do
 						if v:IsA("BasePart") then
 							v.CanCollide = false;
@@ -6441,7 +6441,7 @@ end);
 spawn(function()
 	pcall(function()
 		while wait() do
-			if _G.Settings.Main["Auto Farm"] or _G.Settings.Farm["Auto Farm Chest Tween"] or _G.Settings.Items["Auto Electric Claw"] or _G.Settings.Main["Auto Farm Fruit Mastery"] or _G.Settings.Main["Auto Farm Gun Mastery"] or _G.TeleportIsland or _G.AutoKillSelectedPlayer or _G.TeleportToPlayer or _G.Settings.Farm["Auto Farm Observation"] or _G.Settings.Fruit["Tween To Fruit"] or _G.TeleportNPC or _G.Settings.Main["Auto Farm Mon"] or _G.Settings.Main["Auto Farm Fast"] or _G.Settings.Main["Auto Farm All Boss"] or _G.Settings.Main["Auto Farm Boss"] or _G.Settings.Main["Auto Farm Sword Mastery"] or _G.Settings.Farm["Auto Farm Material"] then
+			if _G.Settings.Main["Auto Farm"] or _G.Settings.Farm["Auto Farm Chest Tween"] or _G.Settings.Items["Auto Electric Claw"] or _G.Settings.Main["Auto Farm Fruit Mastery"] or _G.Settings.Main["Auto Farm Gun Mastery"] or _G.TeleportIsland or _G.AutoKillSelectedPlayer or _G.TeleportToPlayer or _G.Settings.Farm["Auto Farm Observation"] or _G.Settings.Fruit["Tween To Fruit"] or _G.TeleportNPC or _G.Settings.Main["Auto Farm Mon"] or _G.Settings.Main["Auto Farm Fast"] or _G.Settings.Main["Tự Động Farm Tất Cả Boss"] or _G.Settings.Main["Tự Động Farm Boss"] or _G.Settings.Main["Auto Farm Sword Mastery"] or _G.Settings.Farm["Auto Farm Material"] then
 				if not (game:GetService("Players")).LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
 					local Noclip = Instance.new("BodyVelocity");
 					Noclip.Name = "BodyClip";
@@ -6456,7 +6456,7 @@ end);
 spawn(function()
 	pcall(function()
 		(game:GetService("RunService")).Stepped:Connect(function()
-			if _G.Settings.Main["Auto Farm"] or _G.Settings.Farm["Auto Farm Chest Tween"] or _G.Settings.Items["Auto Electric Claw"] or _G.Settings.Main["Auto Farm Fruit Mastery"] or _G.Settings.Main["Auto Farm Gun Mastery"] or _G.TeleportIsland or _G.AutoKillSelectedPlayer or _G.TeleportToPlayer or _G.Settings.Farm["Auto Farm Observation"] or _G.Settings.Fruit["Tween To Fruit"] or _G.TeleportNPC or _G.Settings.Main["Auto Farm Mon"] or _G.Settings.Main["Auto Farm Fast"] or _G.Settings.Main["Auto Farm All Boss"] or _G.Settings.Main["Auto Farm Boss"] or _G.Settings.Main["Auto Farm Sword Mastery"] or _G.Settings.Farm["Auto Farm Material"] then
+			if _G.Settings.Main["Auto Farm"] or _G.Settings.Farm["Auto Farm Chest Tween"] or _G.Settings.Items["Auto Electric Claw"] or _G.Settings.Main["Auto Farm Fruit Mastery"] or _G.Settings.Main["Auto Farm Gun Mastery"] or _G.TeleportIsland or _G.AutoKillSelectedPlayer or _G.TeleportToPlayer or _G.Settings.Farm["Auto Farm Observation"] or _G.Settings.Fruit["Tween To Fruit"] or _G.TeleportNPC or _G.Settings.Main["Auto Farm Mon"] or _G.Settings.Main["Auto Farm Fast"] or _G.Settings.Main["Tự Động Farm Tất Cả Boss"] or _G.Settings.Main["Tự Động Farm Boss"] or _G.Settings.Main["Auto Farm Sword Mastery"] or _G.Settings.Farm["Auto Farm Material"] then
 				for _, v in pairs((game:GetService("Players")).LocalPlayer.Character:GetDescendants()) do
 					if v:IsA("BasePart") then
 						v.CanCollide = false;
@@ -6504,7 +6504,7 @@ spawn(function()
 end);
 MainSection = MainTab:AddSection("Main");
 GameTimeParagraph = MainTab:AddParagraph({
-	Title = "Game Time",
+	Title = "Thời Gian Chơi",
 	Desc = "0",
 	Image = "timer",
 	ImageSize = 20
@@ -6520,7 +6520,7 @@ spawn(function()
 		end);
 	end;
 end);
-LevelFarmSection = MainTab:AddSection(" Level Farm");
+LevelFarmSection = MainTab:AddSection("⬆️ Farm Cấp Độ");
 
 -- Garante compatibilidade total com o sistema de quests existente
 local function QuestNeta()
@@ -6554,8 +6554,8 @@ local function TpConditional(hrp, targetCF, threshold)
 end;
 
 MainTab:AddDropdown({
-	Title = "Select Farm Mode",
-	Desc = "Level = por quest/level | Bone = Haunted Castle | Cake Prince | Tyrant Of The Skies | Nearest = ataca NPCs proximos",
+	Title = "Chọn Chế Độ Farm",
+	Desc = "Level = theo quest/level | Bone = Lâu Đài Ma | Cake Prince | Tyrant Of The Skies | Nearest = tấn công NPC gần nhất",
 	Values = {"Level", "Bone", "Cake Prince", "Tyrant Of The Skies", "Nearest"},
 	Value = "Level",
 	Callback = function(v)
@@ -6579,8 +6579,8 @@ task.spawn(function()
 end);
 
 MainTab:AddToggle({
-	Title = "Accept Quests",
-	Desc = "Aceita quest automaticamente antes de farmar",
+	Title = "Tự Động Nhận Nhiệm Vụ",
+	Desc = "Tự động nhận nhiệm vụ trước khi farm",
 	Value = false,
 	Callback = function(v)
 		_G.EclipseAcceptQuest = v;
@@ -6588,8 +6588,8 @@ MainTab:AddToggle({
 });
 
 AutoLevelFarmToggle = MainTab:AddToggle({
-	Title = "Start Farm",
-	Desc = "Inicia o modo de farm selecionado",
+	Title = "Bắt Đầu Farm",
+	Desc = "Khởi động chế độ farm đã chọn",
 	Value = _G.Settings.Main["Auto Farm"],
 	Callback = function(v)
 		_G.EclipseStartFarm = v;
@@ -7211,7 +7211,7 @@ end);
 
 -- [Auto Fast Farm removido]
 
-MasteryFarmSection = MainTab:AddSection("Mastery Farm");
+MasteryFarmSection = MainTab:AddSection("Farm Thành Thục");
 if World3 then
 	MasteryMethodList = {
 		"Quest",
@@ -7228,7 +7228,7 @@ elseif World2 or World1 then
 	};
 end;
 MasteryMethodDropdown = MainTab:AddDropdown({
-	Title = "Choose Mastery Method",
+	Title = "Chọn Phương Pháp Thành Thục",
 	Values = MasteryMethodList,
 	Value = _G.Settings.Main["Mastery Method"],
 	Callback = function(option)
@@ -7237,7 +7237,7 @@ MasteryMethodDropdown = MainTab:AddDropdown({
 	end
 });
 AutoFruitMasteryToggle = MainTab:AddToggle({
-	Title = "Auto Fruit Mastery",
+	Title = "Tự Động Thành Thục Trái Cây",
 	Value = _G.Settings.Main["Auto Farm Fruit Mastery"],
 	Callback = function(state)
 		_G.Settings.Main["Auto Farm Fruit Mastery"] = state;
@@ -7246,7 +7246,7 @@ AutoFruitMasteryToggle = MainTab:AddToggle({
 	end
 });
 AutoGunMasteryToggle = MainTab:AddToggle({
-	Title = "Auto Gun Mastery",
+	Title = "Tự Động Thành Thục Súng",
 	Value = _G.Settings.Main["Auto Farm Gun Mastery"],
 	Callback = function(state)
 		_G.Settings.Main["Auto Farm Gun Mastery"] = state;
@@ -7262,7 +7262,7 @@ for i, v in pairs(Inventory) do
 	end;
 end;
 ChooseSwordDropdown = MainTab:AddDropdown({
-	Title = "Choose Sword",
+	Title = "Chọn Kiếm",
 	Values = SwordList,
 	Value = _G.Settings.Main["Selected Mastery Sword"],
 	Callback = function(option)
@@ -7290,7 +7290,7 @@ spawn(function()
 	end;
 end);
 AutoSwordMasteryToggle = MainTab:AddToggle({
-	Title = "Auto Sword Mastery",
+	Title = "Tự Động Thành Thục Kiếm",
 	Value = _G.Settings.Main["Auto Farm Sword Mastery"],
 	Callback = function(state)
 		_G.Settings.Main["Auto Farm Sword Mastery"] = state;
@@ -7995,7 +7995,7 @@ spawn(function()
 	end;
 end);
 -- TYRANT OF THE SKIES (separado do Boss Farm)
-MonFarmSection = MainTab:AddSection("Mob Farm");
+MonFarmSection = MainTab:AddSection("Farm Quái");
 if World1 then
 	tableMon = {
 		"Bandit",
@@ -8088,7 +8088,7 @@ elseif World3 then
 	};
 end;
 ChooseMonDropdown = MainTab:AddDropdown({
-	Title = "Choose Mob",
+	Title = "Chọn Quái",
 	Values = tableMon,
 	Value = _G.Settings.Main["Selected Mon"],
 	Callback = function(option)
@@ -8097,8 +8097,8 @@ ChooseMonDropdown = MainTab:AddDropdown({
 	end
 });
 AutoMonFarmToggle = MainTab:AddToggle({
-	Title = "Auto Farm Mob",
-	Desc = "Auto Kill Mob When Spawn",
+	Title = "Tự Động Farm Quái",
+	Desc = "Tự động giết quái khi xuất hiện",
 	Value = _G.Settings.Main["Auto Farm Mon"],
 	Callback = function(state)
 		_G.Settings.Main["Auto Farm Mon"] = state;
@@ -8134,9 +8134,9 @@ spawn(function()
 	end;
 end);
 -- BOSS FARM (Select Boss + Farm All Boss)
-BossSection = FarmingHopTab:AddSection(" Boss Farm");
+BossSection = FarmingHopTab:AddSection("👊 Farm Boss");
 BossStatusParagraph = FarmingHopTab:AddParagraph({
-	Title = "Boss Status",
+	Title = "Trạng Thái Boss",
 	Desc = "N/A"
 });
 spawn(function()
@@ -8194,7 +8194,7 @@ elseif World3 then
 	};
 end;
 ChooseBossDropdown = FarmingHopTab:AddDropdown({
-	Title = "Choose Boss",
+	Title = "Chọn Boss",
 	Values = tableBoss,
 	Value = _G.Settings.Main["Selected Boss"],
 	Callback = function(option)
@@ -8203,18 +8203,18 @@ ChooseBossDropdown = FarmingHopTab:AddDropdown({
 	end
 });
 AutoFarmBossToggle = FarmingHopTab:AddToggle({
-	Title = "Auto Farm Boss",
-	Desc = "Auto Kill Boss When Spawn",
-	Value = _G.Settings.Main["Auto Farm Boss"],
+	Title = "Tự Động Farm Boss",
+	Desc = "Tự động giết boss khi xuất hiện",
+	Value = _G.Settings.Main["Tự Động Farm Boss"],
 	Callback = function(state)
-		_G.Settings.Main["Auto Farm Boss"] = state;
-		StopTween(_G.Settings.Main["Auto Farm Boss"]);
+		_G.Settings.Main["Tự Động Farm Boss"] = state;
+		StopTween(_G.Settings.Main["Tự Động Farm Boss"]);
 		(getgenv()).SaveSetting();
 	end
 });
 spawn(function()
 	while wait(0.2) do
-		if _G.Settings.Main["Auto Farm Boss"] then
+		if _G.Settings.Main["Tự Động Farm Boss"] then
 			pcall(function()
 				if (game:GetService("Workspace")).Enemies:FindFirstChild(_G.Settings.Main["Selected Boss"]) then
 					for i, v in pairs((game:GetService("Workspace")).Enemies:GetChildren()) do
@@ -8228,7 +8228,7 @@ spawn(function()
 									v.HumanoidRootPart.Size = Vector3.new(1, 1, 1);
 									TweenPlayer(v.HumanoidRootPart.CFrame * Pos);
 									Attack();
-								until not _G.Settings.Main["Auto Farm Boss"] or (not v.Parent) or v.Humanoid.Health <= 0;
+								until not _G.Settings.Main["Tự Động Farm Boss"] or (not v.Parent) or v.Humanoid.Health <= 0;
 							end;
 						end;
 					end;
@@ -8240,17 +8240,17 @@ spawn(function()
 	end;
 end);
 AutoFarmAllBossToggle = FarmingHopTab:AddToggle({
-	Title = "Auto Farm All Boss",
-	Value = _G.Settings.Main["Auto Farm All Boss"],
+	Title = "Tự Động Farm Tất Cả Boss",
+	Value = _G.Settings.Main["Tự Động Farm Tất Cả Boss"],
 	Callback = function(state)
-		_G.Settings.Main["Auto Farm All Boss"] = state;
-		StopTween(_G.Settings.Main["Auto Farm All Boss"]);
+		_G.Settings.Main["Tự Động Farm Tất Cả Boss"] = state;
+		StopTween(_G.Settings.Main["Tự Động Farm Tất Cả Boss"]);
 		(getgenv()).SaveSetting();
 	end
 });
 spawn(function()
 	while wait(0.2) do
-		if _G.Settings.Main["Auto Farm All Boss"] then
+		if _G.Settings.Main["Tự Động Farm Tất Cả Boss"] then
 			pcall(function()
 				for i, boss in pairs(tableBoss) do
 					if (game:GetService("Workspace")).Enemies:FindFirstChild(boss) then
@@ -8265,7 +8265,7 @@ spawn(function()
 										v.HumanoidRootPart.Size = Vector3.new(1, 1, 1);
 										TweenPlayer(v.HumanoidRootPart.CFrame * Pos);
 										Attack();
-									until not _G.Settings.Main["Auto Farm All Boss"] or (not v.Parent) or v.Humanoid.Health <= 0;
+									until not _G.Settings.Main["Tự Động Farm Tất Cả Boss"] or (not v.Parent) or v.Humanoid.Health <= 0;
 								end;
 							end;
 						end;
@@ -8279,14 +8279,14 @@ spawn(function()
 end);
 -- [Auto Elite Hunter + Hop foram movidos para a aba Farming And Hop para evitar duplicacao]
 -- FACTORY RAID (Sea 2 - Dom Flamingo's Factory)
-FactoryRaidSection = OthersTab:AddSection("Factory Raid");
-_G.Settings.Farm["Auto Factory Raid"] = _G.Settings.Farm["Auto Factory Raid"] or false;
+FactoryRaidSection = OthersTab:AddSection("Raid Nhà Máy");
+_G.Settings.Farm["Tự Động Raid Nhà Máy"] = _G.Settings.Farm["Tự Động Raid Nhà Máy"] or false;
 AutoFactoryRaidToggle = OthersTab:AddToggle({
-	Title = "Auto Factory Raid",
-	Desc = "Entra na factory pelo portal do Dom Flamingo (Sea 2), vai ao topo e farma os inimigos.",
-	Value = _G.Settings.Farm["Auto Factory Raid"],
+	Title = "Tự Động Raid Nhà Máy",
+	Desc = "Vào nhà máy qua cổng của Dom Flamingo (Biển 2), lên đỉnh và tiêu diệt kẻ thù.",
+	Value = _G.Settings.Farm["Tự Động Raid Nhà Máy"],
 	Callback = function(state)
-		_G.Settings.Farm["Auto Factory Raid"] = state;
+		_G.Settings.Farm["Tự Động Raid Nhà Máy"] = state;
 		(getgenv()).SaveSetting();
 	end
 });
@@ -8298,7 +8298,7 @@ local _FACTORY_MOB_CF     = CFrame.new(1002.53, 490, 1520.0);      -- Area de fa
 
 spawn(function()
 	while wait(0.5) do
-		if not _G.Settings.Farm["Auto Factory Raid"] then continue; end;
+		if not _G.Settings.Farm["Tự Động Raid Nhà Máy"] then continue; end;
 		pcall(function()
 			local plr = game.Players.LocalPlayer;
 			local char = plr.Character;
@@ -8350,14 +8350,14 @@ spawn(function()
 	end;
 end);
 
-PirateRaidSection = OthersTab:AddSection("Pirate Raid");
+PirateRaidSection = OthersTab:AddSection("Raid Cướp Biển");
 AutoPirateRaidToggle = OthersTab:AddToggle({
-	Title = "Auto Pirate Raid",
-	Desc = "Function Sea 3 Only",
-	Value = _G.Settings.Farm["Auto Pirate Raid"],
+	Title = "Tự Động Raid Cướp Biển",
+	Desc = "Chỉ dùng ở Biển 3",
+	Value = _G.Settings.Farm["Tự Động Raid Cướp Biển"],
 	Callback = function(state)
-		_G.Settings.Farm["Auto Pirate Raid"] = state;
-		StopTween(_G.Settings.Farm["Auto Pirate Raid"]);
+		_G.Settings.Farm["Tự Động Raid Cướp Biển"] = state;
+		StopTween(_G.Settings.Farm["Tự Động Raid Cướp Biển"]);
 		(getgenv()).SaveSetting();
 	end
 });
@@ -8378,7 +8378,7 @@ function getPirateRaidEnemies()
 end;
 spawn(function()
 	while wait() do
-		if _G.Settings.Farm["Auto Pirate Raid"] then
+		if _G.Settings.Farm["Tự Động Raid Cướp Biển"] then
 			pcall(function()
 				for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
 					if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
@@ -8397,7 +8397,7 @@ spawn(function()
 										v.Humanoid.WalkSpeed = 0;
 										PosMon = v.HumanoidRootPart.CFrame;
 										MonFarm = v.Name;
-									until not _G.Settings.Main["Auto Pirate Raid"] or (not v.Parent) or v.Humanoid.Health <= 0 or (not game.Workspace.Enemies:FindFirstChild(v.Name));
+									until not _G.Settings.Main["Tự Động Raid Cướp Biển"] or (not v.Parent) or v.Humanoid.Health <= 0 or (not game.Workspace.Enemies:FindFirstChild(v.Name));
 								end;
 							else
 								TweenPlayer(CFrame.new(-5515.08301, 343.112762, -3013.25171, 0.0679906458, 0.0000000121971047, -0.997685969, -0.0000000640159001, 1, 0.00000000786281706, 0.997685969, 0.000000063333168, 0.0679906458));
@@ -8409,7 +8409,7 @@ spawn(function()
 		end;
 	end;
 end);
-ChestFarmSection = OthersTab:AddSection("Chest Farm");
+ChestFarmSection = OthersTab:AddSection("Farm Rương Kho Báu");
 
 
 _G.FullyVolcanicActive = false;
@@ -8628,8 +8628,8 @@ MultiFarmTab:AddSection("PRE HISTORIC KAITUN");
 local _volcanicBoatList = {"Guardian", "Patrol Boat", "Speedboat", "Upgraded Boat", "Cannon Raft"};
 
 MultiFarmTab:AddDropdown({
-	Title = "Boat Selection",
-	Desc = "Selecione o barco para navegar ate a Volcanic Island",
+	Title = "Chọn Thuyền",
+	Desc = "Chọn thuyền để đi đến Volcanic Island",
 	Options = _volcanicBoatList,
 	CurrentOption = {"Guardian"},
 	Callback = function(sel)
@@ -8638,42 +8638,42 @@ MultiFarmTab:AddDropdown({
 });
 
 MultiFarmTab:AddToggle({
-	Title = "Auto Fully Volcanic",
-	Desc = "Compra barco na Tiki, navega ate Volcanic Island no mar 6, inicia Raid, tampa buracos de lava e mata Aura Golems. Sea 3.",
+	Title = "Tự Động Volcanic Đầy Đủ",
+	Desc = "Mua thuyền tại Tiki, đi đến Volcanic Island biển 6, bắt đầu Raid, lấp hố dung nham và giết Aura Golem. Biển 3.",
 	Value = false,
 	Callback = function(state)
 		_G.FullyVolcanicActive = state;
-		if _G.Settings and _G.Settings.Multi then _G.Settings.Multi["Auto Fully Volcanic"] = state; (getgenv()).SaveSetting(); end;
+		if _G.Settings and _G.Settings.Multi then _G.Settings.Multi["Tự Động Volcanic Đầy Đủ"] = state; (getgenv()).SaveSetting(); end;
 		if state then
 			task.spawn(_volcanicMainLoop);
 		end;
 	end
 });
 MultiFarmTab:AddToggle({
-	Title = "Auto Reset After Complete",
-	Desc = "Espera 10 segundos e reseta automaticamente quando a Volcanic Island for completada.",
+	Title = "Tự Động Reset Sau Khi Hoàn Thành",
+	Desc = "Chờ 10 giây và tự động reset khi Volcanic Island hoàn thành.",
 	Value = false,
 	Callback = function(state)
 		_G.VolcanicAutoReset = state;
-		if _G.Settings and _G.Settings.Multi then _G.Settings.Multi["Auto Reset After Complete"] = state; (getgenv()).SaveSetting(); end;
+		if _G.Settings and _G.Settings.Multi then _G.Settings.Multi["Tự Động Reset Sau Khi Hoàn Thành"] = state; (getgenv()).SaveSetting(); end;
 	end
 });
 MultiFarmTab:AddToggle({
-	Title = "Auto Collect Egg",
-	Desc = "Coleta os Eggs que spawnam apos completar a Volcanic Island, antes de auto resetar.",
+	Title = "Tự Động Thu Thập Trứng",
+	Desc = "Thu thập Trứng xuất hiện sau khi hoàn thành Volcanic Island, trước khi auto reset.",
 	Value = false,
 	Callback = function(state)
 		_G.VolcanicCollectEgg = state;
-		if _G.Settings and _G.Settings.Multi then _G.Settings.Multi["Auto Collect Egg"] = state; (getgenv()).SaveSetting(); end;
+		if _G.Settings and _G.Settings.Multi then _G.Settings.Multi["Tự Động Thu Thập Trứng"] = state; (getgenv()).SaveSetting(); end;
 	end
 });
 MultiFarmTab:AddToggle({
-	Title = "Auto Collect Bone",
+	Title = "Tự Động Thu Thập Xương",
 	Desc = "Coleta os ossos que caem apos completar a ilha. Funciona apos coletar Egg e antes do auto reset.",
 	Value = false,
 	Callback = function(state)
 		_G.VolcanicCollectBone = state;
-		if _G.Settings and _G.Settings.Multi then _G.Settings.Multi["Auto Collect Bone"] = state; (getgenv()).SaveSetting(); end;
+		if _G.Settings and _G.Settings.Multi then _G.Settings.Multi["Tự Động Thu Thập Xương"] = state; (getgenv()).SaveSetting(); end;
 	end
 });
 
@@ -9179,7 +9179,7 @@ AutoKatakuriToggle = OthersTab:AddToggle({
 });
 AutoSpawnCakePrinceToggle = OthersTab:AddToggle({
 	Title = "Auto Spawn Cake Prince",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chỉ dùng ở Biển 3",
 	Value = _G.Settings.Farm["Auto Spawn Cake Prince"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Spawn Cake Prince"] = state;
@@ -9248,7 +9248,7 @@ spawn(function()
 end);
 AutoKillCakePrinceToggle = OthersTab:AddToggle({
 	Title = "Auto Kill Cake Prince",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chỉ dùng ở Biển 3",
 	Value = _G.Settings.Farm["Auto Kill Cake Prince"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Kill Cake Prince"] = state;
@@ -9258,7 +9258,7 @@ AutoKillCakePrinceToggle = OthersTab:AddToggle({
 });
 AutoKillDoughKingToggle = OthersTab:AddToggle({
 	Title = "Auto Kill Dough King",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chỉ dùng ở Biển 3",
 	Value = _G.Settings.Farm["Auto Kill Dough King"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Kill Dough King"] = state;
@@ -9928,7 +9928,7 @@ spawn(function()
 		if _G.Settings.Setting["Fast M1 Fruit"]
 			and (_G.ChooseWP == "Fruit" or _G.Settings.Main["Select Weapon"] == "Fruit")
 			and (_G.EclipseStartFarm or _G.Settings.Main["Auto Farm Mon"] or _G.Settings.Main["Auto Farm Fast"]
-				or _G.Settings.Main["Auto Farm All Boss"] or _G.Settings.Main["Auto Farm Boss"]
+				or _G.Settings.Main["Tự Động Farm Tất Cả Boss"] or _G.Settings.Main["Tự Động Farm Boss"]
 				or _G.Settings.Main["Auto Farm Fruit Mastery"] or _G.EclipseLevel)
 		then
 			pcall(function()
@@ -10828,7 +10828,7 @@ spawn(function()
 end);
 AutoBuddySwordToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Buddy Sword",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chỉ dùng ở Biển 3",
 	Value = _G.Settings.Items["Auto Buddy Sword"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Buddy Sword"] = state;
@@ -11201,7 +11201,7 @@ function AutoSoulGuitar()
 end;
 AutoSoulGuitarToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Soul Guitar",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chỉ dùng ở Biển 3",
 	Value = _G.Settings.Items["Auto Soul Guitar"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Soul Guitar"] = state;
@@ -11259,7 +11259,7 @@ spawn(function()
 end);
 AutoHallowScytheToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Hallow Scythe",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chỉ dùng ở Biển 3",
 	Value = _G.Settings.Items["Auto Hallow Scythe"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Hallow Scythe"] = state;
@@ -17336,7 +17336,7 @@ task.spawn(function()
 					found = true; break;
 				end;
 			end;
-			_fodStatusParagraph:SetDesc(found and "SPAWNED no servidor!" or "Nao encontrado");
+			_fodStatusParagraph:SetDesc(found and "ĐÃ XUẤT HIỆN trong server!" or "Không tìm thấy");
 		end);
 	end;
 end);
@@ -17350,7 +17350,7 @@ task.spawn(function()
 					found = true; break;
 				end;
 			end;
-			_chaliceStatusParagraph:SetDesc(found and "SPAWNED no servidor!" or "Nao encontrado");
+			_chaliceStatusParagraph:SetDesc(found and "ĐÃ XUẤT HIỆN trong server!" or "Không tìm thấy");
 		end);
 	end;
 end);
@@ -17363,11 +17363,11 @@ task.spawn(function()
 			for _, bossName in pairs(raidBossNames) do
 				if workspace.Enemies:FindFirstChild(bossName) then
 					found = true;
-					_raidBossStatusParagraph:SetDesc("SPAWNED: " .. bossName);
+					_raidBossStatusParagraph:SetDesc("ĐÃ XUẤT HIỆN: " .. bossName);
 					break;
 				end;
 			end;
-			if not found then _raidBossStatusParagraph:SetDesc("Nenhum Raid Boss ativo"); end;
+			if not found then _raidBossStatusParagraph:SetDesc("Không có Raid Boss nào đang hoạt động"); end;
 		end);
 	end;
 end);
@@ -17375,11 +17375,11 @@ task.spawn(function()
 	while true do
 		task.wait(1);
 		pcall(function()
-			local pirateRaid = workspace:FindFirstChild("PirateRaid") or workspace:FindFirstChild("Pirate Raid") or workspace:FindFirstChild("PiratesRaid");
+			local pirateRaid = workspace:FindFirstChild("PirateRaid") or workspace:FindFirstChild("Raid Cướp Biển") or workspace:FindFirstChild("PiratesRaid");
 			if pirateRaid then
-				_pirateRaidStatusParagraph:SetDesc("ATIVO no servidor!");
+				_pirateRaidStatusParagraph:SetDesc("ĐANG HOẠT ĐỘNG trong server!");
 			else
-				_pirateRaidStatusParagraph:SetDesc("Inativo");
+				_pirateRaidStatusParagraph:SetDesc("Không hoạt động");
 			end;
 		end);
 	end;
@@ -17390,9 +17390,9 @@ task.spawn(function()
 		pcall(function()
 			local factory = workspace:FindFirstChild("Factory") or workspace:FindFirstChild("FactoryFortress");
 			if factory then
-				_factoryStatusParagraph:SetDesc("ATIVO no servidor!");
+				_factoryStatusParagraph:SetDesc("ĐANG HOẠT ĐỘNG trong server!");
 			else
-				_factoryStatusParagraph:SetDesc("Inativo");
+				_factoryStatusParagraph:SetDesc("Không hoạt động");
 			end;
 		end);
 	end;
@@ -17412,17 +17412,17 @@ getgenv().HoldSkillConfig = {
 	["Gun"] = false,    -- Z X Gun
 }
 
-HoldAndSkillTab:AddSection("Skills Config - Selecione as skills para usar nos farms");
+HoldAndSkillTab:AddSection("Cấu Hình Kỹ Năng - Chọn kỹ năng dùng trong farm");
 
 HoldAndSkillTab:AddParagraph({
-	Title = "Como funciona",
-	Desc = "Selecione abaixo quais teclas/skills serao usadas em TODOS os farms e funcoes do hub que precisam de skills. As combinacoes Z X C Melee, Z X C V F Fruit, Z X Sword e Z X Gun definem grupos rapidos."
+	Title = "Cách Hoạt Động",
+	Desc = "Chọn bên dưới các phím/kỹ năng sẽ dùng trong TẤT CẢ farm. Các tổ hợp Z X C Melee, Z X C V F Fruit, Z X Sword và Z X Gun là các nhóm nhanh."
 });
 
 -- Grupo Rapido: Z X C Melee
 HoldAndSkillTab:AddToggle({
-	Title = "Z X C Melee",
-	Desc = "Usa apenas Z, X, C de Melee (Fighting Style)",
+	Title = "Z X C Cận Chiến",
+	Desc = "Chỉ dùng Z, X, C của Cận Chiến (Fighting Style)",
 	Value = false,
 	Callback = function(state)
 		if state then
@@ -17440,8 +17440,8 @@ HoldAndSkillTab:AddToggle({
 
 -- Grupo Rapido: Z X C V F Fruit
 HoldAndSkillTab:AddToggle({
-	Title = "Z X C V F Fruit",
-	Desc = "Usa Z, X, C, V e F de Fruta (Devil Fruit)",
+	Title = "Z X C V F Trái Cây",
+	Desc = "Dùng Z, X, C, V và F của Trái Quỷ (Devil Fruit)",
 	Value = false,
 	Callback = function(state)
 		if state then
@@ -17459,8 +17459,8 @@ HoldAndSkillTab:AddToggle({
 
 -- Grupo Rapido: Z X Sword
 HoldAndSkillTab:AddToggle({
-	Title = "Z X Sword",
-	Desc = "Usa apenas Z e X de Espada (Sword)",
+	Title = "Z X Kiếm",
+	Desc = "Chỉ dùng Z và X của Kiếm (Sword)",
 	Value = false,
 	Callback = function(state)
 		if state then
@@ -17478,8 +17478,8 @@ HoldAndSkillTab:AddToggle({
 
 -- Grupo Rapido: Z X Gun
 HoldAndSkillTab:AddToggle({
-	Title = "Z X Gun",
-	Desc = "Usa apenas Z e X de Arma de Fogo (Gun)",
+	Title = "Z X Súng",
+	Desc = "Chỉ dùng Z và X của Súng (Gun)",
 	Value = false,
 	Callback = function(state)
 		if state then
@@ -17495,44 +17495,44 @@ HoldAndSkillTab:AddToggle({
 	end
 });
 
-HoldAndSkillTab:AddSection("Skills Individuais");
+HoldAndSkillTab:AddSection("Kỹ Năng Riêng Lẻ");
 
 -- Toggles individuais para cada tecla
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill Z",
-	Desc = "Ativa o uso da tecla Z nos farms",
+	Title = "Dùng Kỹ Năng Z",
+	Desc = "Bật sử dụng phím Z trong farm",
 	Value = true,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["Z"] = state;
 	end
 });
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill X",
-	Desc = "Ativa o uso da tecla X nos farms",
+	Title = "Dùng Kỹ Năng X",
+	Desc = "Bật sử dụng phím X trong farm",
 	Value = true,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["X"] = state;
 	end
 });
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill C",
-	Desc = "Ativa o uso da tecla C nos farms",
+	Title = "Dùng Kỹ Năng C",
+	Desc = "Bật sử dụng phím C trong farm",
 	Value = true,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["C"] = state;
 	end
 });
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill V",
-	Desc = "Ativa o uso da tecla V nos farms",
+	Title = "Dùng Kỹ Năng V",
+	Desc = "Bật sử dụng phím V trong farm",
 	Value = false,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["V"] = state;
 	end
 });
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill F",
-	Desc = "Ativa o uso da tecla F nos farms",
+	Title = "Dùng Kỹ Năng F",
+	Desc = "Bật sử dụng phím F trong farm",
 	Value = false,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["F"] = state;
