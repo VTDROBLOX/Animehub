@@ -2557,10 +2557,10 @@ local Setting = Library:MakeTab({
     Icon = "rbxassetid://7734053495"
 })
 Discord:AddDiscordInvite({
-    Name = "VTD ROBLOX",
+    Name = "Tày Hub",
     Description = "vào sever ngay không = GAY",
-    Logo = "rbxassetid://104581093792126",
-    Invite = "https://discord.gg/bdaczqK55h"
+    Logo = "rbxassetid://91222518412026",
+    Invite = "https://discord.gg/ZTFvtRrbeB"
 })
 local credits = Discord:AddParagraph({
     Title = "Credits For Someone Peoples",
