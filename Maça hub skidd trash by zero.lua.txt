@@ -12115,3 +12115,500 @@ FastAttackModule.FastAttack = FastAttack
 NotificacaoNightMystic("𝙏𝙖̀𝙮 𝙝𝙪𝙗", "✅ MENU ĐÃ CHẠY XONG BẠN SẼ ĐƯỢC HỘP KHÔ GÀ")
 
 return FastAttackModulem
+-- ╔══════════════════════════════════════════════════════════╗
+-- ║        🥚 EASTER EVENT — TÂY HUB STANDALONE GUI         ║
+-- ║   Thêm vào CUỐI file Maça Hub (sau tất cả code)         ║
+-- ║   Rainbow 7 màu nhấp nháy — By VTD                      ║
+-- ╚══════════════════════════════════════════════════════════╝
+
+task.spawn(function()
+    task.wait(3)
+
+    local Players      = game:GetService("Players")
+    local RunService   = game:GetService("RunService")
+    local TweenService = game:GetService("TweenService")
+    local UIS          = game:GetService("UserInputService")
+
+    local player    = Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local rootPart  = character:WaitForChild("HumanoidRootPart")
+    local humanoid  = character:WaitForChild("Humanoid")
+
+    local S = {
+        AutoCollect  = false,
+        AutoGive     = false,
+        Flying       = false,
+        Noclip       = false,
+        FlySpeed     = 80,
+        CollectDelay = 0.3,
+        CandyEggs    = 0,
+    }
+    local visitedUIDs   = {}
+    local collectThread = nil
+    local giveThread    = nil
+    local flyConn       = nil
+    local noclipConn    = nil
+    local flyBV, flyBG  = nil, nil
+    local statusLbl, countLbl
+
+    -- NOCLIP
+    local function enableNoclip()
+        if noclipConn then return end
+        noclipConn = RunService.Stepped:Connect(function()
+            pcall(function() rootPart.CanCollide = false end)
+        end)
+    end
+    local function disableNoclip()
+        if noclipConn then noclipConn:Disconnect(); noclipConn = nil end
+        pcall(function() rootPart.CanCollide = true end)
+    end
+
+    -- FLY BodyVelocity
+    local function startFly()
+        if S.Flying then return end
+        S.Flying = true
+        flyBV = Instance.new("BodyVelocity")
+        flyBV.Velocity = Vector3.zero
+        flyBV.MaxForce = Vector3.new(1e5,1e5,1e5)
+        flyBV.P = 1e4
+        flyBV.Parent = rootPart
+        flyBG = Instance.new("BodyGyro")
+        flyBG.MaxTorque = Vector3.new(1e5,1e5,1e5)
+        flyBG.P = 1e4; flyBG.D = 100
+        flyBG.Parent = rootPart
+        flyConn = RunService.Heartbeat:Connect(function()
+            if not S.Flying then return end
+            local cam = workspace.CurrentCamera
+            local md  = humanoid.MoveDirection
+            flyBV.Velocity = md.Magnitude > 0.1
+                and (cam.CFrame.LookVector * -md.Z + cam.CFrame.RightVector * md.X) * S.FlySpeed
+                or Vector3.zero
+            flyBG.CFrame = cam.CFrame
+        end)
+    end
+    local function stopFly()
+        S.Flying = false
+        if flyConn then flyConn:Disconnect(); flyConn = nil end
+        if flyBV and flyBV.Parent then flyBV:Destroy() end
+        if flyBG and flyBG.Parent then flyBG:Destroy() end
+        flyBV, flyBG = nil, nil
+    end
+
+    -- SMOOTH TELE
+    local function smoothTele(pos, t)
+        local tw = TweenService:Create(rootPart,
+            TweenInfo.new(t or 0.25, Enum.EasingStyle.Sine, Enum.EasingDirection.Out),
+            {CFrame = CFrame.new(pos)})
+        tw:Play(); tw.Completed:Wait()
+    end
+
+    -- TÌM TRỨNG
+    local function findEggs()
+        local eggs = {}
+        for _, obj in ipairs(workspace:GetDescendants()) do
+            local name = obj.Name
+            local isEgg = name == "Pirate Egg" or name == "PirateEgg"
+                or (name:lower():find("pirate") and name:lower():find("egg"))
+                or name:lower():find("easteregg") or name:lower():find("candyegg")
+            if isEgg
+                and not obj:IsDescendantOf(character)
+                and not obj:IsDescendantOf(player.PlayerGui) then
+                local pos, uid
+                if obj:IsA("Model") and obj.PrimaryPart then
+                    pos = obj.PrimaryPart.Position; uid = tostring(obj:GetDebugId())
+                elseif obj:IsA("BasePart") then
+                    pos = obj.Position; uid = tostring(obj:GetDebugId())
+                end
+                if pos and uid and not visitedUIDs[uid] then
+                    table.insert(eggs, {obj=obj, pos=pos, uid=uid,
+                        dist=(rootPart.Position-pos).Magnitude, name=name})
+                end
+            end
+        end
+        table.sort(eggs, function(a,b) return a.dist < b.dist end)
+        return eggs
+    end
+
+    -- TÌM NPC
+    local function findNPC()
+        local kws = {"pirateadventurer","eastershop","eggnpc","eggcollector"}
+        for _, obj in ipairs(workspace:GetDescendants()) do
+            local lower = obj.Name:lower():gsub("[%s_]","")
+            for _, kw in ipairs(kws) do
+                if lower:find(kw) then
+                    local pos
+                    if obj:IsA("Model") and obj.PrimaryPart then pos = obj.PrimaryPart.Position
+                    elseif obj:IsA("BasePart") then pos = obj.Position end
+                    if pos then return pos, obj.Name end
+                end
+            end
+        end
+        return nil
+    end
+
+    -- NHẶT TRỨNG
+    local function collectEgg(egg)
+        if statusLbl then statusLbl.Text = "🚀 "..egg.name.." ("..math.floor(egg.dist).."st)" end
+        smoothTele(egg.pos + Vector3.new(0,4,0), 0.22)
+        rootPart.CFrame = CFrame.new(egg.pos + Vector3.new(0,2,0))
+        task.wait(0.12)
+        for _, off in ipairs({
+            Vector3.new(1,0,0), Vector3.new(-1,0,0),
+            Vector3.new(0,0,1), Vector3.new(0,0,-1), Vector3.new(0,1,0),
+        }) do
+            if not (egg.obj and egg.obj.Parent) then break end
+            rootPart.CFrame = CFrame.new(egg.pos + off)
+            task.wait(0.07)
+        end
+        visitedUIDs[egg.uid] = true
+        local ok = not (egg.obj and egg.obj.Parent ~= nil)
+        if ok then S.CandyEggs += 1 end
+        return ok
+    end
+    
+    -- COLLECT LOOP
+    local function startCollect()
+        if collectThread then pcall(task.cancel, collectThread) end
+        collectThread = task.spawn(function()
+            while S.AutoCollect do
+                local eggs = findEggs()
+                if #eggs == 0 then
+                    if statusLbl then statusLbl.Text = "✨ Không thấy trứng, chờ..." end
+                    task.wait(4); visitedUIDs = {}
+                else
+                    if statusLbl then statusLbl.Text = "🗺️ Thấy "..#eggs.." Pirate Egg!" end
+                    for _, egg in ipairs(eggs) do
+                        if not S.AutoCollect then break end
+                        local ok = collectEgg(egg)
+                        if ok then
+                            if statusLbl then statusLbl.Text = "✅ +1! Tổng: "..S.CandyEggs end
+                            if countLbl then countLbl.Text = "🥚  "..S.CandyEggs.." Candy Eggs" end
+                        end
+                        task.wait(S.CollectDelay)
+                    end
+                end
+                task.wait(0.1)
+            end
+        end)
+    end
+    local function stopCollect()
+        S.AutoCollect = false
+        if collectThread then pcall(task.cancel, collectThread); collectThread = nil end
+    end
+
+    -- GIVE LOOP
+    local function startGive()
+        if giveThread then pcall(task.cancel, giveThread) end
+        giveThread = task.spawn(function()
+            while S.AutoGive do
+                local npcPos, npcName = findNPC()
+                if not npcPos then
+                    if statusLbl then statusLbl.Text = "❌ Không thấy NPC" end
+                    task.wait(3)
+                else
+                    if statusLbl then statusLbl.Text = "🏃 Bay đến: "..(npcName or "NPC") end
+                    smoothTele(npcPos + Vector3.new(0,3,0), 0.3)
+                    task.wait(0.3)
+                    for _, off in ipairs({
+                        Vector3.new(3,0,0),Vector3.new(-3,0,0),
+                        Vector3.new(0,0,3),Vector3.new(0,0,-3),
+                    }) do
+                        if not S.AutoGive then break end
+                        rootPart.CFrame = CFrame.new(npcPos+off+Vector3.new(0,2,0))
+                        task.wait(0.18)
+                    end
+                    for _, obj in ipairs(workspace:GetDescendants()) do
+                        local l = obj.Name:lower():gsub("[%s_]","")
+                        if l:find("pirate") or l:find("eastershop") or l:find("eggnpc") then
+                            local p = obj:FindFirstChildOfClass("ProximityPrompt")
+                                or (obj.Parent and obj.Parent:FindFirstChildOfClass("ProximityPrompt"))
+                            if p then pcall(function() fireproximityprompt(p) end); task.wait(0.4) end
+                        end
+                    end
+                    if statusLbl then statusLbl.Text = "📬 Đã đến NPC!" end
+                    task.wait(2)
+                end
+                task.wait(0.4)
+            end
+        end)
+    end
+    local function stopGive()
+        S.AutoGive = false
+        if giveThread then pcall(task.cancel, giveThread); giveThread = nil end
+    end
+
+    -- RESPAWN
+    player.CharacterAdded:Connect(function(char)
+        character = char
+        rootPart  = char:WaitForChild("HumanoidRootPart")
+        humanoid  = char:WaitForChild("Humanoid")
+        flyBV, flyBG = nil, nil; S.Flying = false
+        task.wait(2)
+        if S.Noclip then enableNoclip() end
+    end)
+
+    -- ══════════════════════════════
+    --   GUI RAINBOW 7 MÀU
+    -- ══════════════════════════════
+    local CoreGui = (gethui and gethui()) or game:GetService("CoreGui")
+    if CoreGui:FindFirstChild("TayHubEaster") then
+        CoreGui:FindFirstChild("TayHubEaster"):Destroy()
+    end
+
+    local SG = Instance.new("ScreenGui")
+    SG.Name = "TayHubEaster"; SG.ResetOnSpawn = false
+    SG.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    SG.Parent = CoreGui
+
+    -- Rainbow 
+    local RB = {
+        Color3.fromRGB(255,60,60),  Color3.fromRGB(255,160,0),
+        Color3.fromRGB(240,230,0),  Color3.fromRGB(60,210,60),
+        Color3.fromRGB(0,180,255),  Color3.fromRGB(140,60,255),
+        Color3.fromRGB(255,60,200),
+    }
+    local rbT = 0
+    local function getRB(spd)
+        rbT = (rbT + 0.016*(spd or 1)) % 1
+        local i = math.floor(rbT*#RB)+1
+        local n = (i%#RB)+1
+        return RB[i]:Lerp(RB[n], (rbT*#RB)%1)
+    end
+
+    -- Nút toggle
+    local Tog = Instance.new("TextButton", SG)
+    Tog.Size = UDim2.new(0,52,0,52)
+    Tog.Position = UDim2.new(0,10,0.5,-26)
+    Tog.BackgroundColor3 = Color3.fromRGB(10,10,20)
+    Tog.Text = "🥚"; Tog.Font = Enum.Font.GothamBold
+    Tog.TextSize = 24; Tog.TextColor3 = Color3.fromRGB(255,255,255)
+    Tog.BorderSizePixel = 0; Tog.ZIndex = 10
+    Instance.new("UICorner",Tog).CornerRadius = UDim.new(0,14)
+    local tsk = Instance.new("UIStroke",Tog); tsk.Thickness = 2.5
+
+    local tLbl = Instance.new("TextLabel",SG)
+    tLbl.Size = UDim2.new(0,60,0,14)
+    tLbl.Position = UDim2.new(0,7,0.5,28)
+    tLbl.BackgroundTransparency = 1; tLbl.Text = "EASTER"
+    tLbl.Font = Enum.Font.GothamBold; tLbl.TextSize = 9
+    tLbl.TextColor3 = Color3.fromRGB(255,80,200); tLbl.ZIndex = 10
+
+    -- Panel
+    local PW, PH = 282, 428
+    local Panel = Instance.new("Frame",SG)
+    Panel.Size = UDim2.new(0,PW,0,0)
+    Panel.Position = UDim2.new(0,70,0.5,-26)
+    Panel.BackgroundColor3 = Color3.fromRGB(8,8,16)
+    Panel.BorderSizePixel = 0; Panel.ClipsDescendants = true
+    Instance.new("UICorner",Panel).CornerRadius = UDim.new(0,14)
+    local psk = Instance.new("UIStroke",Panel); psk.Thickness = 2
+
+    -- Header
+    local Hdr = Instance.new("Frame",Panel)
+    Hdr.Size = UDim2.new(1,0,0,46)
+    Hdr.BackgroundColor3 = Color3.fromRGB(180,40,100)
+    Hdr.BorderSizePixel = 0
+    Instance.new("UICorner",Hdr).CornerRadius = UDim.new(0,14)
+    local hf = Instance.new("Frame",Hdr)
+    hf.Size=UDim2.new(1,0,0.5,0); hf.Position=UDim2.new(0,0,0.5,0)
+    hf.BackgroundColor3=Color3.fromRGB(180,40,100); hf.BorderSizePixel=0
+
+    local HT = Instance.new("TextLabel",Hdr)
+    HT.Size=UDim2.new(1,-44,1,0); HT.Position=UDim2.new(0,12,0,0)
+    HT.BackgroundTransparency=1; HT.Text="🥚  Easter Event  |  Tây Hub"
+    HT.Font=Enum.Font.GothamBold; HT.TextSize=13
+    HT.TextColor3=Color3.fromRGB(255,255,255)
+    HT.TextXAlignment=Enum.TextXAlignment.Left
+
+    local CB = Instance.new("TextButton",Hdr)
+    CB.Size=UDim2.new(0,28,0,28); CB.Position=UDim2.new(1,-34,0.5,-14)
+    CB.BackgroundColor3=Color3.fromRGB(210,45,70); CB.Text="✕"
+    CB.Font=Enum.Font.GothamBold; CB.TextSize=13
+    CB.TextColor3=Color3.fromRGB(255,255,255); CB.BorderSizePixel=0
+    Instance.new("UICorner",CB).CornerRadius=UDim.new(0,6)
+    CB.MouseButton1Click:Connect(function()
+        stopCollect(); stopGive(); stopFly(); disableNoclip(); SG:Destroy()
+    end)
+
+    -- Content
+    local Con = Instance.new("Frame",Panel)
+    Con.Size=UDim2.new(1,-16,1,-54); Con.Position=UDim2.new(0,8,0,50)
+    Con.BackgroundTransparency=1
+    local ULL=Instance.new("UIListLayout",Con)
+    ULL.SortOrder=Enum.SortOrder.LayoutOrder; ULL.Padding=UDim.new(0,6)
+
+    -- Helper card
+    local function card(h,bg,rbBorder)
+        local f=Instance.new("Frame",Con)
+        f.Size=UDim2.new(1,0,0,h)
+        f.BackgroundColor3=bg or Color3.fromRGB(18,18,32)
+        f.BorderSizePixel=0
+        Instance.new("UICorner",f).CornerRadius=UDim.new(0,8)
+        if rbBorder then
+            local s=Instance.new("UIStroke",f); s.Thickness=1.2
+            RunService.Heartbeat:Connect(function() s.Color=getRB(0.8) end)
+        end
+        return f
+    end
+
+    -- Helper section
+    local function section(txt)
+        local f=Instance.new("Frame",Con)
+        f.Size=UDim2.new(1,0,0,18); f.BackgroundTransparency=1
+        local l=Instance.new("TextLabel",f)
+        l.Size=UDim2.new(1,0,1,0); l.BackgroundTransparency=1
+        l.Text=txt; l.Font=Enum.Font.GothamBold; l.TextSize=10
+        l.TextXAlignment=Enum.TextXAlignment.Left
+        RunService.Heartbeat:Connect(function() l.TextColor3=getRB(1.2) end)
+        return f
+    end
+
+    -- Helper toggle
+    local function toggle(labelTxt, descTxt, cb)
+        local row=Instance.new("Frame",Con)
+        row.Size=UDim2.new(1,0,0,44)
+        row.BackgroundColor3=Color3.fromRGB(14,14,26)
+        row.BorderSizePixel=0
+        Instance.new("UICorner",row).CornerRadius=UDim.new(0,8)
+
+        local lbl=Instance.new("TextLabel",row)
+        lbl.Size=UDim2.new(1,-56,0,20); lbl.Position=UDim2.new(0,10,0,4)
+        lbl.BackgroundTransparency=1; lbl.Text=labelTxt
+        lbl.Font=Enum.Font.GothamBold; lbl.TextSize=12
+        lbl.TextColor3=Color3.fromRGB(235,235,235)
+        lbl.TextXAlignment=Enum.TextXAlignment.Left
+
+        local sub=Instance.new("TextLabel",row)
+        sub.Size=UDim2.new(1,-56,0,14); sub.Position=UDim2.new(0,10,0,25)
+        sub.BackgroundTransparency=1; sub.Text=descTxt
+        sub.Font=Enum.Font.Gotham; sub.TextSize=10
+        sub.TextColor3=Color3.fromRGB(100,100,140)
+        sub.TextXAlignment=Enum.TextXAlignment.Left
+
+        local swBg=Instance.new("Frame",row)
+        swBg.Size=UDim2.new(0,40,0,22); swBg.Position=UDim2.new(1,-50,0.5,-11)
+        swBg.BackgroundColor3=Color3.fromRGB(40,40,60); swBg.BorderSizePixel=0
+        Instance.new("UICorner",swBg).CornerRadius=UDim.new(1,0)
+
+        local knob=Instance.new("Frame",swBg)
+        knob.Size=UDim2.new(0,16,0,16); knob.Position=UDim2.new(0,3,0.5,-8)
+        knob.BackgroundColor3=Color3.fromRGB(255,255,255); knob.BorderSizePixel=0
+        Instance.new("UICorner",knob).CornerRadius=UDim.new(1,0)
+
+        local state=false
+        local btn=Instance.new("TextButton",row)
+        btn.Size=UDim2.new(1,0,1,0); btn.BackgroundTransparency=1; btn.Text=""
+        btn.MouseButton1Click:Connect(function()
+            state=not state
+            TweenService:Create(swBg,TweenInfo.new(0.2),{
+                BackgroundColor3=state and Color3.fromRGB(255,80,160) or Color3.fromRGB(40,40,60)
+            }):Play()
+            TweenService:Create(knob,TweenInfo.new(0.2),{
+                Position=state and UDim2.new(1,-19,0.5,-8) or UDim2.new(0,3,0.5,-8)
+            }):Play()
+            cb(state)
+        end)
+        return row
+    end
+
+    -- Status
+    local sc=card(32)
+    statusLbl=Instance.new("TextLabel",sc)
+    statusLbl.Size=UDim2.new(1,-8,1,0); statusLbl.Position=UDim2.new(0,4,0,0)
+    statusLbl.BackgroundTransparency=1; statusLbl.Text="⏸  Chờ bắt đầu..."
+    statusLbl.Font=Enum.Font.Gotham; statusLbl.TextSize=11
+    statusLbl.TextColor3=Color3.fromRGB(150,150,180)
+    statusLbl.TextXAlignment=Enum.TextXAlignment.Left
+
+    -- Count (rainbow border)
+    local cc=card(40,Color3.fromRGB(16,5,16),true)
+    countLbl=Instance.new("TextLabel",cc)
+    countLbl.Size=UDim2.new(1,0,1,0); countLbl.BackgroundTransparency=1
+    countLbl.Text="🥚  0 Candy Eggs"
+    countLbl.Font=Enum.Font.GothamBold; countLbl.TextSize=15
+    countLbl.TextColor3=Color3.fromRGB(255,180,220)
+
+    section("  ⚙️  TỰ ĐỘNG")
+
+    toggle("🥚 Auto Collect Egg","Bay nhặt Pirate Egg toàn map",function(val)
+        S.AutoCollect=val
+        if val then enableNoclip(); startCollect(); statusLbl.Text="🟢 Auto Collect chạy..."
+        else stopCollect(); disableNoclip(); statusLbl.Text="⏸ Auto Collect tắt" end
+    end)
+
+    toggle("📬 Auto Give Egg","Bay đến NPC nộp trứng",function(val)
+        S.AutoGive=val
+        if val then enableNoclip(); startGive(); statusLbl.Text="🟢 Auto Give chạy..."
+        else stopGive(); statusLbl.Text="⏸ Auto Give tắt" end
+    end)
+
+    section("  ✈️  DI CHUYỂN")
+
+    toggle("✈️ Fly Mode","BodyVelocity — tránh bị kick",function(val)
+        if val then startFly() else stopFly() end
+    end)
+
+    toggle("👻 Noclip","Xuyên tường",function(val)
+        S.Noclip=val
+        if val then enableNoclip() else disableNoclip() end
+    end)
+
+    section("  🔧  CÔNG CỤ")
+
+    -- Buttons row
+    local bRow=Instance.new("Frame",Con)
+    bRow.Size=UDim2.new(1,0,0,34); bRow.BackgroundTransparency=1
+
+    local function mkBtn(txt,color,xp,xs,fn)
+        local b=Instance.new("TextButton",bRow)
+        b.Size=UDim2.new(xs,-3,1,0); b.Position=UDim2.new(xp,2,0,0)
+        b.BackgroundColor3=color; b.Text=txt
+        b.Font=Enum.Font.GothamBold; b.TextSize=11
+        b.TextColor3=Color3.fromRGB(255,255,255); b.BorderSizePixel=0
+        Instance.new("UICorner",b).CornerRadius=UDim.new(0,7)
+        b.MouseButton1Click:Connect(fn); return b
+    end
+    mkBtn("🔄 Reset",Color3.fromRGB(35,35,60),0,0.5,function()
+        visitedUIDs={}; S.CandyEggs=0
+        countLbl.Text="🥚  0 Candy Eggs"; statusLbl.Text="🔄 Đã reset!"
+    end)
+    mkBtn("🔍 Debug",Color3.fromRGB(25,55,25),0.5,0.5,function()
+        task.spawn(function()
+            local n=0
+            for _,obj in ipairs(workspace:GetDescendants()) do
+                local lo=obj.Name:lower()
+                if lo:find("egg") or lo:find("easter") or lo:find("pirate") then
+                    print("[Easter]",obj.ClassName,obj.Name,obj:GetFullName()); n+=1
+                end
+            end
+            statusLbl.Text="🔍 Scan: "..n.." obj"
+        end)
+    end)
+
+    -- Toggle menu
+    local menuOpen=false
+    local function openMenu()
+        menuOpen=true; Con.Visible=true
+        Panel:TweenSize(UDim2.new(0,PW,0,PH),
+            Enum.EasingDirection.Out,Enum.EasingStyle.Back,0.35,true)
+        Tog.Text="✕"
+        TweenService:Create(Tog,TweenInfo.new(0.2),{BackgroundColor3=Color3.fromRGB(180,40,100)}):Play()
+    end
+    local function closeMenu()
+        menuOpen=false
+        Panel:TweenSize(UDim2.new(0,PW,0,0),
+            Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.22,true,
+            function() Con.Visible=false end)
+        Tog.Text="🥚"
+        TweenService:Create(Tog,TweenInfo.new(0.2),{BackgroundColor3=Color3.fromRGB(10,10,20)}):Play()
+    end
+    Tog.MouseButton1Click:Connect(function()
+        if menuOpen then closeMenu() else openMenu() end
+    end)
+
+    -- Drag
+    local drag,ds,sp,sp2
+    Tog.InputBegan:Connect(function(i)
+        if i.UserInputType==Enum.UserInputType.MouseButton1
+            or i.UserInputType==Enum.UserInputType.Touch then
+            drag=true; d
