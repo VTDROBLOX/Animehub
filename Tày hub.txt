@@ -1,5 +1,4 @@
-loadstring(game:HttpGet("https://pandadevelopment.net/virtual/file/e9c206fd76482ee2"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/fix%20lag.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hdanhhub/hdanhhub/refs/heads/main/Fix-Lag.lua.txt"))()
 --[[
     Abacaxi Hub - Optimized Version
     Performance & Code Quality Improvements
@@ -99,13 +98,13 @@ local function NotificacaoNightMystic(titulo, mensagem)
     end
 end
 
-NotificacaoNightMystic("𝙏𝙖̀𝙮 𝙃𝙪𝙗", "Script carregado com sucesso!")
+NotificacaoNightMystic("Tày Hub", "Script carregado com sucesso!")
 
 -- ========================================
 -- SAVE SYSTEM (Optimized)
 -- ========================================
 local HttpService = Services.HttpService
-local FolderName = "𝙏𝙖̀𝙮 𝙃𝙪𝙗"
+local FolderName = "Tày Hub"
 local FileName = "Settings.json"
 local FullPath = FolderName .. "/" .. FileName
 
@@ -12116,3 +12115,4 @@ FastAttackModule.FastAttack = FastAttack
 NotificacaoNightMystic("Tày Hub", "✅ BẠN SẼ ĐƯỢC HỘP KHÔ GÀ")
 
 return FastAttackModulem
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/notify"))()
