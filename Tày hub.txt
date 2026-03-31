@@ -2396,7 +2396,7 @@ QuestNeta = function()
 			[6] = PosQ,
 		};
 	end;
-	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/ui_tay.lua"))():MakeWindow({
+	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/ui_tay.txt"))():MakeWindow({
     Title = "Tày Hub",
     SubTitle = "by Tùng dz",
     SaveFolder = "Maça.json"
