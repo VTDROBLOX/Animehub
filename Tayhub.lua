@@ -2582,7 +2582,7 @@ uiCorner.Parent = imageButton
 local uiStroke = Instance.new("UIStroke", imageButton)
 uiStroke.Thickness = 2
 uiStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-uiStroke.Color = Color3.fromRGB(255, 200, 40) -- Magenta/Rosa forte
+uiStroke.Color = Color3.fromRGB(0, 220, 100) -- Xanh la cay
 
 -- Variáveis para arrastar
 local dragging = false
@@ -2636,6 +2636,71 @@ imageButton.MouseButton1Click:Connect(function()
     isOpen = not isOpen
     Library:Minimize()
 end)
+-- ========================================
+-- LANGUAGE TOGGLE VI / EN
+-- ========================================
+_G.Lang = _G.Lang or "VI"
+
+local LangTab = Library:MakeTab({
+    Title = "🌐 Ngôn Ngữ / Language",
+    Icon = "rbxassetid://7733965126"
+})
+local LangSection = LangTab:AddSection({ Name = "Chuyển Ngôn Ngữ / Switch Language" })
+LangSection:AddParagraph({
+    Title = "ℹ️ Hướng dẫn",
+    Content = "TẮT = 🇻🇳 Tiếng Việt  |  BẬT = 🇺🇸 English"
+})
+LangSection:AddToggle({
+    Name = "🌐 Tiếng Việt  ⇄  English",
+    Description = "TẮT = Tiếng Việt | BẬT = English",
+    Default = false,
+    Callback = function(val)
+        if val then
+            _G.Lang = "EN"
+            NotificacaoNightMystic("Tày Hub", "🇺🇸 Switched to English!")
+            pcall(function()
+                Farm.Title = "Tab Farming"
+                Maestry.Title = "Tab Farm Mastery"
+                Others.Title = "Tab Farm Others"
+                Event.Title = "Tab Sea Event"
+                Race.Title = "Tab Race Upgrade"
+                Dojo.Title = "Tab Dojo Quest & Drago Race"
+                Esp.Title = "Tab Stats & ESP"
+                Player.Title = "Tab Local Player"
+                Teleport.Title = "Tab Teleport"
+                Get.Title = "Tab Get Items & Upgrade"
+                Fruit.Title = "Tab Raid & Fruit"
+                Setting.Title = "Tab Settings & Misc"
+                Status.Title = "Status And Server"
+                Shop.Title = "Shop"
+                Discord.Title = "Discord"
+                LangTab.Title = "🌐 Language"
+            end)
+        else
+            _G.Lang = "VI"
+            NotificacaoNightMystic("Tày Hub", "🇻🇳 Đã chuyển sang Tiếng Việt!")
+            pcall(function()
+                Farm.Title = "Tab Cày Cấp"
+                Maestry.Title = "Tab Farm Mastery"
+                Others.Title = "Tab Farm Khác"
+                Event.Title = "Tab Sự Kiện Biển"
+                Race.Title = "Tab Nâng Cấp Chủng Tộc"
+                Dojo.Title = "Tab Dojo & Drago Race"
+                Esp.Title = "Tab Thống Kê & ESP"
+                Player.Title = "Tab Người Chơi"
+                Teleport.Title = "Tab Dịch Chuyển"
+                Get.Title = "Tab Lấy Đồ & Nâng Cấp"
+                Fruit.Title = "Tab Raid & Trái Ác Quỷ"
+                Setting.Title = "Tab Cài Đặt & Misc"
+                Status.Title = "Trạng Thái & Server"
+                Shop.Title = "Cửa Hàng"
+                Discord.Title = "Cộng Đồng"
+                LangTab.Title = "🌐 Ngôn Ngữ"
+            end)
+        end
+    end
+})
+
 local Discord = Library:MakeTab({
     Title = "Discord",
     Icon = "rbxassetid://73132811772878"
