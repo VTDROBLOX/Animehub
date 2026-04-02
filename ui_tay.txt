@@ -70,7 +70,7 @@ local redzlib = {
 			}),
 			["Color Hub 2"] = Color3.fromRGB(18, 18, 18),
 			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-			["Color Theme"] = Color3.fromRGB(218, 165, 32), -- Dourado da 2B
+			["Color Theme"] = Color3.fromRGB(0, 220, 100), -- Xanh la
 			["Color Text"] = Color3.fromRGB(255, 255, 255),
 			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
 		}
@@ -1912,6 +1912,9 @@ function redzlib:MakeWindow(Configs)
 			Funcs:ToggleParent(Container, Bool, Containers)
 		end
 		function Tab:Destroy() TabSelect:Destroy() Container:Destroy() end
+		function Tab:SetTitle(NewTitle)
+			LabelTitle.Text = NewTitle
+		end
 		
 		function Tab:AddSection(Configs)
 			local SectionName = type(Configs) == "string" and Configs or Configs[1] or Configs.Name or Configs.Title or Configs.Section

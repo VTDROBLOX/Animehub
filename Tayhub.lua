@@ -2734,43 +2734,43 @@ LangTab:AddToggle({
             _G.Lang = "EN"
             NotificacaoNightMystic("Tày Hub", "🇺🇸 Switched to English!")
             pcall(function()
-                Farm.Title = "Tab Farming"
-                Maestry.Title = "Tab Farm Mastery"
-                Others.Title = "Tab Farm Others"
-                Event.Title = "Tab Sea Event"
-                Race.Title = "Tab Race Upgrade"
-                Dojo.Title = "Tab Dojo Quest & Drago Race"
-                Esp.Title = "Tab Stats & ESP"
-                Player.Title = "Tab Local Player"
-                Teleport.Title = "Tab Teleport"
-                Get.Title = "Tab Get Items & Upgrade"
-                Fruit.Title = "Tab Raid & Fruit"
-                Setting.Title = "Tab Settings & Misc"
-                Status.Title = "Status And Server"
-                Shop.Title = "Shop"
-                Discord.Title = "Discord"
-                LangTab.Title = "🌐 Language"
+                Farm:SetTitle("Tab Farming")
+                Maestry:SetTitle("Tab Farm Mastery")
+                Others:SetTitle("Tab Farm Others")
+                Event:SetTitle("Tab Sea Event")
+                Race:SetTitle("Tab Race Upgrade")
+                Dojo:SetTitle("Tab Dojo Quest & Drago Race")
+                Esp:SetTitle("Tab Stats & ESP")
+                Player:SetTitle("Tab Local Player")
+                Teleport:SetTitle("Tab Teleport")
+                Get:SetTitle("Tab Get Items & Upgrade")
+                Fruit:SetTitle("Tab Raid & Fruit")
+                Setting:SetTitle("Tab Settings & Misc")
+                Status:SetTitle("Status And Server")
+                Shop:SetTitle("Shop")
+                Discord:SetTitle("Discord")
+                LangTab:SetTitle("🌐 Language")
             end)
         else
             _G.Lang = "VI"
             NotificacaoNightMystic("Tày Hub", "🇻🇳 Đã chuyển sang Tiếng Việt!")
             pcall(function()
-                Farm.Title = "Tab Cày Cấp"
-                Maestry.Title = "Tab Farm Mastery"
-                Others.Title = "Tab Farm Khác"
-                Event.Title = "Tab Sự Kiện Biển"
-                Race.Title = "Tab Nâng Cấp Chủng Tộc"
-                Dojo.Title = "Tab Dojo & Drago Race"
-                Esp.Title = "Tab Thống Kê & ESP"
-                Player.Title = "Tab Người Chơi"
-                Teleport.Title = "Tab Dịch Chuyển"
-                Get.Title = "Tab Lấy Đồ & Nâng Cấp"
-                Fruit.Title = "Tab Raid & Trái Ác Quỷ"
-                Setting.Title = "Tab Cài Đặt & Misc"
-                Status.Title = "Trạng Thái & Server"
-                Shop.Title = "Cửa Hàng"
-                Discord.Title = "Cộng Đồng"
-                LangTab.Title = "🌐 Ngôn Ngữ"
+                Farm:SetTitle("Tab Cày Cấp")
+                Maestry:SetTitle("Tab Farm Mastery")
+                Others:SetTitle("Tab Farm Khác")
+                Event:SetTitle("Tab Sự Kiện Biển")
+                Race:SetTitle("Tab Nâng Cấp Chủng Tộc")
+                Dojo:SetTitle("Tab Dojo & Drago Race")
+                Esp:SetTitle("Tab Thống Kê & ESP")
+                Player:SetTitle("Tab Người Chơi")
+                Teleport:SetTitle("Tab Dịch Chuyển")
+                Get:SetTitle("Tab Lấy Đồ & Nâng Cấp")
+                Fruit:SetTitle("Tab Raid & Trái Ác Quỷ")
+                Setting:SetTitle("Tab Cài Đặt & Misc")
+                Status:SetTitle("Trạng Thái & Server")
+                Shop:SetTitle("Cửa Hàng")
+                Discord:SetTitle("Cộng Đồng")
+                LangTab:SetTitle("🌐 Ngôn Ngữ")
             end)
         end
     end
