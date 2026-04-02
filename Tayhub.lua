@@ -1300,7 +1300,7 @@ Hop = function()
 	end;
 local C = Instance.new("Part", workspace);
 C.Size = Vector3.new(1, 1, 1);
-C.Name = "Rip_Indra";
+C.Name = T("Rip_Indra");
 C.Anchored = true;
 C.CanCollide = false;
 C.CanTouch = false;
@@ -2555,6 +2555,165 @@ QuestNeta = function()
 			[6] = PosQ,
 		};
 	end;
+-- ========================================
+-- BANG DICH NGON NGU
+-- ========================================
+_G.VI = {
+    ["Auto Farm main"] = "Cày Tự Động",
+    ["Select Weapon"] = "Chọn Vũ Khí",
+    ["Select Farm Mode"] = "Chọn Chế Độ Cày",
+    ["Start Farm"] = "Bắt Đầu Cày",
+    ["Accept Quests"] = "Nhận Nhiệm Vụ",
+    ["Other"] = "Khác",
+    ["Kill Mobs Nearest"] = "Giết Mob Gần Nhất",
+    ["Auto Pirate Raid"] = "Tự Động Raid Hải Tặc",
+    ["Collect"] = "Thu Thập",
+    ["Auto Collect Chest"] = "Tự Động Nhặt Hòm",
+    ["Auto Collect Berry"] = "Tự Động Nhặt Berry",
+    ["Material"] = "Nguyên Liệu",
+    ["Select Material"] = "Chọn Nguyên Liệu",
+    ["Auto Collect Material"] = "Tự Động Thu Nguyên Liệu",
+    ["Auto Farm"] = "Tự Động Cày",
+    ["Anti AFK"] = "Chống AFK",
+    ["Auto Active Haki"] = "Tự Động Bật Haki",
+    ["Auto Active Cores"] = "Tự Động Bật Cores",
+    ["Auto Active V3"] = "Tự Động Bật V3",
+    ["Auto Active V4"] = "Tự Động Bật V4",
+    ["Kill Mobs"] = "Giết Mob",
+    ["Accept Quest Boss"] = "Nhận Nhiệm Vụ Boss",
+    ["Accept Quest Bypass [Risk]"] = "Bỏ Qua Quest [Rủi Ro]",
+    ["Accept Allies"] = "Chấp Nhận Đồng Minh",
+    ["Tab Farm Maestry"] = "Tab Farm Mastery",
+    ["Mastery Farm"] = "Cày Mastery",
+    ["Auto Mastery"] = "Tự Động Mastery",
+    ["Select Mastery"] = "Chọn Mastery",
+    ["Fruit Skills"] = "Kỹ Năng Trái",
+    ["Use Z Skill"] = "Dùng Kỹ Năng Z",
+    ["Use X Skill"] = "Dùng Kỹ Năng X",
+    ["Use C Skill"] = "Dùng Kỹ Năng C",
+    ["Use V Skill"] = "Dùng Kỹ Năng V",
+    ["Use F Skill"] = "Dùng Kỹ Năng F",
+    ["Teleport"] = "Dịch Chuyển",
+    ["Select Island"] = "Chọn Đảo",
+    ["Teleport To"] = "Dịch Chuyển Đến",
+    ["Teleport Player"] = "Dịch Chuyển Đến Người Chơi",
+    ["Stats"] = "Chỉ Số",
+    ["Add Points Melee"] = "Thêm Điểm Cận Chiến",
+    ["Add Points Defense"] = "Thêm Điểm Phòng Thủ",
+    ["Add Points Sword"] = "Thêm Điểm Kiếm",
+    ["Add Points Gun"] = "Thêm Điểm Súng",
+    ["Add Points Fruit"] = "Thêm Điểm Trái",
+    ["ESP"] = "ESP",
+    ["Player ESP"] = "ESP Người Chơi",
+    ["Mob ESP"] = "ESP Mob",
+    ["Chest ESP"] = "ESP Hòm",
+    ["Fruit ESP"] = "ESP Trái",
+    ["Speed"] = "Tốc Độ",
+    ["Jump"] = "Nhảy",
+    ["Fly"] = "Bay",
+    ["No Clip"] = "Xuyên Tường",
+    ["Infinite Jump"] = "Nhảy Vô Hạn",
+    ["God Mode"] = "Bất Tử",
+    ["Kill Aura"] = "Tấn Công Tự Động",
+    ["Auto Heal"] = "Tự Động Hồi Máu",
+    ["Walk Speed"] = "Tốc Độ Đi",
+    ["Jump Power"] = "Lực Nhảy",
+    ["Sea Event"] = "Sự Kiện Biển",
+    ["Auto Attack Sea Beast"] = "Tự Động Đánh Sea Beast",
+    ["Auto Attack Fish Boat"] = "Tự Động Đánh Thuyền Cá",
+    ["Auto Attack Leviathan"] = "Tự Động Đánh Leviathan",
+    ["Auto Attack Pirate GrandBrigade"] = "Tự Động Đánh Pirate GrandBrigade",
+    ["Race Upgrade"] = "Nâng Cấp Chủng Tộc",
+    ["Auto Race"] = "Tự Động Race",
+    ["Select Race"] = "Chọn Chủng Tộc",
+    ["Raiding"] = "Raid",
+    ["Select Chip"] = "Chọn Chip",
+    ["Buy Chip With Fruit"] = "Mua Chip Bằng Trái",
+    ["Raid Farming"] = "Cày Raid",
+    ["Auto Start Raid"] = "Tự Động Bắt Đầu Raid",
+    ["Auto Complete Raid"] = "Tự Động Hoàn Thành Raid",
+    ["Auto Awakening"] = "Tự Động Thức Tỉnh",
+    ["Fruits Options"] = "Tùy Chọn Trái",
+    ["Select Fruit Stock"] = "Chọn Trái Dự Trữ",
+    ["Buy Basic Stock"] = "Mua Trái Cơ Bản",
+    ["Settings"] = "Cài Đặt",
+    ["FPS Boost"] = "Tăng FPS",
+    ["Anti Lag"] = "Chống Lag",
+    ["Render Quality"] = "Chất Lượng Render",
+    ["Low CPU"] = "Giảm CPU",
+    ["Auto RAM Clean"] = "Dọn RAM Tự Động",
+    ["Remove Effects"] = "Xóa Hiệu Ứng",
+    ["Tween Speed"] = "Tốc Độ Tween",
+    ["Bring Range"] = "Phạm Vi Kéo",
+    ["Get Items"] = "Lấy Đồ",
+    ["Auto Get"] = "Tự Động Lấy",
+    ["Hop Server"] = "Chuyển Server",
+    ["Server Hop"] = "Nhảy Server",
+    ["Auto Ken"] = "Tự Động Ken",
+    ["Aimbot"] = "Aimbot",
+    ["Aimbot Cam Lock"] = "Khóa Camera Aimbot",
+    ["Aimbot Skills"] = "Kỹ Năng Aimbot",
+    ["Agility"] = "Linh Hoạt",
+    ["Auto Angel V2/V3"] = "Tự Động Angel V2/V3",
+    ["Auto Attack"] = "Tự Động Tấn Công",
+    ["Auto Berry"] = "Tự Động Berry",
+    ["Auto Boss"] = "Tự Động Boss",
+    ["Auto Ectoplasm"] = "Tự Động Ectoplasm",
+    ["Auto Factory"] = "Tự Động Factory",
+    ["Auto Find Mirage"] = "Tự Động Tìm Mirage",
+    ["Auto Holy Torch"] = "Tự Động Holy Torch",
+    ["Auto Kilo"] = "Tự Động Kilo",
+    ["Auto Pole V2"] = "Tự Động Pole V2",
+    ["Auto Saber"] = "Tự Động Saber",
+    ["Auto Tushita"] = "Tự Động Tushita",
+    ["Auto Yama"] = "Tự Động Yama",
+    ["Find Mirage Island"] = "Tìm Mirage Island",
+    ["Frozen Dimension"] = "Chiều Không Gian Băng",
+    ["Kill Boss"] = "Giết Boss",
+    ["Kitsune Island"] = "Đảo Kitsune",
+    ["Mirage Island"] = "Mirage Island",
+    ["Prehistoric Island"] = "Đảo Tiền Sử",
+    ["Pull Lever"] = "Kéo Cần Gạt",
+    ["Select Boss"] = "Chọn Boss",
+    ["Select Enemy"] = "Chọn Kẻ Địch",
+    ["Select Player"] = "Chọn Người Chơi",
+    ["Time Zone"] = "Múi Giờ",
+    ["Full Moon"] = "Trăng Tròn",
+    ["Bring Mobs"] = "Kéo Mob",
+    ["Max Bring Mobs"] = "Số Mob Kéo Tối Đa",
+    ["Mob Height"] = "Độ Cao Mob",
+    ["Use Sword Skills"] = "Dùng Kỹ Năng Kiếm",
+    ["Use Melee Skills"] = "Dùng Kỹ Năng Cận Chiến",
+    ["Use Gun Skills"] = "Dùng Kỹ Năng Súng",
+    ["Kill Range"] = "Phạm Vi Giết",
+    ["Auto Kill"] = "Tự Động Giết",
+    ["Health Limit"] = "Giới Hạn Máu",
+    ["Notification"] = "Thông Báo",
+    ["Debug"] = "Debug",
+    ["Credits"] = "Tác Giả",
+    ["Version"] = "Phiên Bản",
+    ["Dimension Killed"] = "Chiều Không Gian Đã Diệt",
+    ["Rip_Indra"] = "Rip_Indra",
+    ["Dough King"] = "Dough King",
+    ["Elite Hunter"] = "Elite Hunter",
+    ["Tyrant of the Skies"] = "Bạo Chúa Bầu Trời",
+    ["Legendary Sword"] = "Kiếm Huyền Thoại",
+    ["Bone"] = "Bone",
+    ["Time"] = "Thời Gian",
+    ["Inicia a Raid automaticamente e aguarda 10s entre verificações"] = "Tự động bắt đầu Raid và chờ 10s giữa các lần kiểm tra",
+    ["Use your lowest fruit in your bag"] = "Dùng trái thấp nhất trong túi",
+    ["Abilities Shop"] = "Cửa Hàng Kỹ Năng",
+    ["Adv"] = "Nâng Cao",
+    ["Auto Active"] = "Tự Động Kích Hoạt",
+}
+
+local function T(s)
+    if _G.Lang == "VI" and _G.VI and _G.VI[s] then
+        return _G.VI[s]
+    end
+    return s
+end
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/ui_tay.txt"))():MakeWindow({
     Title = "Tày Hub",
     SubTitle = "by Tùng dz",
@@ -2714,7 +2873,7 @@ local Setting = Library:MakeTab({
 -- ========================================
 -- LANGUAGE TOGGLE VI / EN
 -- ========================================
-_G.Lang = _G.Lang or "VI"
+_G.Lang = (type(_G.SaveData) == "table" and _G.SaveData["Lang"]) or "VI"
 
 local LangTab = Library:MakeTab({
     Title = "🌐 Ngôn Ngữ / Language",
@@ -2732,7 +2891,9 @@ LangTab:AddToggle({
     Callback = function(val)
         if val then
             _G.Lang = "EN"
-            NotificacaoNightMystic("Tày Hub", "🇺🇸 Switched to English!")
+            _G.SaveData["Lang"] = "EN"
+            SaveSettings()
+            NotificacaoNightMystic("Tày Hub", "🇺🇸 English - Reload script to apply!")
             pcall(function()
                 Farm:SetTitle("Tab Farming")
                 Maestry:SetTitle("Tab Farm Mastery")
@@ -2753,7 +2914,9 @@ LangTab:AddToggle({
             end)
         else
             _G.Lang = "VI"
-            NotificacaoNightMystic("Tày Hub", "🇻🇳 Đã chuyển sang Tiếng Việt!")
+            _G.SaveData["Lang"] = "VI"
+            SaveSettings()
+            NotificacaoNightMystic("Tày Hub", "🇻🇳 Tiếng Việt - Reload script để áp dụng!")
             pcall(function()
                 Farm:SetTitle("Tab Cày Cấp")
                 Maestry:SetTitle("Tab Farm Mastery")
@@ -2976,7 +3139,7 @@ Shop:AddButton({
         Remote:InvokeServer(unpack(args))
     end
 })
-Shop:AddSection("Abilities Shop")
+Shop:AddSection(T("Abilities Shop"))
 Shop:AddButton({
     Name = "Skyjump [ $10,000 Beli ]",
     Callback = function()
@@ -3058,7 +3221,7 @@ Shop:AddButton({
     end
 })
 local Time = Status:AddParagraph({
-    Title = "Time Zone",
+    Title = T("Time Zone"),
     Desc = ""
 })
 function UpdateOS()
@@ -3083,7 +3246,7 @@ spawn(function()
     end
 end)
 local Timmessss = Status:AddParagraph({
-    Title = "Time",
+    Title = T("Time"),
     Desc = ""
 })
 function UpdateTime()
@@ -3100,7 +3263,7 @@ spawn(function()
     end
 end)
 local Miragecheck = Status:AddParagraph({
-    Title = "Mirage Island",
+    Title = T("Mirage Island"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3115,7 +3278,7 @@ spawn(function()
     end)
 end)
 local Kitsunecheck = Status:AddParagraph({
-    Title = "Kitsune Island",
+    Title = T("Kitsune Island"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3130,7 +3293,7 @@ spawn(function()
     end)
 end)
 local CPrehistoriccheck = Status:AddParagraph({
-    Title = "Prehistoric Island",
+    Title = T("Prehistoric Island"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3145,7 +3308,7 @@ spawn(function()
     end)
 end)
 local FrozenIsland = Status:AddParagraph({
-    Title = "Frozen Dimension",
+    Title = T("Frozen Dimension"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3160,7 +3323,7 @@ spawn(function()
     end)
 end)
 local MobCakePrince = Status:AddParagraph({
-    Title = "Dimension Killed",
+    Title = T("Dimension Killed"),
     Desc = ""
 })
 spawn(function()
@@ -3181,7 +3344,7 @@ spawn(function()
     end
 end)
 local TyrantStatus = Status:AddParagraph({
-    Title = "Tyrant of the Skies",
+    Title = T("Tyrant of the Skies"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3196,7 +3359,7 @@ spawn(function()
     end)
 end)
 local CheckRip = Status:AddParagraph({
-    Title = "Rip_Indra",
+    Title = T("Rip_Indra"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3212,7 +3375,7 @@ spawn(function()
     end
 end)
 local CheckDoughKing = Status:AddParagraph({
-    Title = "Dough King",
+    Title = T("Dough King"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3228,7 +3391,7 @@ spawn(function()
     end
 end)
 local EliteHunter = Status:AddParagraph({
-    Title = "Elite Hunter",
+    Title = T("Elite Hunter"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3247,7 +3410,7 @@ spawn(function()
     end
 end)
 local Pullever = Status:AddParagraph({
-    Title = "Pull Lever",
+    Title = T("Pull Lever"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3262,7 +3425,7 @@ spawn(function()
     end
 end)
 local FM = Status:AddParagraph({
-    Title = "Full Moon",
+    Title = T("Full Moon"),
     Desc = ""
 })
 spawn(function()
@@ -3286,7 +3449,7 @@ spawn(function()
     end
 end)
 local LegendarySword = Status:AddParagraph({
-    Title = "Legendary Sword",
+    Title = T("Legendary Sword"),
     Desc = "Status: "
 })
 spawn(function()
@@ -3306,7 +3469,7 @@ spawn(function()
     end)
 end)
 local Bone = Status:AddParagraph({
-    Title = "Bone",
+    Title = T("Bone"),
     Desc = ""
 })
 spawn(function()
@@ -3358,7 +3521,7 @@ Status:AddButton({
     end
 })
 Status:AddButton({
-    Name = "Hop Server",
+    Name = T("Hop Server"),
     Callback = function()
         Hop()
     end
@@ -3386,9 +3549,9 @@ Status:AddButton({
         TPS:TeleportToPlaceInstance(_place, Server.id, plr)
     end
 })
-Farm:AddSection({"Auto Farm main"})
+Farm:AddSection(T("Auto Farm main"))
 Farm:AddDropdown({
-    Name = "Select Weapon",
+    Name = T("Select Weapon"),
     Description = "",
     Options = {"Melee","Sword","Blox Fruit","Gun"},
     Default = "Melee",
@@ -3444,7 +3607,7 @@ end
 ----------------------------------------------------------------------------
 
 Farm:AddDropdown({
-    Name = "Select Farm Mode",
+    Name = T("Select Farm Mode"),
     Options = {"Level", "Bone", "Cake Prince", "Tyrant Of The Skies"},
     Default = GetSetting("SelectedFarmMode_Save", "Level"),
     Callback = function(v)
@@ -3455,7 +3618,7 @@ Farm:AddDropdown({
 })
 
 Farm:AddToggle({
-    Name = "Start Farm",
+    Name = T("Start Farm"),
     Default = GetSetting("StartFarm_Save", false),
     Callback = function(v)
         _G.StartFarm = v
@@ -3484,7 +3647,7 @@ Farm:AddToggle({
 })
 
 Farm:AddToggle({
-    Title = "Accept Quests",
+    Title = T("Accept Quests"),
     Default = GetSetting("AcceptQuest_Save", false),
     Callback = function(v)
         _G.AcceptQuest = v
@@ -3982,7 +4145,7 @@ spawn(function()
         end  
     end
 end)
-Farm:AddSection({"Other"})
+Farm:AddSection(T("Other"))
 -- Configuração da Distância Máxima (em studs)
 -- Aumente se quiser pegar mobs um pouco mais longe, diminua se quiser bem perto.
 _G.MaxFarmDistance = 325
@@ -3991,7 +4154,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 Farm:AddToggle({
-    Name = "Kill Mobs Nearest",
+    Name = T("Kill Mobs Nearest"),
     Description = "",
     -- 1. Carrega se estava ligado ou desligado ao abrir o script
     Default = GetSetting("AutoFarmNear_Save", false),
@@ -4119,7 +4282,7 @@ end)
 end
 if World3 then
 Farm:AddToggle({
-    Name = "Auto Pirate Raid",
+    Name = T("Auto Pirate Raid"),
     Description = "",
     -- 1. Carrega se estava ligado ou desligado ao abrir o script
     Default = GetSetting("AutoRaidCastle_Save", false),
@@ -4191,10 +4354,10 @@ spawn(function()
     end
 end)
 end
-Farm:AddSection({"Collect"})
+Farm:AddSection(T("Collect"))
 -- Botão Auto Collect Chest
 Farm:AddToggle({
-    Name = "Auto Collect Chest",
+    Name = T("Auto Collect Chest"),
     Description = "",
     -- 1. Carrega o estado salvo (ou false por padrão)
     Default = GetSetting("AutoFarmChest_Save", false),
@@ -4211,7 +4374,7 @@ Farm:AddToggle({
 
 -- Botão Auto Collect Berry
 Farm:AddToggle({
-	Name = "Auto Collect Berry",
+	Name = T("Auto Collect Berry"),
 	Description = "",
 	-- 1. Carrega o estado salvo
 	Default = GetSetting("AutoBerry_Save", false),
@@ -4281,10 +4444,10 @@ spawn(function()
         end
     end
 end)
-Farm:AddSection({"Material"})
+Farm:AddSection(T("Material"))
 -- Dropdown de Selecionar Material
 Farm:AddDropdown({
-	Name = "Select Material",
+	Name = T("Select Material"),
 	Description = "",
 	Options = MaterialList,
 	-- 1. Carrega o material salvo ou deixa vazio se for a primeira vez
@@ -4301,7 +4464,7 @@ Farm:AddDropdown({
 
 -- Toggle de Auto Farm (Material)
 Farm:AddToggle({
-	Name = "Auto Farm",
+	Name = T("Auto Farm"),
 	Description = "",
 	-- 1. Carrega se o farm de material estava ligado
 	Default = GetSetting("AutoMaterial_Save", false),
@@ -4451,7 +4614,7 @@ spawn(function()
 	end;
 end);
 Farm:AddToggle({
-    Name = "Auto Active Cores",
+    Name = T("Auto Active Cores"),
     Description = "",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("AutoActiveCores_Save", false),
@@ -4599,7 +4762,7 @@ Setting:AddButton({
 })
 
 Setting:AddToggle({
-	Name = "Auto Attack",
+	Name = T("Auto Attack"),
 	Description = "",
 	-- 1. Carrega o estado salvo ou inicia como true (padrão original)
 	Default = GetSetting("AutoAttack_Save", true),
@@ -4612,7 +4775,7 @@ Setting:AddToggle({
 })
 
 Setting:AddToggle({
-	Name = "Bring Mobs",
+	Name = T("Bring Mobs"),
 	Description = "",
 	-- 1. Carrega o estado salvo ou inicia como true
 	Default = GetSetting("BringMobs_Save", true),
@@ -4638,7 +4801,7 @@ Setting:AddToggle({
 })
 
 Setting:AddToggle({
-	Name = "Auto Active Haki",
+	Name = T("Auto Active Haki"),
 	Description = "",
 	-- 1. Carrega o estado salvo
 	Default = GetSetting("AutoHaki_Save", true),
@@ -4662,7 +4825,7 @@ spawn(function()
 	end;
 end);
 Setting:AddToggle({
-	Name = "Auto Active V3",
+	Name = T("Auto Active V3"),
 	Description = "",
 	-- 1. Carrega o estado salvo
 	Default = GetSetting("AutoActiveV3_Save", false),
@@ -4678,7 +4841,7 @@ Setting:AddToggle({
 })
 
 Setting:AddToggle({
-	Name = "Auto Active V4",
+	Name = T("Auto Active V4"),
 	Description = "",
 	-- 1. Carrega o estado salvo
 	Default = GetSetting("AutoActiveV4_Save", false),
@@ -4719,7 +4882,7 @@ spawn(function()
 	end;
 end);
 Setting:AddToggle({
-	Name = "Anti AFK",
+	Name = T("Anti AFK"),
 	Description = "",
 	Default = true,
 	Callback = function(I)
@@ -4788,7 +4951,7 @@ Setting:AddTextBox({
 })
 
 Setting:AddTextBox({
-    Title = "Tween Speed",
+    Title = T("Tween Speed"),
     Description = "",
     PlaceHolder = "300",
     Default = "300",
@@ -5253,7 +5416,7 @@ end
 Others:AddSection({"Boss Farm"})
 
 local BossDropdown = Others:AddDropdown({
-    Name = "Select Boss",
+    Name = T("Select Boss"),
     Options = Boss, 
     Default = Boss[1],
     Callback = function(v) _G.FindBoss = v end
@@ -5302,7 +5465,7 @@ Others:AddToggle({
 })
 
  Others:AddToggle({
-    Name = "Accept Quest Boss",
+    Name = T("Accept Quest Boss"),
     Default = false,
     Callback = function(v)
         _G.AutoAcceptQuest = v
@@ -6005,7 +6168,7 @@ end);
 end
 
  Others:AddToggle({
-    Name = "Accept Quest Bypass [Risk]",
+    Name = T("Accept Quest Bypass [Risk]"),
     Description = "",
     -- 1. Carrega se estava ligado ou desligado
     Default = GetSetting("BypassQuest_Save", false),
@@ -6182,7 +6345,7 @@ end)
 
 Event:AddSection({"Select what you will farm."})
     Event:AddToggle({
-        Name = "Auto Attack Sea Beast",
+        Name = T("Auto Attack Sea Beast"),
         Description = "",
         Default = false,
         Callback = function(I)
@@ -6190,7 +6353,7 @@ Event:AddSection({"Select what you will farm."})
         end,
     });
 Event:AddToggle({
-    Name = "Auto Attack Pirate GrandBrigade",
+    Name = T("Auto Attack Pirate GrandBrigade"),
     Description = "",
     Default = false,
     Callback = function(I)
@@ -6246,7 +6409,7 @@ Event:AddToggle({
     end,
 });
 Event:AddToggle({
-    Name = "Auto Attack Fish Boat",
+    Name = T("Auto Attack Fish Boat"),
     Description = "",
     Default = false,
     Callback = function(I)
@@ -6403,7 +6566,7 @@ task.spawn(function()
     end
 end)
 if game.PlaceId == 7449423635 or game.PlaceId == 100117331123089 then
-Event:AddSection({"Frozen Dimension"})
+Event:AddSection(T("Frozen Dimension"))
 Event:AddButton({
 	Name = "Buy Spy",
 	Description = "Buy the spy for finding leviathan",
@@ -6439,7 +6602,7 @@ spawn(function()
 	end;
 end); 
 Event:AddToggle({
-	Name = "Auto Attack Leviathan",
+	Name = T("Auto Attack Leviathan"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -6907,7 +7070,7 @@ spawn(function()
         end);
     end;
 end);
-Event:AddSection({"Prehistoric Island"});
+Event:AddSection(T("Prehistoric Island"));
 Event:AddToggle({
     Name = "Auto Find Prehistoric Island",
     Description = "",
@@ -7778,7 +7941,7 @@ spawn(function()
 end);
 
 Race:AddToggle({
-    Name = "Auto Angel V2/V3",
+    Name = T("Auto Angel V2/V3"),
     Description = "",
     Default = false,
     Callback = function(I)
@@ -8586,7 +8749,7 @@ end);
 -- FLY TOGGLE
 --================================================--
 Dojo:AddToggle({
-	Name = "Fly",
+	Name = T("Fly"),
 	Description = "Fly controlado pelo analógico ( Subida Automática )",
 	Default = false,
 	Callback = function(v)
@@ -8915,7 +9078,7 @@ AdvanFruitEsp = function()
                 local Adv = workspace:FindFirstChild("Adv")
                 if not Adv then
                     Adv = Instance.new("Part");
-                    Adv.Name = "Adv";
+                    Adv.Name = T("Adv");
                     Adv.Transparency = 1;
                     Adv.Size = Vector3.new(1, 1, 1);
                     Adv.Anchored = true;
@@ -9351,12 +9514,12 @@ Esp:AddButton({
         ApplyGlobalFont(Enum.Font.Gotham)
     end
 })
-Esp:AddSection({"Stats"});
+Esp:AddSection(T("Stats"));
 
 -- // AUTO STATS (Adicionado à aba VI_S conforme solicitado) // --
 
 Esp:AddToggle({
-    Name = "Add Points Melee",
+    Name = T("Add Points Melee"),
     Description = "Gasta pontos automaticamente em Melee",
     Default = GetSetting("AutoMelee_Save", false),
     Callback = function(I)
@@ -9367,7 +9530,7 @@ Esp:AddToggle({
 })
 
 Esp:AddToggle({
-    Name = "Add Points Sword",
+    Name = T("Add Points Sword"),
     Description = "Gasta pontos automaticamente em Sword",
     Default = GetSetting("AutoSword_Save", false),
     Callback = function(I)
@@ -9378,7 +9541,7 @@ Esp:AddToggle({
 })
 
 Esp:AddToggle({
-    Name = "Add Points Gun",
+    Name = T("Add Points Gun"),
     Description = "Gasta pontos automaticamente em Gun",
     Default = GetSetting("AutoGun_Save", false),
     Callback = function(I)
@@ -9389,7 +9552,7 @@ Esp:AddToggle({
 })
 
 Esp:AddToggle({
-    Name = "Add Points Fruit",
+    Name = T("Add Points Fruit"),
     Description = "Gasta pontos automaticamente em Fruit",
     Default = GetSetting("AutoFruit_Save", false),
     Callback = function(I)
@@ -9400,7 +9563,7 @@ Esp:AddToggle({
 })
 
 Esp:AddToggle({
-    Name = "Add Points Defense",
+    Name = T("Add Points Defense"),
     Description = "Gasta pontos automaticamente em Defense",
     Default = GetSetting("AutoDefense_Save", false),
     Callback = function(I)
@@ -9551,10 +9714,10 @@ Player:AddToggle({
 	end,
 });
 
-Player:AddSection({"Aimbot"});
+Player:AddSection(T("Aimbot"));
 
 Player:AddToggle({
-	Name = "Aimbot Cam Lock",
+	Name = T("Aimbot Cam Lock"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -9597,7 +9760,7 @@ end);
 local SilentAim_Enabled = false
 
 Player:AddToggle({
-	Name = "Aimbot Skills",
+	Name = T("Aimbot Skills"),
 	Description = "",
 	Default = false,
 	Callback = function(state)
@@ -9898,7 +10061,7 @@ spawn(function()
 			if InfAblities then
 				if not plr.Character.HumanoidRootPart:FindFirstChild("Agility") then
 					local I = replicated.FX.Agility:Clone();
-					I.Name = "Agility";
+					I.Name = T("Agility");
 					I.Parent = plr.Character.HumanoidRootPart;
 				end;
 			else
@@ -9950,7 +10113,7 @@ Player:AddToggle({
 	end,
 });
 Player:AddToggle({
-	Name = "Accept Allies",
+	Name = T("Accept Allies"),
 	Description = "turn on for auto accept ally",
 	Default = false,
 	Callback = function(I)
@@ -11640,7 +11803,7 @@ spawn(function()
 	end;
 end);
 end
-Fruit:AddSection({"Raiding"});
+Fruit:AddSection(T("Raiding"));
 e = {
 		"Flame",
 		"Ice",
@@ -11656,7 +11819,7 @@ e = {
 		"Dough",
 	};
 Fruit:AddDropdown({
-	Name = "Select Chip",
+	Name = T("Select Chip"),
 	Description = "",
 	Options = e,
 	Default = "Flame",
@@ -11701,8 +11864,8 @@ spawn(function()
 	end;
 end);
 Fruit:AddToggle({
-	Name = "Buy Chip With Fruit",
-	Description = "Use your lowest fruit in your bag",
+	Name = T("Buy Chip With Fruit"),
+	Description = T("Use your lowest fruit in your bag"),
 	Default = false,
 	Callback = function(state)
 		_G.AutoBuyChip = state
@@ -11742,11 +11905,11 @@ Fruit:AddToggle({
 	end
 })
 
-Fruit:AddSection({"Raid Farming"});
+Fruit:AddSection(T("Raid Farming"));
 
 Fruit:AddToggle({
-	Name  = "Auto Start Raid",
-    Description = "Inicia a Raid automaticamente e aguarda 10s entre verificações",
+	Name  = T("Auto Start Raid"),
+    Description = T("Inicia a Raid automaticamente e aguarda 10s entre verificações"),
     Default = false,
     Callback = function(I)
         _G.Auto_StartRaid = I;
@@ -11793,7 +11956,7 @@ spawn(function()
 end);
 
 Fruit:AddToggle({
-	Name  = "Auto Complete Raid",
+	Name  = T("Auto Complete Raid"),
     Description = "",
     Default = false,
     Callback = function(I)
@@ -11892,7 +12055,7 @@ end)
 end)
 
 Fruit:AddToggle({
-	Name = "Auto Awakening",
+	Name = T("Auto Awakening"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11909,7 +12072,7 @@ spawn(function()
 		end);
 	end;
 end);
-Fruit:AddSection({"Fruits Options"});
+Fruit:AddSection(T("Fruits Options"));
 local J5 = {};
 local function i5(I)
 	local e = tostring(I);
@@ -11937,7 +12100,7 @@ for I, e in pairs(replicated.Remotes.CommF_:InvokeServer("GetFruits", false)) do
 	end;
 end;
 Fruit:AddDropdown({
-	Name = "Select Fruit Stock",
+	Name = T("Select Fruit Stock"),
 	Description = "",
 	Options = C5,
 	Default = false,
@@ -11946,7 +12109,7 @@ Fruit:AddDropdown({
 		_G.SelectFruit = I;
 	end,
 });
-Fruit:AddButton({ Name = "Buy Basic Stock", Description = "", Callback = function()
+Fruit:AddButton({ Name = T("Buy Basic Stock"), Description = "", Callback = function()
 		replicated.Remotes.CommF_:InvokeServer("PurchaseRawFruit", _G.SelectFruit);
 	end });
 Fruit:AddDropdown({
