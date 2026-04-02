@@ -2704,7 +2704,108 @@ _G.VI = {
     ["Use your lowest fruit in your bag"] = "Dùng trái thấp nhất trong túi",
     ["Abilities Shop"] = "Cửa Hàng Kỹ Năng",
     ["Adv"] = "Nâng Cao",
-    ["Auto Active"] = "Tự Động Kích Hoạt",
+    ["Auto Active"] = "Tự Động Kích Hoạt",    [" Number Cursed dual katana quests "] = "Số Quest Kiếm Nguyền Rủa",
+    [" Tiers V4 Status "] = "Trạng Thái V4",
+    ["Activate Boat Speed"] = "Bật Tốc Độ Thuyền",
+    ["Apaga o ficheiro de save e volta ao padrão"] = "Xóa file lưu về mặc định",
+    ["Auto Bisento V2"] = "Tự Động Bisento V2",
+    ["Auto Black Spikey"] = "Tự Động Black Spikey",
+    ["Auto Buy Bait"] = "Tự Động Mua Mồi",
+    ["Auto Buy Boat & Move to Zone"] = "Tự Động Mua Thuyền & Di Chuyển",
+    ["Auto Buy Legendary Sword"] = "Tự Động Mua Kiếm Huyền Thoại",
+    ["Auto Canvendish Sword"] = "Tự Động Kiếm Cavendish",
+    ["Auto Citizen Quest"] = "Tự Động Quest Dân",
+    ["Auto Collect Azure Ember"] = "Tự Động Nhặt Azure Ember",
+    ["Auto Collect Dino Bones"] = "Tự Động Nhặt Xương Dino",
+    ["Auto Collect Dragon Eggs"] = "Tự Động Nhặt Trứng Rồng",
+    ["Auto Collect Fruit"] = "Tự Động Nhặt Trái",
+    ["Auto Collect Gear"] = "Tự Động Nhặt Trang Bị",
+    ["Auto Collect Mirage Chest"] = "Tự Động Nhặt Hòm Mirage",
+    ["Auto Complete Quest"] = "Tự Động Hoàn Thành Quest",
+    ["Auto Complete Trial Race"] = "Tự Động Hoàn Thành Thử Thách Chủng Tộc",
+    ["Auto Craft Volcanic Magnet"] = "Tự Động Chế Tạo Volcanic Magnet",
+    ["Auto Darkbeard"] = "Tự Động Darkbeard",
+    ["Auto Dojo Trainer"] = "Tự Động Huấn Luyện Dojo",
+    ["Auto Dragon Hunter"] = "Tự Động Dragon Hunter",
+    ["Auto Dragon Trident"] = "Tự Động Dragon Trident",
+    ["Auto Drop Fruit"] = "Tự Động Thả Trái",
+    ["Auto Elite Quest"] = "Tự Động Quest Elite",
+    ["Auto Event Prehistoric Island"] = "Tự Động Sự Kiện Đảo Tiền Sử",
+    ["Auto Factory Raid"] = "Tự Động Raid Factory",
+    ["Auto Farm 600 In Swords"] = "Tự Động Cày 600 Kiếm",
+    ["Auto Farm Boss Select"] = "Tự Động Cày Boss",
+    ["Auto Farm Mastery Fruit"] = "Tự Động Cày Mastery Trái",
+    ["Auto Farm Mastery Gun"] = "Tự Động Cày Mastery Súng",
+    ["Auto Farm Material Skull Guitar"] = "Tự Động Nguyên Liệu Skull Guitar",
+    ["Auto Farm Observation"] = "Tự Động Cày Observation",
+    ["Auto Find Kitsune Island"] = "Tự Động Tìm Đảo Kitsune",
+    ["Auto Find Mirage Island"] = "Tự Động Tìm Mirage Island",
+    ["Auto Find Prehistoric Island"] = "Tự Động Tìm Đảo Tiền Sử",
+    ["Auto Fish Crew Member"] = "Tự Động Đánh Fish Crew",
+    ["Auto Fishing"] = "Tự Động Câu Cá",
+    ["Auto Get CDK [ Last Quest ]"] = "Tự Động Lấy CDK [Quest Cuối]",
+    ["Auto Haunted Crew Member"] = "Tự Động Đánh Haunted Crew",
+    ["Auto Human V2/V3"] = "Tự Động Human V2/V3",
+    ["Auto Kill Player After Trial"] = "Tự Động Giết Người Sau Thử Thách",
+    ["Auto Kill Rip Indra"] = "Tự Động Giết Rip Indra",
+    ["Auto Law Raid"] = "Tự Động Raid Law",
+    ["Auto Lei Accessory"] = "Tự Động Phụ Kiện Lei",
+    ["Auto Long Sword"] = "Tự Động Long Sword",
+    ["Auto Look At Moon"] = "Tự Động Nhìn Mặt Trăng",
+    ["Auto Marine Coat"] = "Tự Động Áo Hải Quân",
+    ["Auto Midnight Blade"] = "Tự Động Midnight Blade",
+    ["Auto Mink V3/V4"] = "Tự Động Mink V3/V4",
+    ["Auto Phoenix Flame"] = "Tự Động Ngọn Lửa Phoenix",
+    ["Auto Pull Lever"] = "Tự Động Kéo Cần Gạt",
+    ["Auto Quest Fishing"] = "Tự Động Quest Câu Cá",
+    ["Auto Quest Mirage"] = "Tự Động Quest Mirage",
+    ["Auto Race Evolution"] = "Tự Động Tiến Hóa Chủng Tộc",
+    ["Auto Sell Fish"] = "Tự Động Bán Cá",
+    ["Auto Serpent Bow"] = "Tự Động Serpent Bow",
+    ["Auto Skypiea V3"] = "Tự Động Skypiea V3",
+    ["Auto Soul Guitar"] = "Tự Động Soul Guitar",
+    ["Auto Swan"] = "Tự Động Swan",
+    ["Auto Teleport Race Doors"] = "Tự Động Dịch Chuyển Cổng Race",
+    ["Auto Train V4"] = "Tự Động Train V4",
+    ["Auto Travel Dressrosa"] = "Tự Động Đi Dressrosa",
+    ["Auto Tushita V2"] = "Tự Động Tushita V2",
+    ["Auto Unawakened Haki"] = "Tự Động Haki Chưa Thức Tỉnh",
+    ["Auto Upgrade Dragon"] = "Tự Động Nâng Cấp Rồng",
+    ["Auto use skill of the rod"] = "Tự Động Dùng Kỹ Năng Cần Câu",
+    ["Auto Warden"] = "Tự Động Warden",
+    ["Boss Farm"] = "Cày Boss",
+    ["Buso/Aura Colours"] = "Màu Buso/Aura",
+    ["Crafta a isca selecionada automaticamente"] = "Tự động chế mồi đã chọn",
+    ["Cursed Swords"] = "Kiếm Nguyền Rủa",
+    ["Dark Dragger + Valkyrie"] = "Dark Dragger + Valkyrie",
+    ["Entrega a quest automaticamente"] = "Tự động nộp quest",
+    ["Fishing"] = "Câu Cá",
+    ["Get Bounty"] = "Lấy Bounty",
+    ["Instant Kill"] = "Giết Ngay",
+    ["Kills sea beasts automatically"] = "Tự động giết sea beast",
+    ["Lança e puxa a vara automaticamente"] = "Tự động thả và kéo cần câu",
+    ["Lv Bounty Farm"] = "Cày Bounty",
+    ["Manual Save"] = "Lưu Thủ Công",
+    ["Pega missão com o NPC Angler"] = "Nhận quest từ NPC Angler",
+    ["Quest Boss Farm"] = "Cày Quest Boss",
+    ["Quests"] = "Nhiệm Vụ",
+    ["Select Bait"] = "Chọn Mồi",
+    ["Select Fishing Rod"] = "Chọn Cần Câu",
+    ["Setting Farm"] = "Cài Đặt Farm",
+    ["Spamma a skill Z da ferramenta equipada"] = "Spam kỹ năng Z của công cụ",
+    ["Teleport to Ancient Clock"] = "Dịch Chuyển Đến Ancient Clock",
+    ["Teleport to Ancient One"] = "Dịch Chuyển Đến Ancient One",
+    ["Teleport to Temple of Time"] = "Dịch Chuyển Đến Đền Thời Gian",
+    ["Tiers V4 Status"] = "Trạng Thái V4",
+    ["Trials Quests / Misc V4"] = "Quest Thử Thách / Misc V4",
+    ["turn on for farm tier + auto upgrade your tier level"] = "Bật để cày tier + tự nâng cấp level tier",
+    ["turn on for kill player after the race trials"] = "Bật để giết người sau thử thách đua",
+    ["Vende peixes automaticamente"] = "Tự động bán cá",
+    ["Select"] = "Chọn",
+    ["Bones"] = "Xương",
+    ["Auto Rainbow Haki"] = "Tự Động Rainbow Haki",
+    ["Auto Teleport to Race Doors"] = "Tự Động Dịch Chuyển Cổng Race",
+
 }
 
 local function T(s)
@@ -4230,7 +4331,7 @@ local Sec = 0.5
 
 if World2 then
 Farm:AddToggle({
-    Name = "Auto Factory Raid",
+    Name = T("Auto Factory Raid"),
     Description = "",
     -- 1. Tenta carregar se estava ligado ou desligado
     Default = GetSetting("AutoFactory_Save", false),
@@ -4518,7 +4619,7 @@ spawn(function()
 end);
 
 if World3 then
-Farm:AddSection({"Bones"})
+Farm:AddSection(T("Bones"))
 -- AUTO RANDOM BONES
 Farm:AddToggle({
     Name = "Auto Random Bone",
@@ -4577,9 +4678,9 @@ spawn(function()
 end)
 end
 if World3 then
-Farm:AddSection({"Dark Dragger + Valkyrie"})
+Farm:AddSection(T("Dark Dragger + Valkyrie"))
 Farm:AddToggle({
-    Name = "Auto Kill Rip Indra",
+    Name = T("Auto Kill Rip Indra"),
     Description = "",
     -- 1. Carrega se estava ligado ou não
     Default = GetSetting("AutoRipIndra_Save", false),
@@ -4668,7 +4769,7 @@ spawn(function()
 	end;
 end);
 end
-Setting:AddSection({"Manual Save"})
+Setting:AddSection(T("Manual Save"))
 
 Setting:AddButton({
     Name = "Salvar Configurações Agora",
@@ -4692,7 +4793,7 @@ Setting:AddButton({
 
 Setting:AddButton({
     Name = "Resetar Configurações",
-    Description = "Apaga o ficheiro de save e volta ao padrão",
+    Description = T("Apaga o ficheiro de save e volta ao padrão"),
     Callback = function()
         -- Usa a variável FullPath que foi definida lá no topo do script
         if isfile and isfile(FullPath) then
@@ -4714,7 +4815,7 @@ Setting:AddButton({
         end
     end
 })
-Setting:AddSection({"Setting Farm"})
+Setting:AddSection(T("Setting Farm"))
 Setting:AddButton({
     Name = "Stop Tween",
     Description = "",
@@ -4923,7 +5024,7 @@ spawn(function()
 		end);
 	end;
 end);
-Setting:AddSection({"Select"})
+Setting:AddSection(T("Select"))
 Setting:AddTextBox({
     Title = "Bring Mobs Range",
     Description = "",
@@ -4961,7 +5062,7 @@ Setting:AddTextBox({
         end
     end,
 });
-Others:AddSection({"Fishing"})
+Others:AddSection(T("Fishing"))
 -- =========================================================
 -- NOVO SISTEMA DE PESCA (COM SAVE SYSTEM INTEGRADO)
 -- =========================================================
@@ -5074,7 +5175,7 @@ _G.AutoSkillZ = false
 
 -- 1. SELEÇÃO DE VARA
 Others:AddDropdown({
-    Name = "Select Fishing Rod",
+    Name = T("Select Fishing Rod"),
     Description = "",
     Options = {
         "Fishing Rod",
@@ -5096,7 +5197,7 @@ Others:AddDropdown({
 -- 2. SELEÇÃO DE ISCA
 
 Others:AddDropdown({
-    Name = "Select Bait",
+    Name = T("Select Bait"),
     Description = "",
     Options = {
         "Basic Bait",
@@ -5125,8 +5226,8 @@ Others:AddDropdown({
 
 -- 3. TOGGLE AUTO BUY BAIT
 Others:AddToggle({
-    Name = "Auto Buy Bait",
-    Description = "Crafta a isca selecionada automaticamente",
+    Name = T("Auto Buy Bait"),
+    Description = T("Crafta a isca selecionada automaticamente"),
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoBuyBait", false),
     Callback = function(Value)
@@ -5155,8 +5256,8 @@ end)
 
 -- 4. TOGGLE AUTO FISHING (CAST/CATCH)
 Others:AddToggle({
-    Name = "Auto Fishing",
-    Description = "Lança e puxa a vara automaticamente",
+    Name = T("Auto Fishing"),
+    Description = T("Lança e puxa a vara automaticamente"),
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoFishing", false),
     Callback = function(Value)
@@ -5230,8 +5331,8 @@ end)
 
 -- 5. AUTO QUEST FISHING
 Others:AddToggle({
-    Name = "Auto Quest Fishing",
-    Description = "Pega missão com o NPC Angler",
+    Name = T("Auto Quest Fishing"),
+    Description = T("Pega missão com o NPC Angler"),
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoQuest", false),
     Callback = function(Value)
@@ -5267,8 +5368,8 @@ end)
 
 -- 6. AUTO COMPLETE QUEST
 Others:AddToggle({
-    Name = "Auto Complete Quest",
-    Description = "Entrega a quest automaticamente",
+    Name = T("Auto Complete Quest"),
+    Description = T("Entrega a quest automaticamente"),
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoComplete", false),
     Callback = function(Value)
@@ -5297,8 +5398,8 @@ end)
 
 -- 7. AUTO SELL FISH
 Others:AddToggle({
-    Name = "Auto Sell Fish",
-    Description = "Vende peixes automaticamente",
+    Name = T("Auto Sell Fish"),
+    Description = T("Vende peixes automaticamente"),
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoSell", false),
     Callback = function(Value)
@@ -5327,8 +5428,8 @@ end)
 
 -- 8. AUTO SPAM SKILL Z
 Others:AddToggle({
-    Name = "Auto use skill of the rod",
-    Description = "Spamma a skill Z da ferramenta equipada",
+    Name = T("Auto use skill of the rod"),
+    Description = T("Spamma a skill Z da ferramenta equipada"),
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoSkillZ", false),
     Callback = function(Value)
@@ -5413,7 +5514,7 @@ end
 -- =====================
 -- UI
 -- =====================
-Others:AddSection({"Boss Farm"})
+Others:AddSection(T("Boss Farm"))
 
 local BossDropdown = Others:AddDropdown({
     Name = T("Select Boss"),
@@ -5456,7 +5557,7 @@ Others:AddButton({
 })
 
 Others:AddToggle({
-    Name = "Auto Farm Boss Select",
+    Name = T("Auto Farm Boss Select"),
     Default = false,
     Callback = function(v)
         _G.AutoBoss = v
@@ -5592,9 +5693,9 @@ spawn(function()
         end
     end
 end)
-Others:AddSection({"Quests"})
+Others:AddSection(T("Quests"))
  Others:AddToggle({
-    Name = "Auto Farm Observation",
+    Name = T("Auto Farm Observation"),
     Description = "",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("AutoObsFarm_Save", false),
@@ -5790,7 +5891,7 @@ spawn(function()
 	end;
 end);
 Others:AddToggle({
-	Name = "Auto Citizen Quest",
+	Name = T("Auto Citizen Quest"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -5844,7 +5945,7 @@ spawn(function()
 		end);
 	end;
 end);
-Others:AddSection({"Cursed Swords"});
+Others:AddSection(T("Cursed Swords"));
 local r = Others:AddParagraph({ Title = "Elites Process ", Content = "" });
 spawn(function()
 	while wait(Sec) do
@@ -5854,7 +5955,7 @@ spawn(function()
 	end;
 end);
 Others:AddToggle({
-	Name = "Auto Elite Quest",
+	Name = T("Auto Elite Quest"),
 	Description = "",
 	-- 1. Carrega o estado salvo ou false por padrão
 	Default = GetSetting("AutoEliteQuest_Save", false),
@@ -6025,7 +6126,7 @@ end);
 end
 if World2 or World3 then
 -- SECTION BUSO/AURA COLOURS
-Others:AddSection({"Buso/Aura Colours"});
+Others:AddSection(T("Buso/Aura Colours"));
 
  Others:AddToggle({
     Name = "Teleport Barista Haki",
@@ -6066,7 +6167,7 @@ end);
 end
 if World3 then
  Others:AddToggle({
-    Name = "Auto Rainbow Haki",
+    Name = T("Auto Rainbow Haki"),
     Description = "",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("AutoRainbowHaki_Save", false),
@@ -6224,7 +6325,7 @@ local z5 = {
 
     Event:AddToggle({
         Name = "Auto Start farm",
-        Description = "Auto Buy Boat & Move to Zone",
+        Description = T("Auto Buy Boat & Move to Zone"),
         Default = false,
         Callback = function(I)
             _G.SailBoats = I;
@@ -6300,7 +6401,7 @@ end);
 _G.SetSpeedBoat = 300
 
 Event:AddToggle({
-        Name = "Activate Boat Speed",
+        Name = T("Activate Boat Speed"),
         Description = "Enable custom boat speed",
         Default = false,
         Callback = function(Value)
@@ -6393,7 +6494,7 @@ Event:AddToggle({
     end,
 });
 Event:AddToggle({
-    Name = "Auto Fish Crew Member",
+    Name = T("Auto Fish Crew Member"),
     Description = "",
     Default = false,
     Callback = function(I)
@@ -6401,7 +6502,7 @@ Event:AddToggle({
     end,
 });
 Event:AddToggle({
-    Name = "Auto Haunted Crew Member",
+    Name = T("Auto Haunted Crew Member"),
     Description = "",
     Default = false,
     Callback = function(I)
@@ -6611,7 +6712,7 @@ Event:AddToggle({
 });
 Event:AddSection({"Kitsune Island / Event"});
 Event:AddToggle({
-    Name = "Auto Find Kitsune Island",
+    Name = T("Auto Find Kitsune Island"),
     Description = "turn on for finding & tween kitsune island",
     -- 1. Carrega se estava ativado anteriormente
     Default = GetSetting("FindKitsune_Save", false),
@@ -6693,7 +6794,7 @@ spawn(function()
 	end;
 end);
 Event:AddToggle({
-    Name = "Auto Collect Azure Ember",
+    Name = T("Auto Collect Azure Ember"),
     Description = "",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("CollectAzureEmber_Save", false),
@@ -6755,7 +6856,7 @@ Event:AddButton({ Name = "Talk with kitsune statue", Description = "", Callback 
 	end });
 	Event:AddSection({"Mystic Island / Full Moon"});
 Event:AddToggle({
-	Name = "Auto Find Mirage Island",
+	Name = T("Auto Find Mirage Island"),
     Description = "turn on for finding & tween mirage island",
     -- 1. Carrega se estava ligado ou desligado
     Default = GetSetting("FindMirage_Save", false),
@@ -6838,7 +6939,7 @@ task.spawn(function()
     end
 end)
 Event:AddToggle({
-	Name = "Auto Collect Gear",
+	Name = T("Auto Collect Gear"),
     Description = "Coleta a engrenagem na Mirage (Blue Gear)",
     -- 1. Carrega se o coletor estava ativo
     Default = GetSetting("AutoCollectGear_Save", false),
@@ -6964,7 +7065,7 @@ task.spawn(function()
     end
 end)
 Event:AddToggle({
-	Name = "Auto Collect Mirage Chest",
+	Name = T("Auto Collect Mirage Chest"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -7007,7 +7108,7 @@ end);
 	Event:AddSection({"Volcanic Magnet"});
 -- Configurações de UI e Toggle
 Event:AddToggle({
-    Name = "Auto Craft Volcanic Magnet",
+    Name = T("Auto Craft Volcanic Magnet"),
     Description = "turn on for auto farm material and craft volcanic magnet & stop when you have 1 volcanic magnet",
     Default = false,
     Callback = function(I)
@@ -7072,7 +7173,7 @@ spawn(function()
 end);
 Event:AddSection(T("Prehistoric Island"));
 Event:AddToggle({
-    Name = "Auto Find Prehistoric Island",
+    Name = T("Auto Find Prehistoric Island"),
     Description = "",
     -- 1. Carrega se o buscador estava ativado
     Default = GetSetting("PrehistoricFinder_Save", false),
@@ -7160,7 +7261,7 @@ task.spawn(function()
     end
 end)
 Event:AddToggle({
-    Name = "Auto Event Prehistoric Island",
+    Name = T("Auto Event Prehistoric Island"),
     Description = "",
     -- 1. Carrega o estado salvo
     Default = GetSetting("AutoEventPrehistoric_Save", false),
@@ -7348,7 +7449,7 @@ Event:AddButton({
 })
 -- 1. TOGGLE: Dino Bones
 Event:AddToggle({
-    Name = "Auto Collect Dino Bones",
+    Name = T("Auto Collect Dino Bones"),
     Description = "",
     Default = GetSetting("DinoBones_Save", false),
     Callback = function(I)
@@ -7360,7 +7461,7 @@ Event:AddToggle({
 
 -- 2. TOGGLE: Dragon Eggs
 Event:AddToggle({
-    Name = "Auto Collect Dragon Eggs",
+    Name = T("Auto Collect Dragon Eggs"),
     Description = "",
     Default = GetSetting("DragonEggs_Save", false),
     Callback = function(I)
@@ -7650,7 +7751,7 @@ end
 
 -- CÓDIGO MODIFICADO COM SAVE
 Maestry:AddToggle({
-    Name = "Auto Farm Mastery Fruit",
+    Name = T("Auto Farm Mastery Fruit"),
     Description = "",
     -- 1. Usa GetSetting para pegar o valor salvo (ou false se não tiver salvo)
     Default = GetSetting("FarmMastery_Dev", false), 
@@ -7722,7 +7823,7 @@ end)
 
 -- AUTO FARM MASTERY GUN
 Maestry:AddToggle({
-    Name = "Auto Farm Mastery Gun",
+    Name = T("Auto Farm Mastery Gun"),
     Description = "",
     Default = false,
     Callback = function(I)
@@ -7873,7 +7974,7 @@ spawn(function()
     end;
 end);
 Race:AddToggle({
-    Name = "Auto Human V2/V3",
+    Name = T("Auto Human V2/V3"),
     Description = "",
     Default = false,
     Callback = function(I)
@@ -8037,8 +8138,8 @@ if World1 then
 Race:AddSection({"only in Sea 2 or 3 to upgrade to Race"});
 end
 if World3 then
-Race:AddSection({"Trials Quests / Misc V4"});
-local K5 = Race:AddParagraph({ Title = " Tiers V4 Status ", Content = "" });
+Race:AddSection(T("Trials Quests / Misc V4"));
+local K5 = Race:AddParagraph({ Title = T(" Tiers V4 Status "), Content = "" });
 spawn(function()
 	pcall(function()
 		while wait(.2) do
@@ -8047,7 +8148,7 @@ spawn(function()
 	end);
 end);
 Race:AddToggle({
-	Name = "Auto Look At Moon",
+	Name = T("Auto Look At Moon"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -8069,7 +8170,7 @@ task.spawn(function()
 	end;
 end);
 Race:AddToggle({
-	Name = "Auto Pull Lever",
+	Name = T("Auto Pull Lever"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -8090,8 +8191,8 @@ spawn(function()
 	end;
 end);
 Race:AddToggle({
-	Name = "Auto Train V4",
-	Description = "turn on for farm tier + auto upgrade your tier level",
+	Name = T("Auto Train V4"),
+	Description = T("turn on for farm tier + auto upgrade your tier level"),
 	Default = false,
 	Callback = function(I)
 		_G.AcientOne = I;
@@ -8128,17 +8229,17 @@ spawn(function()
 		end);
 	end;
 end);
-Race:AddButton({ Name = "Teleport to Temple of Time", Description = "", Callback = function()
+Race:AddButton({ Name = T("Teleport to Temple of Time"), Description = "", Callback = function()
 		replicated.Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(28286.35546875, 14895.301757812, 102.62469482422));
 	end });
-Race:AddButton({ Name = "Teleport to Ancient One", Description = "", Callback = function()
+Race:AddButton({ Name = T("Teleport to Ancient One"), Description = "", Callback = function()
 		notween(CFrame.new(28981.552734375, 14888.426757812, -120.24584960938));
 	end });
-Race:AddButton({ Name = "Teleport to Ancient Clock", Description = "", Callback = function()
+Race:AddButton({ Name = T("Teleport to Ancient Clock"), Description = "", Callback = function()
 		notween(CFrame.new(29549, 15069, -88));
 	end });
 Race:AddToggle({
-	Name = "Auto Teleport to Race Doors",
+	Name = T("Auto Teleport to Race Doors"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -8167,7 +8268,7 @@ spawn(function()
 	end;
 end);
 Race:AddToggle({
-	Name = "Auto Complete Trial Race",
+	Name = T("Auto Complete Trial Race"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -8275,8 +8376,8 @@ spawn(function()
 	end;
 end);
 Race:AddToggle({
-	Name = "Auto Kill Player After Trial",
-	Description = "turn on for kill player after the race trials",
+	Name = T("Auto Kill Player After Trial"),
+	Description = T("turn on for kill player after the race trials"),
 	Default = false,
 	Callback = function(I)
 		_G.Defeating = I;
@@ -8306,7 +8407,7 @@ end
 if World3 then
 Dojo:AddSection({"Dojo Quest & Drago Race"});
 Dojo:AddToggle({
-	Name = "Auto Dojo Trainer",
+	Name = T("Auto Dojo Trainer"),
 	Description = "turn on for do dojo belt quest white to black",
 	Default = false,
 	Callback = function(I)
@@ -8410,7 +8511,7 @@ spawn(function()
 	end;
 end);
 Dojo:AddToggle({
-	Name = "Auto Dragon Hunter",
+	Name = T("Auto Dragon Hunter"),
 	Description = "turn on for farm blaze ember + auto collect blaze ember",
 	Default = false,
 	Callback = function(I)
@@ -10487,7 +10588,7 @@ end);
 end
 if World2 or World3 then
 Get:AddToggle({
-	Name = "Auto Farm Material Skull Guitar",
+	Name = T("Auto Farm Material Skull Guitar"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -10616,7 +10717,7 @@ local function GetClosestMob()
 end
 
 Get:AddToggle({
-	Name = "Auto Farm 600 In Swords",
+	Name = T("Auto Farm 600 In Swords"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -10680,7 +10781,7 @@ spawn(function()
 end)
 if World3 then
 Get:AddSection({"Cursed Dual Katana"});
-local I5 = Get:AddParagraph({ Title = " Number Cursed dual katana quests ", Content = "Quest Numbers :" });
+local I5 = Get:AddParagraph({ Title = T(" Number Cursed dual katana quests "), Content = "Quest Numbers :" });
 spawn(function()
 	while wait(.2) do
 		if QuestYama_1 == true then
@@ -10701,7 +10802,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
- Name = "Auto Get CDK [ Last Quest ]",
+ Name = T("Auto Get CDK [ Last Quest ]"),
     Description = "",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("AutoCDK_Save", false),
@@ -11098,7 +11199,7 @@ end
 if World2 then
 Get:AddSection({"True Triple Katana Sword"});
 Get:AddToggle({
- Name = "Auto Buy Legendary Sword",
+ Name = T("Auto Buy Legendary Sword"),
     Description = "",
     Default = GetSetting("TpLegendarySword_Save", false),
     Callback = function(I)
@@ -11155,7 +11256,7 @@ end);
 Get:AddSection({"Law"});
 
 Get:AddToggle({
- Name = "Auto Law Raid",
+ Name = T("Auto Law Raid"),
     Description = "",
     Default = false,
     Callback = function(state)
@@ -11336,7 +11437,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
- Name = "Auto Bisento V2",
+ Name = T("Auto Bisento V2"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11391,7 +11492,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
- Name = "Auto Marine Coat",
+ Name = T("Auto Marine Coat"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11485,7 +11586,7 @@ spawn(function()
     end
 end)
 Get:AddToggle({
- Name = "Auto Dragon Trident",
+ Name = T("Auto Dragon Trident"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11510,7 +11611,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
- Name = "Auto Long Sword",
+ Name = T("Auto Long Sword"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11535,7 +11636,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
- Name = "Auto Black Spikey",
+ Name = T("Auto Black Spikey"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11560,7 +11661,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
- Name = "Auto Midnight Blade",
+ Name = T("Auto Midnight Blade"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11591,7 +11692,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
- Name = "Auto Darkbeard",
+ Name = T("Auto Darkbeard"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11703,7 +11804,7 @@ end
 if World3 then
 Get:AddSection({"Sea 3"});
 Get:AddToggle({
- Name = "Auto Canvendish Sword",
+ Name = T("Auto Canvendish Sword"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11755,7 +11856,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
- Name = "Auto Serpent Bow",
+ Name = T("Auto Serpent Bow"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -11778,7 +11879,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
- Name = "Auto Lei Accessory",
+ Name = T("Auto Lei Accessory"),
 	Description = "",
 	Default = false,
 	Callback = function(I)
@@ -12158,7 +12259,7 @@ spawn(function()
 	end;
 end);
 Get:AddToggle({
-	Name = "Auto Drop Fruit",
+	Name = T("Auto Drop Fruit"),
 	Description = "Automatic drop devil fruit",
 	Default = false,
 	Callback = function(I)
@@ -12227,7 +12328,7 @@ spawn(function()
 	end;
 end);
 Fruit:AddToggle({
-	Name  = "Auto Collect Fruit",
+	Name  = T("Auto Collect Fruit"),
     Description = "Automatic bring devil fruit",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("AutoCollectFruit_Save", false),
