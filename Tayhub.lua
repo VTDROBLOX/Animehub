@@ -2720,12 +2720,12 @@ local LangTab = Library:MakeTab({
     Title = "🌐 Ngôn Ngữ / Language",
     Icon = "rbxassetid://7733965126"
 })
-local LangSection = LangTab:AddSection({ Name = "Chuyển Ngôn Ngữ / Switch Language" })
-LangSection:AddParagraph({
+LangTab:AddSection({ Name = "Chuyển Ngôn Ngữ / Switch Language" })
+LangTab:AddParagraph({
     Title = "ℹ️ Hướng dẫn",
     Content = "TẮT = 🇻🇳 Tiếng Việt  |  BẬT = 🇺🇸 English"
 })
-LangSection:AddToggle({
+LangTab:AddToggle({
     Name = "🌐 Tiếng Việt  ⇄  English",
     Description = "TẮT = Tiếng Việt | BẬT = English",
     Default = false,
