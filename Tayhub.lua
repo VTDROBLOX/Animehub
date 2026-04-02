@@ -1300,7 +1300,7 @@ Hop = function()
 	end;
 local C = Instance.new("Part", workspace);
 C.Size = Vector3.new(1, 1, 1);
-C.Name = T("Rip_Indra");
+C.Name = "Rip_Indra";
 C.Anchored = true;
 C.CanCollide = false;
 C.CanTouch = false;
