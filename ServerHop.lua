@@ -1,202 +1,144 @@
 -- ╔══════════════════════════════════════════════════╗
--- ║   ServerHop.lua — Tày Hub  |  v2.0              ║
--- ║   Dùng TayUI.lua làm giao diện                  ║
--- ║   Blox Fruits  |  Delta / Hydrogen / Solara      ║
+-- ║   ServerHop.lua — Tày Hub  |  v3.0              ║
+-- ║   Style: Teddy Hub  |  Blox Fruits              ║
+-- ║   Delta / Hydrogen / Solara                     ║
 -- ╚══════════════════════════════════════════════════╝
 
--- ─── Load UI Library ─────────────────────────────────────
+-- ── Load UI ──────────────────────────────────────────────
 local TayUI = loadstring(game:HttpGet(
     "https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/TayUI.lua", true
 ))()
 
--- ─── Services ────────────────────────────────────────────
+-- ── Services ─────────────────────────────────────────────
 local TeleportService = game:GetService("TeleportService")
 local HttpService     = game:GetService("HttpService")
 local Players         = game:GetService("Players")
 local LP              = Players.LocalPlayer
 
--- ─── Config ──────────────────────────────────────────────
-local BASE_URL  = "http://nighthub.site/boss/"
-local MAX_SRV   = 6
+-- ── Config ───────────────────────────────────────────────
+local BASE_URL = "http://nighthub.site/boss/"
+local MAX_SRV  = 8
 
--- ─── Badge colors ────────────────────────────────────────
-local BADGE = {
-    BOSS   = { text="BOSS",   color=Color3.fromRGB(255,90,90)   },
-    EVENT  = { text="EVENT",  color=Color3.fromRGB(255,210,0)   },
-    ISLAND = { text="ISLAND", color=Color3.fromRGB(79,180,247)  },
-    RAID   = { text="RAID",   color=Color3.fromRGB(180,100,255) },
-}
-
--- ─── Tab data ────────────────────────────────────────────
-local TABS = {
-    { icon="📋", label="Info & Errors",      endpoint=nil,                  badge=nil      },
-    { icon="⚔️", label="Sword Legendary",    endpoint="SwordLegendary",     badge="BOSS"   },
-    { icon="💠", label="Haki Legendary",     endpoint="HakiLegendary",      badge="BOSS"   },
-    { icon="👁️", label="Rip Indra",          endpoint="RipIndra",           badge="BOSS"   },
-    { icon="🧔", label="Darkbeard",          endpoint="Darkbeard",          badge="BOSS"   },
-    { icon="🍩", label="Dough King",         endpoint="DoughKing",          badge="BOSS"   },
-    { icon="🫐", label="Berry",              endpoint="Berry",              badge="BOSS"   },
-    { icon="🦅", label="Tyrant Of Skies",    endpoint="TyrantOfTheSkies",   badge="BOSS"   },
-    { icon="☠️", label="Cursed Captain",     endpoint="CursedCaptain",      badge="BOSS"   },
-    { icon="💀", label="Soul Reaper",        endpoint="SoulReaper",         badge="BOSS"   },
-    { icon="🌕", label="Full Moon",          endpoint="Fullmoon",           badge="EVENT"  },
-    { icon="🌙", label="Near Moon",          endpoint="NearMoon",           badge="EVENT"  },
-    { icon="🏝️", label="Mirage Island",      endpoint="Mirage",             badge="ISLAND" },
-    { icon="🦊", label="Kitsune Island",     endpoint="KitsuneIsland",      badge="ISLAND" },
-    { icon="🦕", label="Prehistoric",        endpoint="PrehistoricIsland",  badge="ISLAND" },
-    { icon="🎂", label="Cake Prince",        endpoint="CakePrince",         badge="EVENT"  },
-    { icon="⭐", label="Elite",              endpoint="Elite",              badge="RAID"   },
-    { icon="🏰", label="Castle Raid",        endpoint="CastleRaid",         badge="RAID"   },
-}
-
--- ─── Fetch JobIDs ────────────────────────────────────────
+-- ── Fetch JobIDs từ API ───────────────────────────────────
 local function fetchJobIds(endpoint)
     local url = BASE_URL .. endpoint
     local ok, raw = pcall(game.HttpGet, game, url, true)
-    if not ok or not raw or raw == "" then return {} end
+    if not ok or not raw or raw=="" then return {} end
 
     local ids = {}
     local ok2, parsed = pcall(HttpService.JSONDecode, HttpService, raw)
-    if ok2 and type(parsed) == "table" then
+    if ok2 and type(parsed)=="table" then
         for _, v in ipairs(parsed) do
-            if type(v) == "string" then
+            if type(v)=="string" then
                 table.insert(ids, v)
-            elseif type(v) == "table" then
+            elseif type(v)=="table" then
                 local id = v.jobId or v.id or v.JobId
                 if id then table.insert(ids, id) end
             end
         end
     else
-        -- Fallback: cào GUID từ raw string
-        for id in raw:gmatch(
-            "[0-9a-f]%x%x%x%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%x%x%x%x%x%x%x%x"
-        ) do
+        for id in raw:gmatch("[0-9a-f]%x%x%x%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%x%x%x%x%x%x%x%x") do
             table.insert(ids, id)
         end
     end
     return ids
 end
 
--- ─── Hop ─────────────────────────────────────────────────
+-- ── Hop ──────────────────────────────────────────────────
 local function hop(jobId)
-    if not jobId or jobId == "" then return end
+    if not jobId or jobId=="" then return end
     pcall(TeleportService.TeleportToPlaceInstance, TeleportService, game.PlaceId, jobId, LP)
 end
 
--- ─── Clear server cards trong panel ──────────────────────
-local function clearCards(panel)
-    for _, c in ipairs(panel:GetChildren()) do
-        if c.Name:sub(1,4) == "SRV_" then c:Destroy() end
-    end
-end
+-- ══════════════════════════════════════
+-- DATA
+-- ══════════════════════════════════════
 
--- ══════════════════════════════════════════
+-- Tab Hop: danh sách boss/event/island
+local HOP_LIST = {
+    { label="Hop Fullmoon",          endpoint="Fullmoon"          },
+    { label="Hop Near Moon",         endpoint="NearMoon"          },
+    { label="Hop Mirage Island",     endpoint="Mirage"            },
+    { label="Hop Kitsune Island",    endpoint="KitsuneIsland"     },
+    { label="Hop Prehistoric Island",endpoint="PrehistoricIsland" },
+    { label="Hop Sword Legendary",   endpoint="SwordLegendary"    },
+    { label="Hop Haki Legendary",    endpoint="HakiLegendary"     },
+    { label="Hop Rip Indra",         endpoint="RipIndra"          },
+    { label="Hop Darkbeard",         endpoint="Darkbeard"         },
+    { label="Hop Dough King",        endpoint="DoughKing"         },
+    { label="Hop Berry",             endpoint="Berry"             },
+    { label="Hop Tyrant Of Skies",   endpoint="TyrantOfTheSkies"  },
+    { label="Hop Cursed Captain",    endpoint="CursedCaptain"     },
+    { label="Hop Soul Reaper",       endpoint="SoulReaper"        },
+    { label="Hop Cake Prince",       endpoint="CakePrince"        },
+    { label="Hop Elite",             endpoint="Elite"             },
+    { label="Hop Castle Raid",       endpoint="CastleRaid"        },
+}
+
+-- ══════════════════════════════════════
 -- BUILD WINDOW
--- ══════════════════════════════════════════
+-- ══════════════════════════════════════
 local Win = TayUI:CreateWindow({
-    Title    = "Script Hop Server  —  Tày Hub",
-    Sub      = "Blox Fruits  |  v2.0",
-    Width    = 620,
-    Height   = 440,
-    Sidebar  = 195,
+    Title   = "Tày Hub",
+    Sub     = "discord.gg/tayhub",
+    Width   = 680,
+    Height  = 480,
+    Sidebar = 150,
 })
 
--- ══════════════════════════════════════════
--- BUILD TABS
--- ══════════════════════════════════════════
-for i, t in ipairs(TABS) do
+-- ══════════════════════════════════════
+-- TAB: Info
+-- ══════════════════════════════════════
+local infoTab = Win:AddTab("Info", 1)
+TayUI.AddTitle(infoTab, "Info", 0)
+TayUI.AddLabel(infoTab, "🎮  Tày Hub — Server Hop v3.0", Color3.fromRGB(52,211,153), 1)
+TayUI.AddLabel(infoTab, "📡  API: nighthub.site/boss/...", nil, 2)
+TayUI.AddLabel(infoTab, "⚠️   Chỉ dùng trong Blox Fruits!", Color3.fromRGB(255,210,0), 3)
+TayUI.AddLabel(infoTab, "✅  Delta / Hydrogen / Solara OK", nil, 4)
+TayUI.AddLabel(infoTab, "👈  Chọn Hop → bấm server → HOP", nil, 5)
 
-    local panel = Win:AddTab(t.icon, t.label, i)
+-- ══════════════════════════════════════
+-- TAB: Hop
+-- ══════════════════════════════════════
+local hopTab = Win:AddTab("Hop", 2)
+TayUI.AddTitle(hopTab, "Hop", 0)
 
-    -- Dot màu trên sidebar button theo badge
-    if t.badge then
-        local lastBtn = Win._sidebar:GetChildren()
-        for _, c in ipairs(Win._sidebar:GetChildren()) do
-            if c.Name == "SBtn_"..t.label or c.LayoutOrder == i then
-                TayUI.AddSidebarDot(c, BADGE[t.badge].color)
-                break
-            end
-        end
-    end
+for i, h in ipairs(HOP_LIST) do
+    TayUI.AddRow(hopTab, h.label, i, function()
+        -- Fetch rồi mở picker
+        local ids = fetchJobIds(h.endpoint)
+        TayUI.ShowPicker(h.label, ids, function(jobId)
+            hop(jobId)
+        end)
+    end)
+end
 
-    -- ── INFO TAB ──────────────────────────────────────────
-    if t.endpoint == nil then
-        TayUI.AddLabel(panel, "🎮  Tày Hub — Server Hop v2.0",       Color3.fromRGB(52,211,153), 1)
-        TayUI.AddLabel(panel, "📡  API: nighthub.site/boss/...",      nil,                        2)
-        TayUI.AddLabel(panel, "⚠️   Chỉ dùng trong Blox Fruits!",    Color3.fromRGB(255,210,0),  3)
-        TayUI.AddLabel(panel, "✅  Delta / Hydrogen / Solara OK",     nil,                        4)
-        TayUI.AddLabel(panel, "👈  Chọn tab bên trái → Load → HOP",  nil,                        5)
+-- ══════════════════════════════════════
+-- TAB: Id Game
+-- ══════════════════════════════════════
+local idTab = Win:AddTab("Id Game", 3)
+TayUI.AddTitle(idTab, "Id Game", 0)
+TayUI.AddSubTitle(idTab, "Place ID", 1)
+TayUI.AddLabel(idTab, "Place ID: "..tostring(game.PlaceId), nil, 2)
+TayUI.AddLabel(idTab, "Job ID: "..tostring(game.JobId), nil, 3)
 
-    -- ── BOSS / EVENT / ISLAND / RAID TAB ─────────────────
-    else
-        local b = BADGE[t.badge] or {text="HOP", color=Color3.fromRGB(52,211,153)}
+-- ══════════════════════════════════════
+-- TAB: Setting
+-- ══════════════════════════════════════
+local setTab = Win:AddTab("Setting", 4)
+TayUI.AddTitle(setTab, "Setting", 0)
 
-        -- Section header
-        TayUI.AddSection(panel, t.icon.."  "..t.label:upper().."  ·  "..b.text, 1)
+TayUI.AddSubTitle(setTab, "Thông báo", 1)
+TayUI.AddToggle(setTab, "Thông báo khi hop thành công", true, 2, function(state)
+    -- placeholder
+end)
 
-        -- Status label
-        local statusF = TayUI.AddLabel(panel, "— Chưa tải —", nil, 2)
-        statusF.Visible = false
-        local statusLbl = statusF:FindFirstChildWhichIsA("TextLabel")
+TayUI.AddSubTitle(setTab, "Hiệu ứng", 3)
+TayUI.AddToggle(setTab, "Hiện ping dot", true, 4, function(state)
+    -- placeholder
+end)
+TayUI.AddToggle(setTab, "Animation mở cửa sổ", true, 5, function(state)
+    -- placeholder
+end)
 
-        local function setStatus(txt, col)
-            statusLbl.Text = txt
-            statusLbl.TextColor3 = col or Color3.fromRGB(100,100,125)
-            statusF.Visible = true
-        end
-
-        -- Load Servers button
-        TayUI.AddButton(panel, {
-            Text  = "Load Servers",
-            Sub   = "Nhấn để tải",
-            Icon  = "🔍",
-            Order = 3,
-            Callback = function()
-                clearCards(panel)
-                setStatus("🔄 Đang kết nối API...", Color3.fromRGB(100,100,125))
-
-                local ids = fetchJobIds(t.endpoint)
-
-                if #ids == 0 then
-                    setStatus("❌ Không tìm thấy server nào!", Color3.fromRGB(255,75,75))
-                    return
-                end
-
-                setStatus("✅ Tìm thấy "..#ids.." server — chọn HOP!", Color3.fromRGB(52,211,153))
-
-                local count = math.min(#ids, MAX_SRV)
-                for idx = 1, count do
-                    TayUI.AddServerCard(panel, idx, ids[idx], b.text, b.color, function(jobId)
-                        setStatus("🚀 Đang hop tới Server #"..idx.."...", Color3.fromRGB(255,210,0))
-                        hop(jobId)
-                    end)
-                end
-            end,
-        })
-
-        -- ReLoad + Auto Hop button
-        TayUI.AddButton(panel, {
-            Text  = "ReLoad JobID  →  Auto Hop",
-            Sub   = "Load New Server",
-            Icon  = "🔄",
-            Order = 4,
-            Callback = function()
-                clearCards(panel)
-                setStatus("🔄 Đang tải + auto hop...", Color3.fromRGB(100,100,125))
-
-                local ids = fetchJobIds(t.endpoint)
-
-                if #ids == 0 then
-                    setStatus("❌ Không có server nào!", Color3.fromRGB(255,75,75))
-                    return
-                end
-
-                setStatus("🚀 Hop tới Server #1...", Color3.fromRGB(52,211,153))
-                hop(ids[1])
-            end,
-        })
-
-    end -- end tab content
-end -- end tabs loop
-
-print("[TàyHub] ✓ ServerHop v2.0 loaded")
+print("[TàyHub] ✓ ServerHop v3.0 loaded")
