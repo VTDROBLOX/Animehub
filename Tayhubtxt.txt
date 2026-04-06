@@ -2868,10 +2868,13 @@ screenGui.Parent = game.CoreGui
 
 -- Criar ImageButton
 local imageButton = Instance.new("ImageButton")
-imageButton.Size = UDim2.new(0, 50, 0, 50)
+imageButton.Size = UDim2.new(0, 55, 0, 55)
 imageButton.Position = UDim2.new(0.15, 0, 0.15, 0)
 imageButton.Image = "rbxassetid://73902065845651"
-imageButton.BackgroundTransparency = 1
+imageButton.ImageColor3 = Color3.fromRGB(255, 255, 255)
+imageButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+imageButton.BackgroundTransparency = 0.2
+imageButton.AutoButtonColor = false
 imageButton.Parent = screenGui
 
 -- Adicionar cantos arredondados
@@ -6408,11 +6411,52 @@ local function TryCollectEgg(egg)
     end)
 end
 
+-- Danh sach dao de chuyen khi het trung
+local EggIslands = {
+    -- Sea 1
+    {name="Starter Island",    pos=CFrame.new(1044, 27, 1561)},
+    {name="Marine Fortress",   pos=CFrame.new(-2710, 24, 2105)},
+    {name="Jungle",            pos=CFrame.new(-1448, 67, 11)},
+    {name="Desert",            pos=CFrame.new(924, 6, 4481)},
+    {name="Snowland",          pos=CFrame.new(1354, 87, -1393)},
+    {name="Sky Island",        pos=CFrame.new(-4953, 295, -2899)},
+    {name="Prison",            pos=CFrame.new(5098, 0, 474)},
+    {name="Colosseum",         pos=CFrame.new(-1820, 51, -2740)},
+    {name="Magma Village",     pos=CFrame.new(-5411, 11, 8454)},
+    {name="Fishman Island",    pos=CFrame.new(60878, 18, 1543)},
+    -- Sea 2
+    {name="Flower Hill",       pos=CFrame.new(-428, 72, 2345)},
+    {name="Cafe",              pos=CFrame.new(1068, 137, 1322)},
+    {name="Zombie Island",     pos=CFrame.new(-5657, 78, -928)},
+    {name="Ice Castle",        pos=CFrame.new(5966, 62, -6179)},
+    {name="Forgotten Island",  pos=CFrame.new(-3028, 64, -9775)},
+    -- Sea 3
+    {name="Port Town",         pos=CFrame.new(-246, 47, 5584)},
+    {name="Haunted Castle",    pos=CFrame.new(-8763, 165, 6159)},
+    {name="Cake Island",       pos=CFrame.new(-2374, 37, -12125)},
+    {name="Chocolate Island",  pos=CFrame.new(-21, 80, -12352)},
+    {name="Tiki Outpost",      pos=CFrame.new(-16479, 226, -300)},
+}
+
+local currentIslandIdx = 1
+local emptyCount = 0
+
+local function MoveToNextIsland()
+    currentIslandIdx = (currentIslandIdx % #EggIslands) + 1
+    local island = EggIslands[currentIslandIdx]
+    NotificacaoNightMystic("Tày Hub", "🥚 Bay sang: " .. island.name)
+    _tp(island.pos)
+    task.wait(3)
+end
+
 -- Loop Auto Egg
 task.spawn(function()
     while true do
         task.wait(0.5)
-        if not _G.AutoEgg then continue end
+        if not _G.AutoEgg then
+            emptyCount = 0
+            continue
+        end
         local char = plr.Character
         if not char or not char:FindFirstChild("HumanoidRootPart") then continue end
         local hum = char:FindFirstChild("Humanoid")
@@ -6420,10 +6464,18 @@ task.spawn(function()
 
         local eggs = GetAllEggs()
         if #eggs == 0 then
-            task.wait(2)
+            emptyCount = emptyCount + 1
+            if emptyCount >= 4 then
+                -- Het trung tren dao nay -> chuyen dao
+                emptyCount = 0
+                pcall(MoveToNextIsland)
+            else
+                task.wait(2)
+            end
             continue
         end
 
+        emptyCount = 0
         local nearest = GetNearestEgg(eggs)
         if not nearest then continue end
 
