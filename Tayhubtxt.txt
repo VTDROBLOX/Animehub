@@ -3043,28 +3043,12 @@ LangTab:AddToggle({
             _G.SaveData["Lang"] = "VI"
             SaveSettings()
         end
-        -- Destroy UI cu va re-execute de apply ngon ngu moi
-        task.spawn(function()
-            task.wait(0.3)
-            pcall(function()
-                for _, v in ipairs(game:GetService("CoreGui"):GetChildren()) do
-                    if v.Name == "redz-library-v5" or v.Name == "BananaToggleGui" 
-                    or v.Name == "ControlGUI" or v.Name == "NazuXWindowsToggleUltimate"
-                    or v.Name == "NM_Notify" then
-                        v:Destroy()
-                    end
-                end
-            end)
-            -- Thong bao reload
-            if _G.Lang == "EN" then
-                NotificacaoNightMystic("Tày Hub", "🇺🇸 Switched to English! Reloading...")
-            else
-                NotificacaoNightMystic("Tày Hub", "🇻🇳 Chuyển Tiếng Việt! Đang tải lại...")
-            end
-            task.wait(1)
-            -- Re-execute script tu GitHub
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/Tay_hub_v2.lua"))()
-        end)
+        -- Thong bao doi ngon ngu
+        if _G.Lang == "EN" then
+            NotificacaoNightMystic("Tày Hub", "🇺🇸 Switched to English!")
+        else
+            NotificacaoNightMystic("Tày Hub", "🇻🇳 Đã chuyển Tiếng Việt!")
+        end
     end
 })
 Discord:AddDiscordInvite({
