@@ -6351,72 +6351,81 @@ end
 
 
 -- ========================================
--- AUTO EGG EVENT v2 - FULL SEA 1-2-3
--- Timeout + Fail-safe + Sea Detection
+-- AUTO EGG EVENT v3 - DUNG LOCATIONS THUC TU GAME
+-- Bay qua tung dao, theo duoi Eggcited Egg
 -- ========================================
 _G.AutoEgg = false
 _G.EggTweenSpeed = 120
 
--- Phan loai dao theo Sea
-local Sea1Islands = {
-    {name="Starter Island",  pos=Vector3.new(1044,  27,  1561)},
-    {name="Marine Fortress", pos=Vector3.new(-2710, 24,  2105)},
-    {name="Jungle",          pos=Vector3.new(-1448, 67,  11)},
-    {name="Desert",          pos=Vector3.new(924,   6,   4481)},
-    {name="Snowland",        pos=Vector3.new(1354,  87,  -1393)},
-    {name="Prison",          pos=Vector3.new(5098,  5,   474)},
-    {name="Colosseum",       pos=Vector3.new(-1820, 51,  -2740)},
-    {name="Magma Village",   pos=Vector3.new(-5411, 15,  8454)},
-}
-local Sea2Islands = {
-    {name="Flower Hill",     pos=Vector3.new(-428,  72,  2345)},
-    {name="Cafe",            pos=Vector3.new(1068,  137, 1322)},
-    {name="Zombie Island",   pos=Vector3.new(-5657, 78,  -928)},
-    {name="Snow Mountain",   pos=Vector3.new(549,   427, -5563)},
-    {name="Ice Castle",      pos=Vector3.new(5966,  62,  -6179)},
-    {name="Lab Island",      pos=Vector3.new(-5707, 16,  -4513)},
-    {name="Forgotten Island",pos=Vector3.new(-3028, 64,  -9775)},
-}
-local Sea3Islands = {
-    {name="Port Town",       pos=Vector3.new(-246,  47,  5584)},
-    {name="Dragon Crew",     pos=Vector3.new(6709,  52,  -1139)},
-    {name="Haunted Castle",  pos=Vector3.new(-8763, 165, 6159)},
-    {name="Peanut Island",   pos=Vector3.new(-2143, 48,  -10029)},
-    {name="Ice Cream Island",pos=Vector3.new(-872,  66,  -10919)},
-    {name="Cake Island",     pos=Vector3.new(-2374, 38,  -12125)},
-    {name="Chocolate Island",pos=Vector3.new(-21,   80,  -12352)},
-    {name="Tiki Outpost",    pos=Vector3.new(-16479,226, -300)},
-}
-
--- Lay list dao dung theo Sea hien tai
-local function GetIslandList()
-    local placeId = game.PlaceId
-    if placeId == 2753915549 or placeId == 85211729168715 then
-        return Sea1Islands
-    elseif placeId == 4442272183 or placeId == 79091703265657 then
-        return Sea2Islands
-    elseif placeId == 7449423635 or placeId == 100117331123089 then
-        return Sea3Islands
+-- Lay danh sach dao THUC TE tu game (giong Travel-Island)
+local function GetRealIslandList()
+    local list = {}
+    pcall(function()
+        local locs = workspace._WorldOrigin.Locations
+        for _, loc in ipairs(locs:GetChildren()) do
+            if loc:IsA("BasePart") or loc:IsA("CFrameValue") or loc:IsA("Model") then
+                local ok, pos = pcall(function()
+                    if loc:IsA("CFrameValue") then
+                        return loc.Value.Position
+                    elseif loc:IsA("Model") then
+                        return loc:GetPivot().Position
+                    else
+                        return loc.Position
+                    end
+                end)
+                if ok and pos then
+                    table.insert(list, {name = loc.Name, pos = pos})
+                end
+            end
+        end
+    end)
+    -- Fallback neu khong lay duoc
+    if #list == 0 then
+        local placeId = game.PlaceId
+        if placeId == 2753915549 or placeId == 85211729168715 then
+            list = {
+                {name="Starter Island",  pos=Vector3.new(1044,27,1561)},
+                {name="Marine Fortress", pos=Vector3.new(-2710,24,2105)},
+                {name="Jungle",          pos=Vector3.new(-1448,67,11)},
+                {name="Desert",          pos=Vector3.new(924,6,4481)},
+                {name="Snowland",        pos=Vector3.new(1354,87,-1393)},
+                {name="Prison",          pos=Vector3.new(5098,5,474)},
+                {name="Colosseum",       pos=Vector3.new(-1820,51,-2740)},
+                {name="Magma Village",   pos=Vector3.new(-5411,15,8454)},
+            }
+        elseif placeId == 4442272183 or placeId == 79091703265657 then
+            list = {
+                {name="Flower Hill",     pos=Vector3.new(-428,72,2345)},
+                {name="Cafe",            pos=Vector3.new(1068,137,1322)},
+                {name="Zombie Island",   pos=Vector3.new(-5657,78,-928)},
+                {name="Ice Castle",      pos=Vector3.new(5966,62,-6179)},
+                {name="Forgotten Island",pos=Vector3.new(-3028,64,-9775)},
+            }
+        else
+            list = {
+                {name="Port Town",       pos=Vector3.new(-246,47,5584)},
+                {name="Haunted Castle",  pos=Vector3.new(-8763,165,6159)},
+                {name="Cake Island",     pos=Vector3.new(-2374,38,-12125)},
+                {name="Chocolate Island",pos=Vector3.new(-21,80,-12352)},
+                {name="Tiki Outpost",    pos=Vector3.new(-16479,226,-300)},
+            }
+        end
     end
-    -- Fallback: dung tat ca
-    local all = {}
-    for _, v in ipairs(Sea1Islands) do table.insert(all, v) end
-    for _, v in ipairs(Sea2Islands) do table.insert(all, v) end
-    for _, v in ipairs(Sea3Islands) do table.insert(all, v) end
-    return all
+    return list
 end
 
--- Scan trung
+-- Scan tat ca trung trong map
 local function GetAllEggs()
     local eggs = {}
     for _, obj in ipairs(workspace:GetDescendants()) do
         if obj and obj.Parent then
             local name = obj.Name:lower()
-            if name:find("egg") and (obj:IsA("Part") or obj:IsA("MeshPart") or obj:IsA("Model")) then
+            if name:find("egg") and
+               (obj:IsA("Part") or obj:IsA("MeshPart") or obj:IsA("Model")) then
                 local ok, pos = pcall(function()
                     return obj:IsA("Model") and obj:GetPivot().Position or obj.Position
                 end)
-                if ok and pos then
+                if ok and pos and pos.Y > -500 then
                     table.insert(eggs, {obj=obj, pos=pos})
                 end
             end
@@ -6432,138 +6441,153 @@ local function GetNearestEgg(eggs)
     local nearest, minDist = nil, math.huge
     for _, data in ipairs(eggs) do
         if data.obj and data.obj.Parent then
-            local dist = (data.pos - hrp.Position).Magnitude
-            if dist < minDist then
-                minDist = dist
-                nearest = data
+            -- Lay vi tri HIEN TAI (Eggcited Egg co the da nhay)
+            local ok, curPos = pcall(function()
+                return data.obj:IsA("Model") and data.obj:GetPivot().Position or data.obj.Position
+            end)
+            if ok and curPos then
+                local dist = (curPos - hrp.Position).Magnitude
+                if dist < minDist then
+                    minDist = dist
+                    nearest = {obj=data.obj, pos=curPos}
+                end
             end
         end
     end
     return nearest
 end
 
--- Bay toi trung (dung _tp cua script chinh)
-local function FlyToEgg(targetPos)
-    pcall(function()
-        local goal = CFrame.new(targetPos + Vector3.new(0, 3, 0))
-        _tp(goal)
-    end)
-    task.wait(0.5)
-end
-
--- Thu nhat trung
-local function TryCollectEgg(egg)
-    pcall(function()
+-- Nhat trung - theo duoi Eggcited Egg neu no chay
+local function TryCollectEgg(eggObj)
+    for attempt = 1, 8 do
+        if not eggObj or not eggObj.Parent then break end
         local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
-        if not hrp then return end
-        local part = egg:IsA("Model") and (egg.PrimaryPart or egg:FindFirstChildOfClass("Part")) or egg
-        if not part then return end
+        if not hrp then break end
+
+        -- Lay vi tri HIEN TAI cua trung
+        local ok, curPos = pcall(function()
+            return eggObj:IsA("Model") and eggObj:GetPivot().Position or eggObj.Position
+        end)
+        if not ok then break end
+
         -- TP sat trung
-        hrp.CFrame = CFrame.new(part.Position + Vector3.new(0, 2, 0))
-        task.wait(0.1)
-        -- Touch
-        pcall(function() firetouchinterest(hrp, part, 0) end)
-        pcall(function() firetouchinterest(hrp, part, 1) end)
-        -- Click
         pcall(function()
-            local cd = part:FindFirstChildOfClass("ClickDetector") or egg:FindFirstChildOfClass("ClickDetector")
-            if cd then fireclickdetector(cd) end
+            hrp.CFrame = CFrame.new(curPos + Vector3.new(0, 2, 0))
         end)
-        -- Remote
-        pcall(function()
-            local re = part:FindFirstChildOfClass("RemoteEvent") or egg:FindFirstChildOfClass("RemoteEvent")
-            if re then re:FireServer() end
-        end)
-    end)
-end
+        task.wait(0.05)
 
--- Bay den dao tiep theo
-local _eggIslandIdx = 1
-local function MoveToNextIsland()
-    local list = GetIslandList()
-    _eggIslandIdx = (_eggIslandIdx % #list) + 1
-    local island = list[_eggIslandIdx]
-    NotificacaoNightMystic("Tày Hub", "🥚 Bay sang: " .. island.name)
-    -- Bay den dao (co fail-safe)
-    pcall(function()
-        _tp(CFrame.new(island.pos + Vector3.new(0, 5, 0)))
-    end)
-    task.wait(3)
-    -- Fail-safe: neu van con xa thi tp lai
-    pcall(function()
-        local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
-        if hrp and (hrp.Position - island.pos).Magnitude > 200 then
-            _tp(CFrame.new(island.pos + Vector3.new(0, 5, 0)))
-            task.wait(2)
+        -- Touch + Click + Remote
+        local part = pcall(function() return eggObj:IsA("Model") and
+            (eggObj.PrimaryPart or eggObj:FindFirstChildOfClass("Part")) or eggObj end)
+            and (eggObj:IsA("Model") and (eggObj.PrimaryPart or eggObj:FindFirstChildOfClass("Part")) or eggObj)
+        if part then
+            pcall(function() firetouchinterest(hrp, part, 0) end)
+            pcall(function() firetouchinterest(hrp, part, 1) end)
+            pcall(function()
+                local cd = part:FindFirstChildOfClass("ClickDetector") or eggObj:FindFirstChildOfClass("ClickDetector")
+                if cd then fireclickdetector(cd) end
+            end)
+            pcall(function()
+                local re = part:FindFirstChildOfClass("RemoteEvent") or eggObj:FindFirstChildOfClass("RemoteEvent")
+                if re then re:FireServer() end
+            end)
         end
-    end)
+
+        -- Neu trung bien mat = nhat duoc
+        if not eggObj.Parent then break end
+        task.wait(0.08)
+    end
 end
 
--- MAIN LOOP - Auto Egg
-task.spawn(function()
-    local islandTimer = tick() -- timer de chuyen dao sau 10s du co trung hay khong
-    local stuckTimer = tick()  -- timer chong dung
-    local lastPos = Vector3.new(0,0,0)
+-- MAIN LOOP
+local _islandIdx = 1
+local _islandTimer = tick()
+local _stuckTimer = tick()
+local _lastPos = Vector3.new(0,0,0)
 
+task.spawn(function()
     while true do
-        task.wait(0.4)
+        task.wait(0.3)
         if not _G.AutoEgg then
-            islandTimer = tick()
-            stuckTimer = tick()
+            _islandTimer = tick()
+            _stuckTimer = tick()
             continue
         end
 
         local char = plr.Character
         local hrp = char and char:FindFirstChild("HumanoidRootPart")
         local hum = char and char:FindFirstChild("Humanoid")
-        if not hrp or not hum or hum.Health <= 0 then continue end
+        if not hrp or not hum or hum.Health <= 0 then task.wait(1) continue end
 
-        -- Chong dung: neu dung >8s thi chuyen dao
-        if (hrp.Position - lastPos).Magnitude < 5 then
-            if tick() - stuckTimer > 8 then
-                NotificacaoNightMystic("Tày Hub", "🥚 Bị kẹt! Chuyển đảo...")
-                pcall(MoveToNextIsland)
-                stuckTimer = tick()
-                islandTimer = tick()
+        -- Chong stuck: dung >8s -> chuyen dao
+        if (hrp.Position - _lastPos).Magnitude < 3 then
+            if tick() - _stuckTimer > 8 then
+                local list = GetRealIslandList()
+                _islandIdx = (_islandIdx % #list) + 1
+                local isl = list[_islandIdx]
+                NotificacaoNightMystic("Tày Hub", "🥚 Kẹt! Bay sang: " .. isl.name)
+                pcall(function() _tp(CFrame.new(isl.pos + Vector3.new(0,8,0))) end)
+                task.wait(3)
+                _islandTimer = tick()
+                _stuckTimer = tick()
                 continue
             end
         else
-            stuckTimer = tick()
-            lastPos = hrp.Position
-        end
-
-        -- Timeout: chuyen dao sau 12s bat ke con trung hay khong
-        if tick() - islandTimer > 12 then
-            pcall(MoveToNextIsland)
-            islandTimer = tick()
-            continue
+            _stuckTimer = tick()
+            _lastPos = hrp.Position
         end
 
         -- Scan trung
         local eggs = GetAllEggs()
+
         if #eggs == 0 then
-            task.wait(1)
+            -- Het trung tren dao: sau 10s thi chuyen dao
+            if tick() - _islandTimer > 10 then
+                local list = GetRealIslandList()
+                _islandIdx = (_islandIdx % #list) + 1
+                local isl = list[_islandIdx]
+                NotificacaoNightMystic("Tày Hub", "🥚 Bay sang: " .. isl.name)
+                pcall(function() _tp(CFrame.new(isl.pos + Vector3.new(0,8,0))) end)
+                task.wait(3)
+                _islandTimer = tick()
+            else
+                task.wait(1)
+            end
             continue
         end
 
-        -- Nhat trung gan nhat
+        -- Lay trung gan nhat (ke ca Eggcited dang chay)
         local nearest = GetNearestEgg(eggs)
         if not nearest then continue end
 
-        FlyToEgg(nearest.pos)
-        TryCollectEgg(nearest.obj)
+        -- Bay toi trung
+        pcall(function()
+            _tp(CFrame.new(nearest.pos + Vector3.new(0,3,0)))
+        end)
         task.wait(0.2)
+
+        -- Nhat (theo duoi neu chay)
+        TryCollectEgg(nearest.obj)
+
+        -- Reset island timer vi dang con trung
+        _islandTimer = tick()
     end
 end)
 
 Event:AddSection("🥚 Auto Egg Event")
 Event:AddToggle({
     Name = "🥚 Auto Collect Egg",
-    Description = "Tự động nhặt trứng + chuyển đảo - Full Sea 1-2-3",
+    Description = "Tự động nhặt trứng + chuyển đảo theo Locations thực tế",
     Default = false,
     Callback = function(v)
         _G.AutoEgg = v
-        NotificacaoNightMystic("Tày Hub", v and "🥚 Auto Egg: BẬT" or "🥚 Auto Egg: TẮT")
+        if v then
+            _islandTimer = tick()
+            _stuckTimer = tick()
+            NotificacaoNightMystic("Tày Hub", "🥚 Auto Egg: BẬT")
+        else
+            NotificacaoNightMystic("Tày Hub", "🥚 Auto Egg: TẮT")
+        end
     end
 })
 Event:AddSlider({
