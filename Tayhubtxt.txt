@@ -6350,160 +6350,417 @@ end
 })
 
 
-local IslandPositions = {}
+-- ========================================
+-- AUTO EGG EVENT v3 - DUNG LOCATIONS THUC TU GAME
+-- Bay qua tung dao, theo duoi Eggcited Egg
+-- ========================================
+_G.AutoEgg = false
+_G.EggTweenSpeed = 120
 
-if World1 then
-    IslandPositions = {
-        CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594),
-        CFrame.new(-2566.4296875, 6.8556680679321, 2045.2561035156),
-        CFrame.new(-690.33081054688, 15.09425163269, 1582.2380371094),
-        CFrame.new(-1612.7957763672, 36.852081298828, 149.12843322754),
-        CFrame.new(-1181.3093261719, 4.7514905929565, 3803.5456542969),
-        CFrame.new(944.15789794922, 20.919729232788, 4373.3002929688),
-        CFrame.new(1347.8067626953, 104.66806030273, -1319.7370605469),
-        CFrame.new(-4914.8212890625, 50.963626861572, 4281.0278320313),
-        CFrame.new(-1427.6203613281, 7.2881078720093, -2792.7722167969),
-        CFrame.new(-4869.1025390625, 733.46051025391, -2667.0180664063),
-        CFrame.new(4875.330078125, 5.6519818305969, 734.85021972656),
-        CFrame.new(-5247.7163085938, 12.883934020996, 8504.96875),
-        CFrame.new(5127.1284179688, 59.501365661621, 4105.4458007813),
-        CFrame.new(-1442.16553, 29.8788261, -28.3547478),
-        CFrame.new(-2850.20068, 7.39224768, 5354.99268)
-    }
-elseif World2 then
-    IslandPositions = {
-        CFrame.new(-380.47927856445, 77.220390319824, 255.82550048828),
-        CFrame.new(-11.311455726624, 29.276733398438, 2771.5224609375),
-        CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375),
-        CFrame.new(-483.73370361328, 332.0383605957, 595.32708740234),
-        CFrame.new(2284.4140625, 15.152037620544, 875.72534179688),
-        CFrame.new(-2448.5300292969, 73.016105651855, -3210.6306152344),
-        CFrame.new(424.12698364258, 211.16171264648, -427.54049682617),
-        CFrame.new(-1503.6224365234, 219.7956237793, 1369.3101806641),
-        CFrame.new(-5622.033203125, 492.19604492188, -781.78552246094),
-        CFrame.new(753.14288330078, 408.23559570313, -5274.6147460938),
-        CFrame.new(-6127.654296875, 15.951762199402, -5040.2861328125),
-        CFrame.new(923.40197753906, 125.05712890625, 32885.875),
-        CFrame.new(6148.4116210938, 294.38687133789, -6741.1166992188),
-        CFrame.new(-3032.7641601563, 317.89672851563, -10075.373046875),
-        CFrame.new(4816.8618164063, 8.4599885940552, 2863.8195800781),
-        CFrame.new(-288.74060058594, 49326.31640625, -35248.59375)
-    }
-elseif World3 then
-    IslandPositions = {
-        CFrame.new(2681.2736816406, 1682.8092041016, -7190.9853515625),
-        CFrame.new(-5074.45556640625, 314.5155334472656, -2991.054443359375),
-        CFrame.new(-260.65557861328, 49325.8046875, -35253.5703125),
-        CFrame.new(-95, 11, 5455),
-        CFrame.new(5433, 1062, 290),
-        CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625),
-        CFrame.new(-12551, 337, -7476),
-        CFrame.new(-9516, 142, 5537),
-        CFrame.new(-874, 66, -10915),
-        CFrame.new(-2062.7475585938, 50.473892211914, -10232.568359375),
-        CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375),
-        CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375),
-        CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625),
-        CFrame.new(-16101.1885, 12.8422165, 380.942291)
-    }
-end
-
-Main:AddDropdown({
-    Name = "Select Method Egg",
-    Options = {"Normal", "Chest", "Island"},
-    Default = "Normal",
-    Callback = function(Value)
-        _G.ChooseEgg = Value
-    end
-})
-
-Main:AddToggle({
-    Name = "Auto Collect Egg",
-    Default = false,
-    Callback = function(Value)
-        _G.AutoCollectEgg = Value
-    end
-})
-
-local RS = game:GetService("ReplicatedStorage")
-local CS = game:GetService("CollectionService")
-local Remote = RS:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/EasterServiceRE")
-local plr = game.Players.LocalPlayer
-
-local function CollectEgg()
-    local char = plr.Character
-    local root = char and char:FindFirstChild("HumanoidRootPart")
-    local hum = char and char:FindFirstChild("Humanoid")
-    
-    if not root or not hum or hum.Health <= 0 then return false end
-
-    local Remote = RS:FindFirstChild("Modules") and RS.Modules:FindFirstChild("Net") and RS.Modules.Net:FindFirstChild("RE/EasterServiceRE")
-    if not Remote then return false end
-
-    local eggs = CS:GetTagged("EasterEgg26")
-    for i = 1, #eggs do
-        local egg = eggs[i]
-        local uid = egg:GetAttribute("UID")
-        local cf = egg:GetAttribute("CFrame")
-        if uid and cf then
-            pcall(function()
-                _tp(cf + Vector3.new(0, 2, 0))
-                Remote:FireServer("CollectEgg", {
-                    UID = uid,
-                    Additional = {}
-                })
-            end)
-            return true
+-- Lay danh sach dao THUC TE tu game (giong Travel-Island)
+local function GetRealIslandList()
+    local list = {}
+    pcall(function()
+        local locs = workspace._WorldOrigin.Locations
+        for _, loc in ipairs(locs:GetChildren()) do
+            if loc:IsA("BasePart") or loc:IsA("CFrameValue") or loc:IsA("Model") then
+                local ok, pos = pcall(function()
+                    if loc:IsA("CFrameValue") then
+                        return loc.Value.Position
+                    elseif loc:IsA("Model") then
+                        return loc:GetPivot().Position
+                    else
+                        return loc.Position
+                    end
+                end)
+                if ok and pos then
+                    table.insert(list, {name = loc.Name, pos = pos})
+                end
+            end
+        end
+    end)
+    -- Fallback neu khong lay duoc
+    if #list == 0 then
+        local placeId = game.PlaceId
+        if placeId == 2753915549 or placeId == 85211729168715 then
+            list = {
+                {name="Starter Island",  pos=Vector3.new(1044,27,1561)},
+                {name="Marine Fortress", pos=Vector3.new(-2710,24,2105)},
+                {name="Jungle",          pos=Vector3.new(-1448,67,11)},
+                {name="Desert",          pos=Vector3.new(924,6,4481)},
+                {name="Snowland",        pos=Vector3.new(1354,87,-1393)},
+                {name="Prison",          pos=Vector3.new(5098,5,474)},
+                {name="Colosseum",       pos=Vector3.new(-1820,51,-2740)},
+                {name="Magma Village",   pos=Vector3.new(-5411,15,8454)},
+            }
+        elseif placeId == 4442272183 or placeId == 79091703265657 then
+            list = {
+                {name="Flower Hill",     pos=Vector3.new(-428,72,2345)},
+                {name="Cafe",            pos=Vector3.new(1068,137,1322)},
+                {name="Zombie Island",   pos=Vector3.new(-5657,78,-928)},
+                {name="Ice Castle",      pos=Vector3.new(5966,62,-6179)},
+                {name="Forgotten Island",pos=Vector3.new(-3028,64,-9775)},
+            }
+        else
+            list = {
+                {name="Port Town",       pos=Vector3.new(-246,47,5584)},
+                {name="Haunted Castle",  pos=Vector3.new(-8763,165,6159)},
+                {name="Cake Island",     pos=Vector3.new(-2374,38,-12125)},
+                {name="Chocolate Island",pos=Vector3.new(-21,80,-12352)},
+                {name="Tiki Outpost",    pos=Vector3.new(-16479,226,-300)},
+            }
         end
     end
-    return false
+    return list
 end
 
-spawn(function()
-    local currentIndex = 1
-    local lastIslandTP = 0 
+-- Scan tat ca trung trong map
+local function GetAllEggs()
+    local eggs = {}
+    for _, obj in ipairs(workspace:GetDescendants()) do
+        if obj and obj.Parent then
+            local name = obj.Name:lower()
+            if name:find("egg") and
+               (obj:IsA("Part") or obj:IsA("MeshPart") or obj:IsA("Model")) then
+                local ok, pos = pcall(function()
+                    return obj:IsA("Model") and obj:GetPivot().Position or obj.Position
+                end)
+                if ok and pos and pos.Y > -500 then
+                    table.insert(eggs, {obj=obj, pos=pos})
+                end
+            end
+        end
+    end
+    return eggs
+end
 
-    while wait(1) do
-        if _G.AutoCollectEgg then
+-- Lay trung gan nhat
+local function GetNearestEgg(eggs)
+    local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+    if not hrp then return nil end
+    local nearest, minDist = nil, math.huge
+    for _, data in ipairs(eggs) do
+        if data.obj and data.obj.Parent then
+            -- Lay vi tri HIEN TAI (Eggcited Egg co the da nhay)
+            local ok, curPos = pcall(function()
+                return data.obj:IsA("Model") and data.obj:GetPivot().Position or data.obj.Position
+            end)
+            if ok and curPos then
+                local dist = (curPos - hrp.Position).Magnitude
+                if dist < minDist then
+                    minDist = dist
+                    nearest = {obj=data.obj, pos=curPos}
+                end
+            end
+        end
+    end
+    return nearest
+end
+
+-- Nhat trung - theo duoi Eggcited Egg neu no chay
+local function TryCollectEgg(eggObj)
+    for attempt = 1, 8 do
+        if not eggObj or not eggObj.Parent then break end
+        local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+        if not hrp then break end
+
+        -- Lay vi tri HIEN TAI cua trung
+        local ok, curPos = pcall(function()
+            return eggObj:IsA("Model") and eggObj:GetPivot().Position or eggObj.Position
+        end)
+        if not ok then break end
+
+        -- TP sat trung
+        pcall(function()
+            hrp.CFrame = CFrame.new(curPos + Vector3.new(0, 2, 0))
+        end)
+        task.wait(0.05)
+
+        -- Touch + Click + Remote
+        local part = pcall(function() return eggObj:IsA("Model") and
+            (eggObj.PrimaryPart or eggObj:FindFirstChildOfClass("Part")) or eggObj end)
+            and (eggObj:IsA("Model") and (eggObj.PrimaryPart or eggObj:FindFirstChildOfClass("Part")) or eggObj)
+        if part then
+            pcall(function() firetouchinterest(hrp, part, 0) end)
+            pcall(function() firetouchinterest(hrp, part, 1) end)
+            pcall(function()
+                local cd = part:FindFirstChildOfClass("ClickDetector") or eggObj:FindFirstChildOfClass("ClickDetector")
+                if cd then fireclickdetector(cd) end
+            end)
+            pcall(function()
+                local re = part:FindFirstChildOfClass("RemoteEvent") or eggObj:FindFirstChildOfClass("RemoteEvent")
+                if re then re:FireServer() end
+            end)
+        end
+
+        -- Neu trung bien mat = nhat duoc
+        if not eggObj.Parent then break end
+        task.wait(0.08)
+    end
+end
+
+-- MAIN LOOP
+local _islandIdx = 1
+local _islandTimer = tick()
+local _stuckTimer = tick()
+local _lastPos = Vector3.new(0,0,0)
+
+task.spawn(function()
+    while true do
+        task.wait(0.3)
+        if not _G.AutoEgg then
+            _islandTimer = tick()
+            _stuckTimer = tick()
+            continue
+        end
+
+        local char = plr.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        local hum = char and char:FindFirstChild("Humanoid")
+        if not hrp or not hum or hum.Health <= 0 then task.wait(1) continue end
+
+        -- Chong stuck: dung >8s -> chuyen dao
+        if (hrp.Position - _lastPos).Magnitude < 3 then
+            if tick() - _stuckTimer > 8 then
+                local list = GetRealIslandList()
+                _islandIdx = (_islandIdx % #list) + 1
+                local isl = list[_islandIdx]
+                NotificacaoNightMystic("Tày Hub", "🥚 Kẹt! Bay sang: " .. isl.name)
+                pcall(function() _tp(CFrame.new(isl.pos + Vector3.new(0,8,0))) end)
+                task.wait(3)
+                _islandTimer = tick()
+                _stuckTimer = tick()
+                continue
+            end
+        else
+            _stuckTimer = tick()
+            _lastPos = hrp.Position
+        end
+
+        -- Scan trung
+        local eggs = GetAllEggs()
+
+        if #eggs == 0 then
+            -- Het trung tren dao: sau 10s thi chuyen dao
+            if tick() - _islandTimer > 10 then
+                local list = GetRealIslandList()
+                _islandIdx = (_islandIdx % #list) + 1
+                local isl = list[_islandIdx]
+                NotificacaoNightMystic("Tày Hub", "🥚 Bay sang: " .. isl.name)
+                pcall(function() _tp(CFrame.new(isl.pos + Vector3.new(0,8,0))) end)
+                task.wait(3)
+                _islandTimer = tick()
+            else
+                task.wait(1)
+            end
+            continue
+        end
+
+        -- Lay trung gan nhat (ke ca Eggcited dang chay)
+        local nearest = GetNearestEgg(eggs)
+        if not nearest then continue end
+
+        -- Bay toi trung
+        pcall(function()
+            _tp(CFrame.new(nearest.pos + Vector3.new(0,3,0)))
+        end)
+        task.wait(0.2)
+
+        -- Nhat (theo duoi neu chay)
+        TryCollectEgg(nearest.obj)
+
+        -- Reset island timer vi dang con trung
+        _islandTimer = tick()
+    end
+end)
+
+Event:AddSection("🥚 Auto Egg Event")
+Event:AddToggle({
+    Name = "🥚 Auto Collect Egg",
+    Description = "Tự động nhặt trứng + chuyển đảo theo Locations thực tế",
+    Default = false,
+    Callback = function(v)
+        _G.AutoEgg = v
+        if v then
+            _islandTimer = tick()
+            _stuckTimer = tick()
+            NotificacaoNightMystic("Tày Hub", "🥚 Auto Egg: BẬT")
+        else
+            NotificacaoNightMystic("Tày Hub", "🥚 Auto Egg: TẮT")
+        end
+    end
+})
+Event:AddSlider({
+    Name = "⚡ Tốc Độ Bay (Studs/s)",
+    Description = "100-150 là an toàn nhất",
+    Min = 50,
+    Max = 200,
+    Default = 120,
+    Callback = function(v)
+        _G.EggTweenSpeed = v
+        getgenv().TweenSpeedFar = v
+    end
+})
+
+
+-- ========================================
+-- AUTO EGG v2 - COLLECTIONSERVICE (EasterEgg26)
+-- Dung Remote EasterServiceRE, chon method Normal/Chest/Island
+-- ========================================
+do
+    local _eggIslandPositions = {}
+
+    if World1 then
+        _eggIslandPositions = {
+            CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594),
+            CFrame.new(-2566.4296875, 6.8556680679321, 2045.2561035156),
+            CFrame.new(-690.33081054688, 15.09425163269, 1582.2380371094),
+            CFrame.new(-1612.7957763672, 36.852081298828, 149.12843322754),
+            CFrame.new(-1181.3093261719, 4.7514905929565, 3803.5456542969),
+            CFrame.new(944.15789794922, 20.919729232788, 4373.3002929688),
+            CFrame.new(1347.8067626953, 104.66806030273, -1319.7370605469),
+            CFrame.new(-4914.8212890625, 50.963626861572, 4281.0278320313),
+            CFrame.new(-1427.6203613281, 7.2881078720093, -2792.7722167969),
+            CFrame.new(-4869.1025390625, 733.46051025391, -2667.0180664063),
+            CFrame.new(4875.330078125, 5.6519818305969, 734.85021972656),
+            CFrame.new(-5247.7163085938, 12.883934020996, 8504.96875),
+            CFrame.new(5127.1284179688, 59.501365661621, 4105.4458007813),
+            CFrame.new(-1442.16553, 29.8788261, -28.3547478),
+            CFrame.new(-2850.20068, 7.39224768, 5354.99268),
+        }
+    elseif World2 then
+        _eggIslandPositions = {
+            CFrame.new(-380.47927856445, 77.220390319824, 255.82550048828),
+            CFrame.new(-11.311455726624, 29.276733398438, 2771.5224609375),
+            CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375),
+            CFrame.new(-483.73370361328, 332.0383605957, 595.32708740234),
+            CFrame.new(2284.4140625, 15.152037620544, 875.72534179688),
+            CFrame.new(-2448.5300292969, 73.016105651855, -3210.6306152344),
+            CFrame.new(424.12698364258, 211.16171264648, -427.54049682617),
+            CFrame.new(-1503.6224365234, 219.7956237793, 1369.3101806641),
+            CFrame.new(-5622.033203125, 492.19604492188, -781.78552246094),
+            CFrame.new(753.14288330078, 408.23559570313, -5274.6147460938),
+            CFrame.new(-6127.654296875, 15.951762199402, -5040.2861328125),
+            CFrame.new(923.40197753906, 125.05712890625, 32885.875),
+            CFrame.new(6148.4116210938, 294.38687133789, -6741.1166992188),
+            CFrame.new(-3032.7641601563, 317.89672851563, -10075.373046875),
+            CFrame.new(4816.8618164063, 8.4599885940552, 2863.8195800781),
+            CFrame.new(-288.74060058594, 49326.31640625, -35248.59375),
+        }
+    elseif World3 then
+        _eggIslandPositions = {
+            CFrame.new(2681.2736816406, 1682.8092041016, -7190.9853515625),
+            CFrame.new(-5074.45556640625, 314.5155334472656, -2991.054443359375),
+            CFrame.new(-260.65557861328, 49325.8046875, -35253.5703125),
+            CFrame.new(-95, 11, 5455),
+            CFrame.new(5433, 1062, 290),
+            CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625),
+            CFrame.new(-12551, 337, -7476),
+            CFrame.new(-9516, 142, 5537),
+            CFrame.new(-874, 66, -10915),
+            CFrame.new(-2062.7475585938, 50.473892211914, -10232.568359375),
+            CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375),
+            CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375),
+            CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625),
+            CFrame.new(-16101.1885, 12.8422165, 380.942291),
+        }
+    end
+
+    _G.AutoCollectEgg = false
+    _G.ChooseEgg = "Normal"
+
+    local _eggRS = game:GetService("ReplicatedStorage")
+    local _eggCS = game:GetService("CollectionService")
+
+    local function _EasterCollect()
+        local char = plr.Character
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+        local hum  = char and char:FindFirstChild("Humanoid")
+        if not root or not hum or hum.Health <= 0 then return false end
+
+        local remote = _eggRS:FindFirstChild("Modules")
+            and _eggRS.Modules:FindFirstChild("Net")
+            and _eggRS.Modules.Net:FindFirstChild("RE/EasterServiceRE")
+        if not remote then return false end
+
+        local eggs = _eggCS:GetTagged("EasterEgg26")
+        for _, egg in ipairs(eggs) do
+            local uid = egg:GetAttribute("UID")
+            local cf  = egg:GetAttribute("CFrame")
+            if uid and cf then
+                pcall(function()
+                    _tp(cf + Vector3.new(0, 2, 0))
+                    remote:FireServer("CollectEgg", { UID = uid, Additional = {} })
+                end)
+                return true
+            end
+        end
+        return false
+    end
+
+    local _eggIslandIdx = 1
+    local _eggLastTP    = 0
+
+    task.spawn(function()
+        while true do
+            task.wait(1)
+            if not _G.AutoCollectEgg then
+                _eggIslandIdx = 1
+                continue
+            end
+
             local char = plr.Character
             local root = char and char:FindFirstChild("HumanoidRootPart")
-            local hum = char and char:FindFirstChild("Humanoid")
+            local hum  = char and char:FindFirstChild("Humanoid")
+            if not root or not hum or hum.Health <= 0 then task.wait(1) continue end
 
-            if root and hum and hum.Health > 0 then
-                local hasEgg = CollectEgg()
-                
-                if not hasEgg then
-                    if _G.ChooseEgg == "Chest" then
-                        _G.AutoFarmChest = true
-                    elseif _G.ChooseEgg == "Island" then
-                        _G.AutoFarmChest = false
-                        if #IslandPositions > 0 and (tick() - lastIslandTP) > 2 then
-                            pcall(function()
-                                _tp(IslandPositions[currentIndex])
-                            end)
-                            currentIndex = currentIndex + 1
-                            if currentIndex > #IslandPositions then
-                                currentIndex = 1
-                            end
-                            lastIslandTP = tick()
-                        end
-                    elseif _G.ChooseEgg == "Normal" then
-                        _G.AutoFarmChest = false
+            local hasEgg = _EasterCollect()
+
+            if not hasEgg then
+                if _G.ChooseEgg == "Chest" then
+                    _G.AutoFarmChest = true
+                elseif _G.ChooseEgg == "Island" then
+                    _G.AutoFarmChest = false
+                    if #_eggIslandPositions > 0 and (tick() - _eggLastTP) > 2 then
+                        pcall(function()
+                            _tp(_eggIslandPositions[_eggIslandIdx])
+                        end)
+                        _eggIslandIdx = _eggIslandIdx % #_eggIslandPositions + 1
+                        _eggLastTP = tick()
                     end
-                else
+                else -- Normal
                     _G.AutoFarmChest = false
                 end
             else
                 _G.AutoFarmChest = false
-                task.wait(1)
             end
-        else
-            _G.AutoFarmChest = false
-            currentIndex = 1
         end
-    end
-end)
+    end)
 
+    Event:AddSection("🐣 Easter Egg - Remote Method")
+    Event:AddDropdown({
+        Name = "🗺️ Select Method Egg",
+        Options = {"Normal", "Chest", "Island"},
+        Default = "Normal",
+        Callback = function(v)
+            _G.ChooseEgg = v
+        end
+    })
+    Event:AddToggle({
+        Name = "🐣 Auto Collect Easter Egg (Remote)",
+        Description = "Dùng EasterServiceRE remote để nhặt trứng. Chọn method: Normal/Chest/Island",
+        Default = false,
+        Callback = function(v)
+            _G.AutoCollectEgg = v
+            if v then
+                NotificacaoNightMystic("Tày Hub", "🐣 Easter Egg Remote: BẬT | Method: " .. tostring(_G.ChooseEgg))
+            else
+                _G.AutoFarmChest = false
+                NotificacaoNightMystic("Tày Hub", "🐣 Easter Egg Remote: TẮT")
+            end
+        end
+    })
+end
 
 Event:AddSection({"Sea Event / Setting Sail"})
 local z5 = {
