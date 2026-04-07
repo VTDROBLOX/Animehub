@@ -1,8 +1,65 @@
-loadstring(game:HttpGet("https://pandadevelopment.net/virtual/file/e9c206fd76482ee2"))()
--- Luu script de re-execute khi doi ngon ngu
-if not getgenv().TayHubLoaded then
-    getgenv().TayHubLoaded = true
+pcall(function() loadstring(game:HttpGet("https://pandadevelopment.net/virtual/file/e9c206fd76482ee2"))() end)
+-- ================================================
+-- DELTA COMPATIBLE - Ho tro tat ca Executor/Client
+-- ================================================
+
+-- Polyfill cac ham khong co tren Delta
+hookfunction = hookfunction or function() end
+newcclosure = newcclosure or function(f) return f end  
+setreadonly = setreadonly or function() end
+getrawmetatable = getrawmetatable or getmetatable
+getnamecallmethod = getnamecallmethod or function() return "" end
+sethiddenproperty = sethiddenproperty or function() end
+getgc = getgc or function() return {} end
+getupvalues = getupvalues or function() return {} end
+
+-- getfenv polyfill
+if not getfenv then
+    getfenv = function(f)
+        if type(f) == "number" then return {} end
+        return {}
+    end
 end
+
+-- Filesystem polyfill
+isfile = isfile or function() return false end
+readfile = readfile or function() return "" end
+writefile = writefile or function() end
+makefolder = makefolder or function() end
+isfolder = isfolder or function() return false end
+
+-- firetouchinterest polyfill (Delta khong co)
+if not firetouchinterest then
+    firetouchinterest = function(part1, part2, toggle)
+        pcall(function()
+            if toggle == 0 then
+                local con = part2.Touched:Connect(function() end)
+                con:Disconnect()
+            end
+        end)
+    end
+end
+
+-- fireclickdetector polyfill
+if not fireclickdetector then
+    fireclickdetector = function(detector, distance)
+        pcall(function()
+            local plr = game:GetService("Players").LocalPlayer
+            if detector and plr then
+                detector.MouseClick:Fire(plr)
+            end
+        end)
+    end
+end
+
+-- VirtualInputManager / VirtualUser (Delta co san)
+if not game:GetService("VirtualInputManager") then
+    vim1 = {SendKeyEvent = function() end}
+else
+    vim1 = game:GetService("VirtualInputManager")
+end
+
+-- ================================================
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/hdanhhub/hdanhhub/refs/heads/main/Fix-Lag.lua.txt"))()
 -- ========================================
@@ -39,8 +96,6 @@ task.spawn(function()
     end)
 end)
 
--- Luu URL script de re-execute khi doi ngon ngu
-getgenv().TayHubScript = nil -- Se duoc set tu ben ngoai khi load
 --[[
     Abacaxi Hub - Optimized Version
     Performance & Code Quality Improvements
@@ -59,7 +114,7 @@ local function NotificacaoNightMystic(titulo, mensagem)
     local success = pcall(function()
         local TweenService = Services.TweenService
         local CoreGui = Services.CoreGui
-        local LogoID = "rbxthumb://type=AvatarHeadShot&id=3778225&w=60&h=60"
+        local LogoID = "rbxassetid://73902065845651"
 
         local ScreenGui = Instance.new("ScreenGui")
         ScreenGui.Name = "NM_Notify"
@@ -245,11 +300,11 @@ do
     TW = Services.TweenService
     Lighting = Services.Lighting
     Enemies = workspace.Enemies
-    vim1 = Services.VirtualInputManager
-    vim2 = Services.VirtualUser
+    vim1 = vim1 or pcall(function() return game:GetService("VirtualInputManager") end) and game:GetService("VirtualInputManager") or {SendKeyEvent=function()end}
+    vim2 = pcall(function() return game:GetService("VirtualUser") end) and game:GetService("VirtualUser") or nil
     TeamSelf = plr.Team
     RunSer = Services.RunService
-    Stats = Services.Stats
+    Stats = pcall(function() return game:GetService("Stats") end) and game:GetService("Stats") or nil
     Energy = plr.Character.Energy.Value
     
     -- Tables
@@ -468,18 +523,18 @@ weaponSc = function(I)
 			end;
 		end;
 	end;
-hookfunction(require((game:GetService("ReplicatedStorage")).Effect.Container.Death), function()
+pcall(function() hookfunction(require((game:GetService("ReplicatedStorage")).Effect.Container.Death), function()
  
-end);
-hookfunction((require((game:GetService("ReplicatedStorage")):WaitForChild("GuideModule"))).ChangeDisplayedNPC, function()
+end); end)
+pcall(function() hookfunction((require((game:GetService("ReplicatedStorage")):WaitForChild("GuideModule"))).ChangeDisplayedNPC, function()
  
-end);
-hookfunction(error, function()
+end); end)
+pcall(function() hookfunction(error, function()
  
-end);
-hookfunction(warn, function()
+end); end)
+pcall(function() hookfunction(warn, function()
  
-end);
+end); end)
 local O = workspace:FindFirstChild("Rocks");
 if O then
 	O:Destroy();
@@ -901,6 +956,7 @@ Useskills = function(I, e)
 			vim1:SendKeyEvent(false, "Y", false, game);
 		end;
 	end;
+pcall(function()
 local J = getrawmetatable(game);
 local i = J.__namecall;
 setreadonly(J, false);
@@ -919,6 +975,7 @@ J.__namecall = newcclosure(function(...)
 		end;
 		return i(...);
 	end);
+end)
 GetConnectionEnemies = function(I)
 		for e, K in pairs(replicated:GetChildren()) do
 			if K:IsA("Model") and ((typeof(I) == "table" and table.find(I, K.Name) or K.Name == I) and (K:FindFirstChild("Humanoid") and K.Humanoid.Health > 0)) then
@@ -2870,7 +2927,7 @@ screenGui.Parent = game.CoreGui
 local imageButton = Instance.new("ImageButton")
 imageButton.Size = UDim2.new(0, 55, 0, 55)
 imageButton.Position = UDim2.new(0.15, 0, 0.15, 0)
-imageButton.Image = "rbxthumb://type=AvatarHeadShot&id=3778225&w=60&h=60"
+imageButton.Image = "rbxassetid://73902065845651"
 imageButton.ImageColor3 = Color3.fromRGB(255, 255, 255)
 imageButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 imageButton.BackgroundTransparency = 0.2
@@ -3043,12 +3100,8 @@ LangTab:AddToggle({
             _G.SaveData["Lang"] = "VI"
             SaveSettings()
         end
-        -- Thong bao doi ngon ngu
-        if _G.Lang == "EN" then
-            NotificacaoNightMystic("Tày Hub", "🇺🇸 Switched to English!")
-        else
-            NotificacaoNightMystic("Tày Hub", "🇻🇳 Đã chuyển Tiếng Việt!")
-        end
+        -- Destroy UI cu va re-execute de apply ngon ngu moi
+        NotificacaoNightMystic("Tày Hub", _G.Lang == "EN" and "🇺🇸 Switched to English!" or "🇻🇳 Đã chuyển Tiếng Việt!")
     end
 })
 Discord:AddDiscordInvite({
