@@ -6436,9 +6436,9 @@ local function CollectEgg()
         local cf = egg:GetAttribute("CFrame")
         if uid and cf then
             pcall(function()
-                -- Dung notween (tp thang, khong gay xung dot Tween)
-                plr.Character.HumanoidRootPart.CFrame = cf * CFrame.new(0, 2, 0)
-                task.wait(0.15)
+                -- Bay mươt den trung
+                _tp(cf * CFrame.new(0, 3, 0))
+                task.wait(0.3)
                 Remote:FireServer("CollectEgg", {
                     UID = uid,
                     Additional = {}
@@ -6449,21 +6449,21 @@ local function CollectEgg()
     return #eggs > 0
 end
 
--- Loop chinh - dung notween tranh xung dot voi _tp Tween
+-- Loop chinh - bay mươt bang _tp, tam dung farm khi bay
 spawn(function()
     local currentIndex = 1
-    local lastIslandTP = 0
     local noEggCount = 0
+    local isFlying = false
 
     while task.wait(1) do
         if not _G.AutoCollectEgg then
             currentIndex = 1
             noEggCount = 0
+            isFlying = false
             continue
         end
 
-        -- Dung shouldTween = false de ngat tween dang chay
-        shouldTween = false
+        if isFlying then continue end
 
         local char = plr.Character
         local root = char and char:FindFirstChild("HumanoidRootPart")
@@ -6479,19 +6479,45 @@ spawn(function()
             noEggCount = 0
         else
             noEggCount = noEggCount + 1
-            -- Sau 3 lan khong co trung -> chuyen dao
-            if noEggCount >= 3 and #IslandPositions > 0 and (tick() - lastIslandTP) > 3 then
+            if noEggCount >= 3 and #IslandPositions > 0 then
+                isFlying = true
+                noEggCount = 0
+
                 local dest = IslandPositions[currentIndex]
-                -- Dung notween (teleport thang, khong Tween)
-                pcall(function()
-                    plr.Character.HumanoidRootPart.CFrame = dest * CFrame.new(0, 5, 0)
-                end)
-                NotificacaoNightMystic("Tày Hub", "🥚 Bay sang đảo " .. currentIndex .. "/" .. #IslandPositions)
                 currentIndex = currentIndex + 1
                 if currentIndex > #IslandPositions then currentIndex = 1 end
-                lastIslandTP = tick()
-                noEggCount = 0
-                task.wait(2) -- Cho on dinh sau khi tp
+
+                NotificacaoNightMystic("Tày Hub", "🥚 Bay sang đảo " .. (currentIndex-1) .. "/" .. #IslandPositions)
+
+                -- Tam dung tat ca farm truoc khi bay
+                local oldStartFarm = _G.StartFarm
+                local oldLevel = _G.Level
+                local oldAutoFarm = _G.AutoFarm_Bone
+                _G.StartFarm = false
+                _G.Level = false
+                _G.AutoFarm_Bone = false
+                shouldTween = false
+                task.wait(0.3)
+
+                -- Bay mươt bang _tp (Tween chinh cua script)
+                pcall(function()
+                    _tp(dest * CFrame.new(0, 8, 0))
+                end)
+
+                -- Cho bay xong (tinh theo khoang cach)
+                local dist = 0
+                pcall(function()
+                    dist = (dest.Position - root.Position).Magnitude
+                end)
+                local waitTime = math.clamp(dist / 300, 2, 10)
+                task.wait(waitTime)
+
+                -- Bat lai farm sau khi bay xong
+                _G.StartFarm = oldStartFarm
+                _G.Level = oldLevel
+                _G.AutoFarm_Bone = oldAutoFarm
+
+                isFlying = false
             end
         end
     end
