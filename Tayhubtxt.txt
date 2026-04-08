@@ -6351,14 +6351,10 @@ end
 
 
 -- ========================================
--- AUTO EGG EVENT v4 - CHUAN BLOX FRUITS
--- Dung CollectionService + Remote chinh xac
+-- AUTO EGG EVENT - TICH HOP TAYHUB
 -- ========================================
-local _RS = game:GetService("ReplicatedStorage")
-local _CS = game:GetService("CollectionService")
-
--- Island positions chinh xac theo Sea
 local IslandPositions = {}
+
 if World1 then
     IslandPositions = {
         CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594),
@@ -6414,131 +6410,147 @@ elseif World3 then
 end
 
 _G.AutoCollectEgg = false
-_G.ChooseEgg = "Island" -- Mac dinh: bay qua dao
+_G.ChooseEgg = "Island"
 
--- Ham nhat trung chinh xac dung Remote cua game
+-- Ham nhat trung - fix loi cf la CFrame
 local function CollectEgg()
     local char = plr.Character
     local root = char and char:FindFirstChild("HumanoidRootPart")
     local hum = char and char:FindFirstChild("Humanoid")
     if not root or not hum or hum.Health <= 0 then return false end
 
-    local Remote = _RS:FindFirstChild("Modules")
-        and _RS.Modules:FindFirstChild("Net")
-        and _RS.Modules.Net:FindFirstChild("RE/EasterServiceRE")
-    if not Remote then return false end
+    -- Tim Remote (khong dung WaitForChild de tranh yield)
+    local EggRemote = nil
+    pcall(function()
+        EggRemote = game:GetService("ReplicatedStorage")
+            .Modules.Net["RE/EasterServiceRE"]
+    end)
+    if not EggRemote then return false end
 
-    local eggs = _CS:GetTagged("EasterEgg26")
+    local eggs = game:GetService("CollectionService"):GetTagged("EasterEgg26")
     if #eggs == 0 then return false end
 
-    for _, egg in ipairs(eggs) do
+    for _, egg in pairs(eggs) do
         local uid = egg:GetAttribute("UID")
-        local cf = egg:GetAttribute("CFrame")
-        if uid and cf then
-            pcall(function()
-                -- Bay mươt den trung
-                _tp(cf * CFrame.new(0, 3, 0))
-                task.wait(0.3)
-                Remote:FireServer("CollectEgg", {
-                    UID = uid,
-                    Additional = {}
-                })
-            end)
+        if uid and egg:IsA("BasePart") then
+
+            -- BAM TRUNG 10 LAN - theo duoi trung chay
+            for i = 1, 10 do
+                if not egg or not egg.Parent then break end
+                pcall(function()
+                    -- Dung .Position (BasePart) chu khong dung CFrame attribute
+                    root.CFrame = CFrame.new(egg.Position + Vector3.new(0, 2, 0))
+                end)
+                task.wait(0.1)
+            end
+
+            -- FIRE REMOTE 5 LAN
+            for i = 1, 5 do
+                pcall(function()
+                    EggRemote:FireServer("CollectEgg", {
+                        UID = uid,
+                        Additional = {}
+                    })
+                end)
+                task.wait(0.1)
+            end
+
+            return true
         end
     end
-    return #eggs > 0
+    return false
 end
 
--- Loop chinh - bay mươt bang _tp, tam dung farm khi bay
+-- Bay muot den dao - dung _tp chinh cua TayHub
+local function FlyToIsland(dest)
+    -- Tam dung farm tranh xung dot
+    local sv = {
+        StartFarm = _G.StartFarm,
+        Level = _G.Level,
+        Bone = _G.AutoFarm_Bone,
+        Cake = _G.AutoFarm_Cake,
+    }
+    _G.StartFarm = false
+    _G.Level = false
+    _G.AutoFarm_Bone = false
+    _G.AutoFarm_Cake = false
+    shouldTween = false
+    task.wait(0.3)
+
+    -- Bay muot bang _tp (chinh xac giong farm xuong/level)
+    pcall(function()
+        _tp(dest * CFrame.new(0, 8, 0))
+    end)
+
+    -- Cho bay xong theo khoang cach thuc te
+    local root = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+    local dist = root and (dest.Position - root.Position).Magnitude or 500
+    task.wait(math.clamp(dist / 250, 2, 12))
+
+    -- Bat lai farm
+    _G.StartFarm = sv.StartFarm
+    _G.Level = sv.Level
+    _G.AutoFarm_Bone = sv.Bone
+    _G.AutoFarm_Cake = sv.Cake
+end
+
+-- LOOP CHINH
 spawn(function()
     local currentIndex = 1
-    local noEggCount = 0
+    local lastIslandTP = 0
     local isFlying = false
 
-    while task.wait(1) do
+    while wait(1) do
         if not _G.AutoCollectEgg then
             currentIndex = 1
-            noEggCount = 0
             isFlying = false
             continue
         end
-
         if isFlying then continue end
 
         local char = plr.Character
         local root = char and char:FindFirstChild("HumanoidRootPart")
         local hum = char and char:FindFirstChild("Humanoid")
         if not root or not hum or hum.Health <= 0 then
-            task.wait(1)
-            continue
+            task.wait(1) continue
         end
 
         local hasEgg = CollectEgg()
 
-        if hasEgg then
-            noEggCount = 0
-        else
-            noEggCount = noEggCount + 1
-            if noEggCount >= 3 and #IslandPositions > 0 then
-                isFlying = true
-                noEggCount = 0
-
-                local dest = IslandPositions[currentIndex]
-                currentIndex = currentIndex + 1
-                if currentIndex > #IslandPositions then currentIndex = 1 end
-
-                NotificacaoNightMystic("Tày Hub", "🥚 Bay sang đảo " .. (currentIndex-1) .. "/" .. #IslandPositions)
-
-                -- Tam dung tat ca farm truoc khi bay
-                local oldStartFarm = _G.StartFarm
-                local oldLevel = _G.Level
-                local oldAutoFarm = _G.AutoFarm_Bone
-                _G.StartFarm = false
-                _G.Level = false
-                _G.AutoFarm_Bone = false
-                shouldTween = false
-                task.wait(0.3)
-
-                -- Bay mươt bang _tp (Tween chinh cua script)
-                pcall(function()
-                    _tp(dest * CFrame.new(0, 8, 0))
-                end)
-
-                -- Cho bay xong (tinh theo khoang cach)
-                local dist = 0
-                pcall(function()
-                    dist = (dest.Position - root.Position).Magnitude
-                end)
-                local waitTime = math.clamp(dist / 300, 2, 10)
-                task.wait(waitTime)
-
-                -- Bat lai farm sau khi bay xong
-                _G.StartFarm = oldStartFarm
-                _G.Level = oldLevel
-                _G.AutoFarm_Bone = oldAutoFarm
-
-                isFlying = false
+        if not hasEgg then
+            if _G.ChooseEgg == "Island" then
+                if #IslandPositions > 0 and (tick() - lastIslandTP) > 2 then
+                    isFlying = true
+                    local dest = IslandPositions[currentIndex]
+                    NotificacaoNightMystic("Tày Hub", "🥚 Bay sang đảo " .. currentIndex .. "/" .. #IslandPositions)
+                    currentIndex = currentIndex + 1
+                    if currentIndex > #IslandPositions then currentIndex = 1 end
+                    lastIslandTP = tick()
+                    FlyToIsland(dest)
+                    isFlying = false
+                end
             end
         end
     end
 end)
 
+-- UI - Dung Event tab cua TayHub (khong phai Main)
 Event:AddSection("🥚 Auto Egg Event")
-Event:AddToggle({
-    Name = "🥚 Auto Collect Egg",
-    Description = "Nhặt trứng bằng Remote chính xác + bay qua đảo",
-    Default = false,
-    Callback = function(v)
-        _G.AutoCollectEgg = v
-        NotificacaoNightMystic("Tày Hub", v and "🥚 Auto Egg: BẬT" or "🥚 Auto Egg: TẮT")
-    end
-})
 Event:AddDropdown({
-    Name = "Chế Độ Egg",
+    Name = "Chế Độ Nhặt Trứng",
     Options = {"Island", "Normal"},
     Default = "Island",
     Callback = function(v)
         _G.ChooseEgg = v
+    end
+})
+Event:AddToggle({
+    Name = "🥚 Auto Collect Egg",
+    Description = "Bám trứng + bay mượt qua đảo như farm xương",
+    Default = false,
+    Callback = function(v)
+        _G.AutoCollectEgg = v
+        NotificacaoNightMystic("Tày Hub", v and "🥚 Auto Egg: BẬT" or "🥚 Auto Egg: TẮT")
     end
 })
 
