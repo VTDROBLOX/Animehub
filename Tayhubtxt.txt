@@ -6436,8 +6436,9 @@ local function CollectEgg()
         local cf = egg:GetAttribute("CFrame")
         if uid and cf then
             pcall(function()
-                _tp(cf + Vector3.new(0, 2, 0))
-                task.wait(0.2)
+                -- Dung notween (tp thang, khong gay xung dot Tween)
+                plr.Character.HumanoidRootPart.CFrame = cf * CFrame.new(0, 2, 0)
+                task.wait(0.15)
                 Remote:FireServer("CollectEgg", {
                     UID = uid,
                     Additional = {}
@@ -6448,16 +6449,21 @@ local function CollectEgg()
     return #eggs > 0
 end
 
--- Loop chinh
+-- Loop chinh - dung notween tranh xung dot voi _tp Tween
 spawn(function()
     local currentIndex = 1
     local lastIslandTP = 0
+    local noEggCount = 0
 
-    while wait(0.8) do
+    while task.wait(1) do
         if not _G.AutoCollectEgg then
             currentIndex = 1
+            noEggCount = 0
             continue
         end
+
+        -- Dung shouldTween = false de ngat tween dang chay
+        shouldTween = false
 
         local char = plr.Character
         local root = char and char:FindFirstChild("HumanoidRootPart")
@@ -6469,16 +6475,23 @@ spawn(function()
 
         local hasEgg = CollectEgg()
 
-        if not hasEgg then
-            -- Khong co trung -> bay sang dao tiep theo
-            if #IslandPositions > 0 and (tick() - lastIslandTP) > 2 then
-                _tp(IslandPositions[currentIndex])
+        if hasEgg then
+            noEggCount = 0
+        else
+            noEggCount = noEggCount + 1
+            -- Sau 3 lan khong co trung -> chuyen dao
+            if noEggCount >= 3 and #IslandPositions > 0 and (tick() - lastIslandTP) > 3 then
+                local dest = IslandPositions[currentIndex]
+                -- Dung notween (teleport thang, khong Tween)
+                pcall(function()
+                    plr.Character.HumanoidRootPart.CFrame = dest * CFrame.new(0, 5, 0)
+                end)
                 NotificacaoNightMystic("Tày Hub", "🥚 Bay sang đảo " .. currentIndex .. "/" .. #IslandPositions)
                 currentIndex = currentIndex + 1
-                if currentIndex > #IslandPositions then
-                    currentIndex = 1
-                end
+                if currentIndex > #IslandPositions then currentIndex = 1 end
                 lastIslandTP = tick()
+                noEggCount = 0
+                task.wait(2) -- Cho on dinh sau khi tp
             end
         end
     end
