@@ -636,6 +636,7 @@ end
 -- ==========================================
 Tabs = {
     ["Info"]     = wrapTab(Window:AddTab("Thông Tin")),
+    ["Admin"]    = wrapTab(Window:AddTab("⚡ Admin")),
     ["Main"]     = wrapTab(Window:AddTab("Cày Cấp")),
     ["Sea"]      = wrapTab(Window:AddTab("Sự Kiện")),
     ["Item"]     = wrapTab(Window:AddTab("Lấy & Nâng Cấp Vật Phẩm")),
@@ -653,6 +654,31 @@ Tabs = {
 }
 
 wait(1)
+
+-- ==========================================
+-- TAB ADMIN
+-- ==========================================
+Tabs.Admin:AddSection("Admin hiệu ứng 100%")
+local _kamuiOpened = false
+local _kamuiStatus = Tabs.Admin:AddParagraph({
+    Title = "Kamui Status: ❌ Chưa mở",
+    Description = ""
+})
+Tabs.Admin:AddButton({
+    Title = "🌀 Kamui (Bấm 1 lần)",
+}, function()
+    if not _kamuiOpened then
+        _kamuiOpened = true
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/AdminKamui.luau"))()
+        end)
+        pcall(function() _kamuiStatus:SetText("Kamui Status: ✅ Đã mở") end)
+        Library:Notify({Title = "Tày Hub", Description = "🌀 Kamui đã được kích hoạt!", Duration = 3})
+    else
+        Library:Notify({Title = "Tày Hub", Description = "⚠️ Kamui đã mở rồi!", Duration = 2})
+    end
+end)
+
 
 Library:Notify({
     Title = "",
@@ -5595,7 +5621,7 @@ spawn(function()
     end
 end)
 -- =====================================
--- 🥚 AUTO COLLECT EGG - ĐẦU TAB SỰ KIỆN
+-- 🥚 AUTO COLLECT EGG [BETA] - ĐẦU TAB SỰ KIỆN
 -- =====================================
 local IslandPositions = {}
 
@@ -5656,7 +5682,7 @@ elseif World3 then
 end
 
 Tabs.Sea:AddDropdown("DropEggMethod", {
-    ["Title"] = "Select Method Egg",
+    ["Title"] = "Select Method Egg [BETA]",
     ["Values"] = {"Normal", "Chest", "Island"},
     ["Default"] = "Normal"
 }):OnChanged(function(Value)
@@ -5664,7 +5690,7 @@ Tabs.Sea:AddDropdown("DropEggMethod", {
 end)
 
 Tabs.Sea:AddToggle("ToggleAutoEgg", {
-    ["Title"] = "Auto Collect Egg",
+    ["Title"] = "🥚 Auto Collect Egg [BETA]",
     ["Default"] = false
 }):OnChanged(function(Value)
     _G.AutoCollectEgg = Value
@@ -12514,4 +12540,4 @@ Tabs.Misc:AddButton({
 
 -- ===============================================================
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/notify"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/fix%20lag.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hdanhhub/hdanhhub/refs/heads/main/Fix-Lag.lua.txt"))()
