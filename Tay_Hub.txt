@@ -658,26 +658,39 @@ wait(1)
 -- ==========================================
 -- TAB ADMIN
 -- ==========================================
-Tabs.Admin:AddSection("Admin hiệu ứng 100%")
+Tabs.Admin:AddSection("⚡ Admin Tools")
 local _kamuiOpened = false
 local _kamuiStatus = Tabs.Admin:AddParagraph({
-    Title = "Kamui Status: ❌ Chưa mở",
-    Description = ""
+    ["Title"] = "Kamui Status: ❌ Chưa mở",
+    ["Description"] = "Bấm nút bên dưới để kích hoạt"
 })
 Tabs.Admin:AddButton({
-    Title = "🌀 Kamui (Bấm 1 lần)",
-}, function()
-    if not _kamuiOpened then
-        _kamuiOpened = true
-        pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/AdminKamui.luau"))()
-        end)
-        pcall(function() _kamuiStatus:SetText("Kamui Status: ✅ Đã mở") end)
-        Library:Notify({Title = "Tày Hub", Description = "🌀 Kamui đã được kích hoạt!", Duration = 3})
-    else
-        Library:Notify({Title = "Tày Hub", Description = "⚠️ Kamui đã mở rồi!", Duration = 2})
+    ["Title"] = "🌀 Kamui (Bấm 1 lần)",
+    ["Description"] = "Kích hoạt Admin Kamui",
+    ["Callback"] = function()
+        if not _kamuiOpened then
+            _kamuiOpened = true
+            pcall(function()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/AdminKamui.luau"))()
+            end)
+            -- Cap nhat status
+            pcall(function()
+                _kamuiStatus:SetText("Kamui Status: ✅ Đã mở")
+            end)
+            Library:Notify({
+                ["Title"] = "Tày Hub",
+                ["Description"] = "🌀 Kamui đã được kích hoạt!",
+                ["Duration"] = 3
+            })
+        else
+            Library:Notify({
+                ["Title"] = "Tày Hub",
+                ["Description"] = "⚠️ Kamui đã mở rồi!",
+                ["Duration"] = 2
+            })
+        end
     end
-end)
+})
 
 
 Library:Notify({
@@ -12540,4 +12553,4 @@ Tabs.Misc:AddButton({
 
 -- ===============================================================
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/notify"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hdanhhub/hdanhhub/refs/heads/main/Fix-Lag.lua.txt"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/fix%20lag.lua"))()
