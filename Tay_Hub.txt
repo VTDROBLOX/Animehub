@@ -5705,10 +5705,14 @@ end
 
 spawn(function()
     local currentIndex = 1
-    local lastIslandTP = 0 
+    local lastIslandTP = 0
+    local isFlying = false -- KHOA LOOP KHI DANG BAY
 
     while wait(1) do
         if _G.AutoCollectEgg then
+            -- NEU DANG BAY THI KHONG LAM GI HET - tranh doi huong
+            if isFlying then continue end
+
             local char = plr.Character
             local root = char and char:FindFirstChild("HumanoidRootPart")
             local hum = char and char:FindFirstChild("Humanoid")
@@ -5722,14 +5726,25 @@ spawn(function()
                     elseif _G.ChooseEgg == "Island" then
                         _G.AutoFarmChest = false
                         if #IslandPositions > 0 and (tick() - lastIslandTP) > 2 then
-                            pcall(function()
-                                _tp(IslandPositions[currentIndex])
-                            end)
+                            isFlying = true -- KHOA LOOP TRUOC KHI BAY
+                            local dest = IslandPositions[currentIndex]
                             currentIndex = currentIndex + 1
                             if currentIndex > #IslandPositions then
                                 currentIndex = 1
                             end
                             lastIslandTP = tick()
+                            pcall(function()
+                                _tp(dest)
+                            end)
+                            -- Cho bay xong theo khoang cach thuc te
+                            local dist = 500
+                            pcall(function()
+                                if root then
+                                    dist = (dest.Position - root.Position).Magnitude
+                                end
+                            end)
+                            task.wait(math.clamp(dist / 300, 2, 15))
+                            isFlying = false -- MO KHOA SAU KHI BAY XONG
                         end
                     elseif _G.ChooseEgg == "Normal" then
                         _G.AutoFarmChest = false
@@ -5744,6 +5759,7 @@ spawn(function()
         else
             _G.AutoFarmChest = false
             currentIndex = 1
+            isFlying = false
         end
     end
 end)
@@ -12498,4 +12514,4 @@ Tabs.Misc:AddButton({
 
 -- ===============================================================
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/notify"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hdanhhub/hdanhhub/refs/heads/main/Fix-Lag.lua.txt"))() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/fix%20lag.lua"))()
