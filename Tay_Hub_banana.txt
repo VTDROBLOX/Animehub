@@ -11886,7 +11886,8 @@ end)
 -- Bay muot Tween2 + Bam trung khong miss
 -- ========================================
 local IslandPositions = {}
-if Sea1 then
+
+if World1 then
     IslandPositions = {
         CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594),
         CFrame.new(-2566.4296875, 6.8556680679321, 2045.2561035156),
@@ -11904,7 +11905,7 @@ if Sea1 then
         CFrame.new(-1442.16553, 29.8788261, -28.3547478),
         CFrame.new(-2850.20068, 7.39224768, 5354.99268)
     }
-elseif Sea2 then
+elseif World2 then
     IslandPositions = {
         CFrame.new(-380.47927856445, 77.220390319824, 255.82550048828),
         CFrame.new(-11.311455726624, 29.276733398438, 2771.5224609375),
@@ -11921,11 +11922,13 @@ elseif Sea2 then
         CFrame.new(6148.4116210938, 294.38687133789, -6741.1166992188),
         CFrame.new(-3032.7641601563, 317.89672851563, -10075.373046875),
         CFrame.new(4816.8618164063, 8.4599885940552, 2863.8195800781),
+        CFrame.new(-288.74060058594, 49326.31640625, -35248.59375)
     }
-elseif Sea3 then
+elseif World3 then
     IslandPositions = {
         CFrame.new(2681.2736816406, 1682.8092041016, -7190.9853515625),
         CFrame.new(-5074.45556640625, 314.5155334472656, -2991.054443359375),
+        CFrame.new(-260.65557861328, 49325.8046875, -35253.5703125),
         CFrame.new(-95, 11, 5455),
         CFrame.new(5433, 1062, 290),
         CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625),
@@ -11940,109 +11943,101 @@ elseif Sea3 then
     }
 end
 
-_G.AutoCollectEgg = false
-_G.ChooseEgg = "Island"
+Main:AddDropdown({
+    Name = "Select Method Egg",
+    Options = {"Normal", "Chest", "Island"},
+    Default = "Normal",
+    Callback = function(Value)
+        _G.ChooseEgg = Value
+    end
+})
 
--- Ham nhat trung dung CollectionService chinh xac
+Main:AddToggle({
+    Name = "Auto Collect Egg",
+    Default = false,
+    Callback = function(Value)
+        _G.AutoCollectEgg = Value
+    end
+})
+
+local RS = game:GetService("ReplicatedStorage")
+local CS = game:GetService("CollectionService")
+local Remote = RS:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/EasterServiceRE")
+local plr = game.Players.LocalPlayer
+
 local function CollectEgg()
     local char = plr.Character
     local root = char and char:FindFirstChild("HumanoidRootPart")
     local hum = char and char:FindFirstChild("Humanoid")
+    
     if not root or not hum or hum.Health <= 0 then return false end
 
-    -- Tim Remote khong dung WaitForChild (tranh yield)
-    local EggRemote = nil
-    pcall(function()
-        EggRemote = game:GetService("ReplicatedStorage").Modules.Net["RE/EasterServiceRE"]
-    end)
-    if not EggRemote then return false end
+    local Remote = RS:FindFirstChild("Modules") and RS.Modules:FindFirstChild("Net") and RS.Modules.Net:FindFirstChild("RE/EasterServiceRE")
+    if not Remote then return false end
 
-    local eggs = game:GetService("CollectionService"):GetTagged("EasterEgg26")
-    if #eggs == 0 then return false end
-
-    for _, egg in pairs(eggs) do
+    local eggs = CS:GetTagged("EasterEgg26")
+    for i = 1, #eggs do
+        local egg = eggs[i]
         local uid = egg:GetAttribute("UID")
-        if uid and egg:IsA("BasePart") then
-            -- BAM TRUNG 10 LAN - theo duoi Eggcited Egg
-            for i = 1, 10 do
-                if not egg or not egg.Parent then break end
-                pcall(function()
-                    root.CFrame = CFrame.new(egg.Position + Vector3.new(0, 2, 0))
-                end)
-                task.wait(0.1)
-            end
-            -- FIRE REMOTE 5 LAN
-            for i = 1, 5 do
-                pcall(function()
-                    EggRemote:FireServer("CollectEgg", {UID=uid, Additional={}})
-                end)
-                task.wait(0.1)
-            end
+        local cf = egg:GetAttribute("CFrame")
+        if uid and cf then
+            pcall(function()
+                _tp(cf + Vector3.new(0, 2, 0))
+                Remote:FireServer("CollectEgg", {
+                    UID = uid,
+                    Additional = {}
+                })
+            end)
             return true
         end
     end
     return false
 end
 
--- Bay muot den dao bang Tween2 (giong farm mob)
-local function FlyToIsland(dest)
-    _G.StopTween2 = false
-    pcall(function() Tween2(dest * CFrame.new(0, 8, 0)) end)
-end
-
-Tabs.Sea:AddSection("🥚 Auto Nhặt Trứng Event")
-Tabs.Sea:AddDropdown("DropdownEggMethod", {
-    ["Title"] = "Chế Độ Nhặt Trứng",
-    ["Values"] = {"Island", "Normal"},
-    ["Default"] = "Island"
-}):OnChanged(function(v) _G.ChooseEgg = v end)
-
-Tabs.Sea:AddToggle("ToggleCollectEgg", {
-    ["Title"] = "🥚 Auto Collect Egg",
-    ["Default"] = false
-}):OnChanged(function(v)
-    _G.AutoCollectEgg = v
-    Library:Notify({
-        Title = "Tày Hub",
-        Content = v and "🥚 Auto Egg: BẬT" or "🥚 Auto Egg: TẮT",
-        Duration = 3
-    })
-end)
-
 spawn(function()
     local currentIndex = 1
-    local lastIslandTP = 0
-    local isFlying = false
+    local lastIslandTP = 0 
 
     while wait(1) do
-        if not _G.AutoCollectEgg then
-            currentIndex = 1
-            isFlying = false
-            continue
-        end
-        if isFlying then continue end
+        if _G.AutoCollectEgg then
+            local char = plr.Character
+            local root = char and char:FindFirstChild("HumanoidRootPart")
+            local hum = char and char:FindFirstChild("Humanoid")
 
-        local char = plr.Character
-        local root = char and char:FindFirstChild("HumanoidRootPart")
-        local hum = char and char:FindFirstChild("Humanoid")
-        if not root or not hum or hum.Health <= 0 then task.wait(1) continue end
-
-        local hasEgg = CollectEgg()
-
-        if not hasEgg and _G.ChooseEgg == "Island" then
-            if #IslandPositions > 0 and (tick() - lastIslandTP) > 2 then
-                isFlying = true
-                local dest = IslandPositions[currentIndex]
-                currentIndex = currentIndex + 1
-                if currentIndex > #IslandPositions then currentIndex = 1 end
-                lastIslandTP = tick()
-                Library:Notify({Title="Tày Hub", Content="🥚 Bay sang đảo "..currentIndex.."/"..#IslandPositions, Duration=2})
-                FlyToIsland(dest)
-                isFlying = false
+            if root and hum and hum.Health > 0 then
+                local hasEgg = CollectEgg()
+                
+                if not hasEgg then
+                    if _G.ChooseEgg == "Chest" then
+                        _G.AutoFarmChest = true
+                    elseif _G.ChooseEgg == "Island" then
+                        _G.AutoFarmChest = false
+                        if #IslandPositions > 0 and (tick() - lastIslandTP) > 2 then
+                            pcall(function()
+                                _tp(IslandPositions[currentIndex])
+                            end)
+                            currentIndex = currentIndex + 1
+                            if currentIndex > #IslandPositions then
+                                currentIndex = 1
+                            end
+                            lastIslandTP = tick()
+                        end
+                    elseif _G.ChooseEgg == "Normal" then
+                        _G.AutoFarmChest = false
+                    end
+                else
+                    _G.AutoFarmChest = false
+                end
+            else
+                _G.AutoFarmChest = false
+                task.wait(1)
             end
+        else
+            _G.AutoFarmChest = false
+            currentIndex = 1
         end
     end
-end)
+end) 
 -- ===============================================================
 -- ==================== CHỨC NĂNG BỔ SUNG ====================
 
