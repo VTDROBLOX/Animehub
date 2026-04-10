@@ -673,7 +673,6 @@ Tabs.Admin:AddButton({
             pcall(function()
                 loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/AdminKamui.luau"))()
             end)
-            -- Cap nhat status
             pcall(function()
                 _kamuiStatus:SetText("Kamui Status: ✅ Đã mở")
             end)
@@ -689,6 +688,73 @@ Tabs.Admin:AddButton({
                 ["Duration"] = 2
             })
         end
+    end
+})
+
+Tabs.Admin:AddSection("☄️ Meteor Rain")
+local _throneStatus = Tabs.Admin:AddParagraph({
+    ["Title"] = "Royal Throne: ⏳ Đang kiểm tra...",
+    ["Description"] = "Cần có Royal Throne mới dùng được"
+})
+
+-- Kiem tra Royal Throne lien tuc
+task.spawn(function()
+    pcall(function()
+        local lastStatus = ""
+        while true do
+            task.wait(1)
+            local chair = workspace:FindFirstChild("LuckymaxerChair")
+            local exists = chair and chair:FindFirstChild("Royal Throne")
+            local status = exists and "✅ Có" or "❌ Không có"
+            if status ~= lastStatus then
+                pcall(function()
+                    _throneStatus:SetText("Royal Throne: " .. status)
+                end)
+                lastStatus = status
+            end
+        end
+    end)
+end)
+
+Tabs.Admin:AddButton({
+    ["Title"] = "☄️ Meteor Rain Attack",
+    ["Description"] = "Cần có Royal Throne trong workspace",
+    ["Callback"] = function()
+        local Players = game:GetService("Players")
+        local player = Players.LocalPlayer
+        local backpack = player:WaitForChild("Backpack")
+
+        -- Kiem tra Royal Throne truoc
+        local chair = workspace:FindFirstChild("LuckymaxerChair")
+        if not chair or not chair:FindFirstChild("Royal Throne") then
+            Library:Notify({
+                ["Title"] = "Tày Hub",
+                ["Description"] = "❌ Không tìm thấy Royal Throne!",
+                ["Duration"] = 3
+            })
+            return
+        end
+
+        local tool = Instance.new("Tool")
+        tool.Name = "Draconic Incandescence of the Vermillion Firmament"
+        tool.RequiresHandle = false
+        tool.CanBeDropped = false
+        tool.Parent = backpack
+
+        tool.Activated:Connect(function()
+            pcall(function()
+                local args = {"Uzoth"}
+                workspace:WaitForChild("LuckymaxerChair")
+                    :WaitForChild("RemoteFunction")
+                    :InvokeServer(unpack(args))
+            end)
+        end)
+
+        Library:Notify({
+            ["Title"] = "Tày Hub",
+            ["Description"] = "☄️ Meteor Rain đã được thêm vào túi! Equip và bấm để dùng.",
+            ["Duration"] = 4
+        })
     end
 })
 
