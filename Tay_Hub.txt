@@ -696,21 +696,67 @@ local _throneStatus = Tabs.Admin:AddParagraph({
     ["Title"] = "Royal Throne: ⏳ Đang kiểm tra...",
     ["Description"] = "Cần có Royal Throne mới dùng được"
 })
+local _meteorTimer = Tabs.Admin:AddParagraph({
+    ["Title"] = "⏱️ Chu kỳ: ~3-4 giờ/lần",
+    ["Description"] = "Thời gian trong server hiện tại: đang tính..."
+})
+local _meteorNextLabel = Tabs.Admin:AddParagraph({
+    ["Title"] = "🕐 Server time: --:--:--",
+    ["Description"] = "Khi Royal Throne xuất hiện = sự kiện đang diễn ra"
+})
 
--- Kiem tra Royal Throne lien tuc
+-- Kiem tra Royal Throne + dem thoi gian server
+local _meteorStartTick = tick()
 task.spawn(function()
     pcall(function()
         local lastStatus = ""
+        local _eventStartTime = nil
         while true do
             task.wait(1)
+
+            -- Kiem tra Royal Throne
             local chair = workspace:FindFirstChild("LuckymaxerChair")
             local exists = chair and chair:FindFirstChild("Royal Throne")
-            local status = exists and "✅ Có" or "❌ Không có"
+            local status = exists and "✅ Có (Sự kiện đang diễn ra!)" or "❌ Không có"
             if status ~= lastStatus then
-                pcall(function()
-                    _throneStatus:SetText("Royal Throne: " .. status)
-                end)
+                pcall(function() _throneStatus:SetText("Royal Throne: " .. status) end)
+                if exists and not _eventStartTime then
+                    _eventStartTime = tick()
+                elseif not exists then
+                    _eventStartTime = nil
+                end
                 lastStatus = status
+            end
+
+            -- Dem thoi gian server (tu khi bat script)
+            local elapsed = tick() - _meteorStartTick
+            local h = math.floor(elapsed / 3600)
+            local m = math.floor((elapsed % 3600) / 60)
+            local s = math.floor(elapsed % 60)
+            local timeStr = string.format("%02d:%02d:%02d", h, m, s)
+            pcall(function()
+                _meteorTimer:SetText("⏱️ Server uptime: " .. timeStr .. " | Chu kỳ: ~3-4h")
+            end)
+
+            -- Hien thi trang thai su kien
+            if exists and _eventStartTime then
+                local dur = tick() - _eventStartTime
+                local dm = math.floor(dur / 60)
+                local ds = math.floor(dur % 60)
+                pcall(function()
+                    _meteorNextLabel:SetText("🔥 SỰ KIỆN ĐANG DIỄN RA! (" .. dm .. "p " .. ds .. "s)")
+                end)
+            else
+                -- Uoc tinh lan tiep (moi 3.5h = 12600s)
+                local cycle = 12600
+                local timeInCycle = elapsed % cycle
+                local remaining = cycle - timeInCycle
+                local rh = math.floor(remaining / 3600)
+                local rm = math.floor((remaining % 3600) / 60)
+                local rs = math.floor(remaining % 60)
+                pcall(function()
+                    _meteorNextLabel:SetText(string.format("🕐 Ước tính lần tiếp: ~%02dh %02dm %02ds", rh, rm, rs))
+                end)
             end
         end
     end)
