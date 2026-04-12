@@ -1,0 +1,445 @@
+-- // Tày Hub - Key System
+-- // Chỉnh sửa các biến bên dưới
+
+local HUB_NAME = "Tày Hub 1 lần = vĩnh viễn"
+local HUB_VERSION = "v3.1"
+local VALID_KEYS = {
+    "khogaoi", -- Thay key của bạn vào đây
+    "TAYHUB-FREE-2024",
+}
+local GET_KEY_LINK = "https://link4sub.com/agx7eyC1sO" -- Thay link get key của bạn
+local DISCORD_LINK = "https://discord.gg/ZTFvtRrbeB"
+local LOGO_ID = "rbxassetid://91222518412026" -- Thay ID logo của bạn
+
+-- // Màu chủ đạo
+local ACCENT = Color3.fromRGB(255, 80, 150)      -- Hồng chính
+local ACCENT2 = Color3.fromRGB(200, 40, 100)     -- Hồng đậm
+local BG_DARK = Color3.fromRGB(10, 5, 15)        -- Nền đen tím
+local BG_CARD = Color3.fromRGB(20, 10, 25)       -- Card nền
+local TEXT_W = Color3.fromRGB(255, 255, 255)
+local TEXT_G = Color3.fromRGB(180, 160, 190)
+
+-- // Services
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+-- // Xóa GUI cũ nếu có
+if PlayerGui:FindFirstChild("TayHubKeyGUI") then
+    PlayerGui:FindFirstChild("TayHubKeyGUI"):Destroy()
+end
+
+-- // Tạo ScreenGui
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "TayHubKeyGUI"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.Parent = PlayerGui
+
+-- // Hàm tạo tween nhanh
+local function tween(obj, props, t, style, dir)
+    local info = TweenInfo.new(t or 0.3, style or Enum.EasingStyle.Quart, dir or Enum.EasingDirection.Out)
+    TweenService:Create(obj, info, props):Play()
+end
+
+-- // Overlay mờ nền
+local Overlay = Instance.new("Frame")
+Overlay.Size = UDim2.new(1, 0, 1, 0)
+Overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Overlay.BackgroundTransparency = 0.3
+Overlay.BorderSizePixel = 0
+Overlay.ZIndex = 1
+Overlay.Parent = ScreenGui
+
+-- // Card chính (giống ảnh: dọc, giữa màn hình)
+local Card = Instance.new("Frame")
+Card.Size = UDim2.new(0, 380, 0, 520)
+Card.Position = UDim2.new(0.5, -190, 0.5, -260)
+Card.BackgroundColor3 = BG_CARD
+Card.BorderSizePixel = 0
+Card.ZIndex = 2
+Card.Parent = ScreenGui
+
+local CardCorner = Instance.new("UICorner")
+CardCorner.CornerRadius = UDim.new(0, 16)
+CardCorner.Parent = Card
+
+-- Viền hồng neon
+local CardStroke = Instance.new("UIStroke")
+CardStroke.Color = ACCENT
+CardStroke.Thickness = 2
+CardStroke.Parent = Card
+
+-- Glow effect bên ngoài card
+local Glow = Instance.new("ImageLabel")
+Glow.Size = UDim2.new(1, 80, 1, 80)
+Glow.Position = UDim2.new(0, -40, 0, -40)
+Glow.BackgroundTransparency = 1
+Glow.Image = "rbxassetid://5028857084"
+Glow.ImageColor3 = ACCENT
+Glow.ImageTransparency = 0.7
+Glow.ZIndex = 1
+Glow.Parent = Card
+
+-- // Logo circle (giống ảnh)
+local LogoFrame = Instance.new("Frame")
+LogoFrame.Size = UDim2.new(0, 90, 0, 90)
+LogoFrame.Position = UDim2.new(0.5, -45, 0, 20)
+LogoFrame.BackgroundColor3 = BG_DARK
+LogoFrame.BorderSizePixel = 0
+LogoFrame.ZIndex = 3
+LogoFrame.Parent = Card
+
+local LogoCorner = Instance.new("UICorner")
+LogoCorner.CornerRadius = UDim.new(1, 0)
+LogoCorner.Parent = LogoFrame
+
+local LogoStroke = Instance.new("UIStroke")
+LogoStroke.Color = ACCENT
+LogoStroke.Thickness = 3
+LogoStroke.Parent = LogoFrame
+
+local LogoImg = Instance.new("ImageLabel")
+LogoImg.Size = UDim2.new(1, -10, 1, -10)
+LogoImg.Position = UDim2.new(0, 5, 0, 5)
+LogoImg.BackgroundTransparency = 1
+LogoImg.Image = LOGO_ID
+LogoImg.ScaleType = Enum.ScaleType.Fit
+LogoImg.ZIndex = 4
+LogoImg.Parent = LogoFrame
+
+-- // Tiêu đề
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -20, 0, 40)
+Title.Position = UDim2.new(0, 10, 0, 120)
+Title.BackgroundTransparency = 1
+Title.Text = HUB_NAME .. " lấy 1 lần = vĩnh viễn"
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 20
+Title.TextColor3 = TEXT_W
+Title.TextWrapped = true
+Title.ZIndex = 3
+Title.Parent = Card
+
+-- // Subtitle
+local Sub = Instance.new("TextLabel")
+Sub.Size = UDim2.new(1, -20, 0, 20)
+Sub.Position = UDim2.new(0, 10, 0, 162)
+Sub.BackgroundTransparency = 1
+Sub.Text = "Nhap key de tiep tuc"
+Sub.Font = Enum.Font.Gotham
+Sub.TextSize = 13
+Sub.TextColor3 = TEXT_G
+Sub.ZIndex = 3
+Sub.Parent = Card
+
+-- // Divider
+local Div1 = Instance.new("Frame")
+Div1.Size = UDim2.new(1, -40, 0, 1)
+Div1.Position = UDim2.new(0, 20, 0, 190)
+Div1.BackgroundColor3 = Color3.fromRGB(80, 40, 60)
+Div1.BorderSizePixel = 0
+Div1.ZIndex = 3
+Div1.Parent = Card
+
+-- // Label "KEY XAC THUC"
+local KeyLabel = Instance.new("TextLabel")
+KeyLabel.Size = UDim2.new(1, -40, 0, 18)
+KeyLabel.Position = UDim2.new(0, 20, 0, 200)
+KeyLabel.BackgroundTransparency = 1
+KeyLabel.Text = "KEY XAC THUC"
+KeyLabel.Font = Enum.Font.GothamBold
+KeyLabel.TextSize = 11
+KeyLabel.TextColor3 = ACCENT
+KeyLabel.TextXAlignment = Enum.TextXAlignment.Left
+KeyLabel.ZIndex = 3
+KeyLabel.Parent = Card
+
+-- // Input + Button container
+local InputRow = Instance.new("Frame")
+InputRow.Size = UDim2.new(1, -40, 0, 48)
+InputRow.Position = UDim2.new(0, 20, 0, 224)
+InputRow.BackgroundColor3 = Color3.fromRGB(30, 15, 35)
+InputRow.BorderSizePixel = 0
+InputRow.ZIndex = 3
+InputRow.Parent = Card
+
+local InputRowCorner = Instance.new("UICorner")
+InputRowCorner.CornerRadius = UDim.new(0, 10)
+InputRowCorner.Parent = InputRow
+
+local InputRowStroke = Instance.new("UIStroke")
+InputRowStroke.Color = Color3.fromRGB(80, 40, 60)
+InputRowStroke.Thickness = 1.5
+InputRowStroke.Parent = InputRow
+
+-- TextBox nhập key
+local KeyInput = Instance.new("TextBox")
+KeyInput.Size = UDim2.new(1, -100, 1, 0)
+KeyInput.Position = UDim2.new(0, 12, 0, 0)
+KeyInput.BackgroundTransparency = 1
+KeyInput.PlaceholderText = "Nhap key..."
+KeyInput.PlaceholderColor3 = Color3.fromRGB(120, 80, 100)
+KeyInput.Text = ""
+KeyInput.Font = Enum.Font.Gotham
+KeyInput.TextSize = 14
+KeyInput.TextColor3 = TEXT_W
+KeyInput.ClearTextOnFocus = false
+KeyInput.ZIndex = 4
+KeyInput.Parent = InputRow
+
+-- Nút XAC MINH
+local VerifyBtn = Instance.new("TextButton")
+VerifyBtn.Size = UDim2.new(0, 88, 1, -10)
+VerifyBtn.Position = UDim2.new(1, -93, 0, 5)
+VerifyBtn.BackgroundColor3 = ACCENT2
+VerifyBtn.Text = "XAC MINH"
+VerifyBtn.Font = Enum.Font.GothamBold
+VerifyBtn.TextSize = 12
+VerifyBtn.TextColor3 = TEXT_W
+VerifyBtn.BorderSizePixel = 0
+VerifyBtn.ZIndex = 5
+VerifyBtn.Parent = InputRow
+
+local VBCorner = Instance.new("UICorner")
+VBCorner.CornerRadius = UDim.new(0, 7)
+VBCorner.Parent = VerifyBtn
+
+-- // Thông báo lỗi/thành công
+local StatusLabel = Instance.new("TextLabel")
+StatusLabel.Size = UDim2.new(1, -40, 0, 20)
+StatusLabel.Position = UDim2.new(0, 20, 0, 278)
+StatusLabel.BackgroundTransparency = 1
+StatusLabel.Text = ""
+StatusLabel.Font = Enum.Font.Gotham
+StatusLabel.TextSize = 12
+StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+StatusLabel.ZIndex = 3
+StatusLabel.Parent = Card
+
+-- // Divider 2
+local Div2 = Instance.new("Frame")
+Div2.Size = UDim2.new(1, -40, 0, 1)
+Div2.Position = UDim2.new(0, 20, 0, 305)
+Div2.BackgroundColor3 = Color3.fromRGB(80, 40, 60)
+Div2.BorderSizePixel = 0
+Div2.ZIndex = 3
+Div2.Parent = Card
+
+-- // Nút "Lấy key miễn phí"
+local GetKeyDot = Instance.new("Frame")
+GetKeyDot.Size = UDim2.new(0, 8, 0, 8)
+GetKeyDot.Position = UDim2.new(0, 20, 0, 322)
+GetKeyDot.BackgroundColor3 = ACCENT
+GetKeyDot.BorderSizePixel = 0
+GetKeyDot.ZIndex = 3
+GetKeyDot.Parent = Card
+Instance.new("UICorner", GetKeyDot).CornerRadius = UDim.new(1,0)
+
+local GetKeyBtn = Instance.new("TextButton")
+GetKeyBtn.Size = UDim2.new(1, -45, 0, 50)
+GetKeyBtn.Position = UDim2.new(0, 38, 0, 310)
+GetKeyBtn.BackgroundTransparency = 1
+GetKeyBtn.BorderSizePixel = 0
+GetKeyBtn.ZIndex = 3
+GetKeyBtn.Parent = Card
+
+local GKTitle = Instance.new("TextLabel")
+GKTitle.Size = UDim2.new(1, 0, 0, 22)
+GKTitle.BackgroundTransparency = 1
+GKTitle.Text = "Lay key mien phi"
+GKTitle.Font = Enum.Font.GothamBold
+GKTitle.TextSize = 15
+GKTitle.TextColor3 = TEXT_W
+GKTitle.TextXAlignment = Enum.TextXAlignment.Left
+GKTitle.ZIndex = 4
+GKTitle.Parent = GetKeyBtn
+
+local GKSub = Instance.new("TextLabel")
+GKSub.Size = UDim2.new(1, 0, 0, 18)
+GKSub.Position = UDim2.new(0, 0, 0, 22)
+GKSub.BackgroundTransparency = 1
+GKSub.Text = "Nhan de sao chep link, dan vao trinh duyet"
+GKSub.Font = Enum.Font.Gotham
+GKSub.TextSize = 11
+GKSub.TextColor3 = TEXT_G
+GKSub.TextXAlignment = Enum.TextXAlignment.Left
+GKSub.ZIndex = 4
+GKSub.Parent = GetKeyBtn
+
+-- // Divider 3
+local Div3 = Instance.new("Frame")
+Div3.Size = UDim2.new(1, -40, 0, 1)
+Div3.Position = UDim2.new(0, 20, 0, 368)
+Div3.BackgroundColor3 = Color3.fromRGB(80, 40, 60)
+Div3.BorderSizePixel = 0
+Div3.ZIndex = 3
+Div3.Parent = Card
+
+-- // Discord
+local DiscordDot = Instance.new("Frame")
+DiscordDot.Size = UDim2.new(0, 8, 0, 8)
+DiscordDot.Position = UDim2.new(0, 20, 0, 386)
+DiscordDot.BackgroundColor3 = ACCENT
+DiscordDot.BorderSizePixel = 0
+DiscordDot.ZIndex = 3
+DiscordDot.Parent = Card
+Instance.new("UICorner", DiscordDot).CornerRadius = UDim.new(1,0)
+
+local DiscordBtn = Instance.new("TextButton")
+DiscordBtn.Size = UDim2.new(1, -45, 0, 50)
+DiscordBtn.Position = UDim2.new(0, 38, 0, 374)
+DiscordBtn.BackgroundTransparency = 1
+DiscordBtn.BorderSizePixel = 0
+DiscordBtn.ZIndex = 3
+DiscordBtn.Parent = Card
+
+local DCTitle = Instance.new("TextLabel")
+DCTitle.Size = UDim2.new(1, 0, 0, 22)
+DCTitle.BackgroundTransparency = 1
+DCTitle.Text = "Ho tro - Discord"
+DCTitle.Font = Enum.Font.GothamBold
+DCTitle.TextSize = 15
+DCTitle.TextColor3 = TEXT_W
+DCTitle.TextXAlignment = Enum.TextXAlignment.Left
+DCTitle.ZIndex = 4
+DCTitle.Parent = DiscordBtn
+
+local DCSub = Instance.new("TextLabel")
+DCSub.Size = UDim2.new(1, 0, 0, 18)
+DCSub.Position = UDim2.new(0, 0, 0, 22)
+DCSub.BackgroundTransparency = 1
+DCSub.Text = DISCORD_LINK
+DCSub.Font = Enum.Font.Gotham
+DCSub.TextSize = 11
+DCSub.TextColor3 = Color3.fromRGB(100, 160, 255)
+DCSub.TextXAlignment = Enum.TextXAlignment.Left
+DCSub.ZIndex = 4
+DCSub.Parent = DiscordBtn
+
+-- // Version
+local VersionLabel = Instance.new("TextLabel")
+VersionLabel.Size = UDim2.new(1, 0, 0, 20)
+VersionLabel.Position = UDim2.new(0, 0, 1, -22)
+VersionLabel.BackgroundTransparency = 1
+VersionLabel.Text = HUB_NAME .. " " .. HUB_VERSION
+VersionLabel.Font = Enum.Font.Gotham
+VersionLabel.TextSize = 11
+VersionLabel.TextColor3 = TEXT_G
+VersionLabel.ZIndex = 3
+VersionLabel.Parent = Card
+
+-- // Animate card xuất hiện
+Card.Position = UDim2.new(0.5, -190, 1.5, 0)
+Card.BackgroundTransparency = 1
+tween(Card, {Position = UDim2.new(0.5, -190, 0.5, -260), BackgroundTransparency = 0}, 0.6, Enum.EasingStyle.Back)
+
+-- // Rainbow stroke animation
+local hue = 0
+RunService.Heartbeat:Connect(function(dt)
+    hue = (hue + dt * 0.3) % 1
+    CardStroke.Color = Color3.fromHSV(hue, 0.8, 1)
+    LogoStroke.Color = Color3.fromHSV(hue, 0.8, 1)
+    GetKeyDot.BackgroundColor3 = Color3.fromHSV(hue, 0.8, 1)
+    DiscordDot.BackgroundColor3 = Color3.fromHSV(hue, 0.8, 1)
+end)
+
+-- // Hover effects
+VerifyBtn.MouseEnter:Connect(function()
+    tween(VerifyBtn, {BackgroundColor3 = ACCENT}, 0.15)
+end)
+VerifyBtn.MouseLeave:Connect(function()
+    tween(VerifyBtn, {BackgroundColor3 = ACCENT2}, 0.15)
+end)
+
+GetKeyBtn.MouseEnter:Connect(function()
+    tween(GKTitle, {TextColor3 = ACCENT}, 0.15)
+end)
+GetKeyBtn.MouseLeave:Connect(function()
+    tween(GKTitle, {TextColor3 = TEXT_W}, 0.15)
+end)
+
+-- // Nút Lấy Key - copy link vào clipboard
+GetKeyBtn.MouseButton1Click:Connect(function()
+    if setclipboard then
+        setclipboard(GET_KEY_LINK)
+        GKSub.Text = "✓ Da sao chep! Dan vao trinh duyet"
+        GKSub.TextColor3 = Color3.fromRGB(100, 255, 150)
+        task.wait(3)
+        GKSub.Text = "Nhan de sao chep link, dan vao trinh duyet"
+        GKSub.TextColor3 = TEXT_G
+    end
+end)
+
+-- // Nút Discord - copy discord link
+DiscordBtn.MouseButton1Click:Connect(function()
+    if setclipboard then
+        setclipboard("https://" .. DISCORD_LINK)
+        DCSub.Text = "✓ Da sao chep Discord!"
+        task.wait(2)
+        DCSub.Text = DISCORD_LINK
+    end
+end)
+
+-- // Hàm kiểm tra key
+local function checkKey(inputKey)
+    inputKey = inputKey:gsub("%s+", "") -- bỏ khoảng trắng
+    for _, validKey in ipairs(VALID_KEYS) do
+        if inputKey == validKey then
+            return true
+        end
+    end
+    return false
+end
+
+-- // Hàm mở hub sau khi xác minh key
+local function onKeySuccess()
+    StatusLabel.Text = "✓ Key hop le! Dang mo hub..."
+    StatusLabel.TextColor3 = Color3.fromRGB(100, 255, 150)
+    
+    task.wait(0.8)
+    
+    -- Animate card ra
+    tween(Card, {Position = UDim2.new(0.5, -190, -0.5, -260), BackgroundTransparency = 1}, 0.5, Enum.EasingStyle.Back, Enum.EasingDirection.In)
+    tween(Overlay, {BackgroundTransparency = 1}, 0.5)
+    
+    task.wait(0.6)
+    ScreenGui:Destroy()
+    
+    -- =============================================
+    -- // LOAD HUB CỦA BẠN Ở ĐÂY
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/Tayhubbnana.txt"))()
+    -- =============================================
+end
+
+-- // Xác minh key khi nhấn nút
+VerifyBtn.MouseButton1Click:Connect(function()
+    local input = KeyInput.Text
+    if input == "" then
+        StatusLabel.Text = "✗ Vui long nhap key!"
+        StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+        return
+    end
+    
+    if checkKey(input) then
+        onKeySuccess()
+    else
+        StatusLabel.Text = "✗ Key khong hop le! Thu lai hoac lay key moi."
+        StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+        tween(InputRow, {Position = UDim2.new(0, 25, 0, 224)}, 0.05)
+        task.wait(0.05)
+        tween(InputRow, {Position = UDim2.new(0, 15, 0, 224)}, 0.05)
+        task.wait(0.05)
+        tween(InputRow, {Position = UDim2.new(0, 20, 0, 224)}, 0.05)
+    end
+end)
+
+-- // Cho phép nhấn Enter để xác minh
+KeyInput.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        VerifyBtn.MouseButton1Click:Fire()
+    end
+end)
