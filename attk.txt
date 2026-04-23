@@ -1,0 +1,61 @@
+local RS = game:GetService("ReplicatedStorage")
+local TS = game:GetService("TweenService")
+local P = game:GetService("Players").LocalPlayer
+local N = require(RS.Modules.Net)
+
+local hit = N:RemoteEvent("RegisterHit", true)
+local atk = RS.Modules.Net["RE/RegisterAttack"]
+
+local SETTINGS = {
+    GOM_COUNT = 6,
+    RANGE = 100,
+    HEIGHT = 12,
+    RADIUS = 6,
+    ROT_SPEED = 5,
+    HIT_PER_TICK = 3
+}
+
+task.spawn(function()
+    while task.wait() do
+        local c = P.Character
+        local hrp = c and c:FindFirstChild("HumanoidRootPart")
+        if not hrp or not c:FindFirstChildOfClass("Tool") then continue end
+
+        local targets = {}
+        for _, m in ipairs(workspace.Enemies:GetChildren()) do
+            local hum = m:FindFirstChild("Humanoid")
+            local m_hrp = m:FindFirstChild("HumanoidRootPart")
+            if hum and m_hrp and hum.Health > 0 then
+                local dist = (m_hrp.Position - hrp.Position).Magnitude
+                if dist <= SETTINGS.RANGE then
+                    table.insert(targets, {m, m_hrp, hum})
+                end
+            end
+        end
+        
+        table.sort(targets, function(a, b) 
+            return (a[2].Position - hrp.Position).Magnitude < (b[2].Position - hrp.Position).Magnitude 
+        end)
+
+        if #targets > 0 then
+            local count = math.min(#targets, SETTINGS.GOM_COUNT)
+            local pivot = targets[1][2].Position 
+            
+            local t = tick() * SETTINGS.ROT_SPEED
+            local orbitCFrame = CFrame.new(pivot + Vector3.new(math.cos(t) * SETTINGS.RADIUS, SETTINGS.HEIGHT, math.sin(t) * SETTINGS.RADIUS), pivot)
+            hrp.CFrame = orbitCFrame
+
+            atk:FireServer()
+            for i = 1, count do
+                local m, target_hrp, hum = targets[i][1], targets[i][2], targets[i][3]
+                local packetId = tostring(P.UserId):sub(2,4)..tostring(math.random(100,999))
+                
+                for _ = 1, SETTINGS.HIT_PER_TICK do
+                    if hum.Health > 0 then
+                        hit:FireServer(target_hrp, {{m, target_hrp}}, nil, nil, packetId)
+                    end
+                end
+            end
+        end
+    end
+end)
