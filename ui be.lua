@@ -3038,12 +3038,24 @@ function bearlib:MakeWindow(Configs)
         ToggleButton.Name = "ToggleButton"
         ToggleButton.Size = UDim2.new(0, 50, 0, 50)
         ToggleButton.Position = UDim2.new(0.12, 0, 0.12, 0)
-        ToggleButton.Image = "rbxassetid://108449485047823"
-        ToggleButton.BackgroundColor3 = Theme["Color Hub 2"]
+        ToggleButton.Image = "rbxassetid://73966916440074"
+        ToggleButton.BackgroundColor3 = Color3.fromRGB(10, 10, 15)
         ToggleButton.BackgroundTransparency = 0.2
         ToggleButton.Active = true
         ToggleButton.Draggable = true
         ToggleButton.Parent = ToggleGui
+        
+        -- Vien xanh la nhap nhay
+        local _tbStroke = Instance.new("UIStroke")
+        _tbStroke.Color = Color3.fromRGB(0, 195, 120)
+        _tbStroke.Thickness = 3
+        _tbStroke.Parent = ToggleButton
+        task.spawn(function()
+            while _tbStroke and _tbStroke.Parent do
+                _tbStroke.Transparency = 0.05 + math.abs(math.sin(tick() * 2.5)) * 0.5
+                task.wait(0.04)
+            end
+        end)
         
         local UICorner = Instance.new("UICorner")
         UICorner.CornerRadius = UDim.new(1, 0)
@@ -3597,6 +3609,42 @@ task.spawn(function()
                                 if (c.G > 0.5) or (c.R < 0.1 and c.G > 0.3) then
                                     v.Color = col
                                     v.Transparency = 0.08 + math.abs(math.sin(tick()*2.2)) * 0.3
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+-- RAINBOW VIEN XANH LA <-> XANH DUONG
+task.spawn(function()
+    task.wait(2)
+    local pgui = game:GetService("Players").LocalPlayer.PlayerGui
+    while task.wait(0.04) do
+        pcall(function()
+            local t = math.abs(math.sin(tick() * 0.8))
+            local r = math.floor(0   * (1-t) + 40  * t)
+            local g = math.floor(195 * (1-t) + 170 * t)
+            local b = math.floor(120 * (1-t) + 255 * t)
+            local col = Color3.fromRGB(r, g, b)
+            for _, sg in ipairs(pgui:GetChildren()) do
+                if sg:IsA("ScreenGui") then
+                    for _, v in ipairs(sg:GetDescendants()) do
+                        pcall(function()
+                            if v:IsA("UIStroke") and v.Name ~= "UIStroke" then
+                                local c = v.Color
+                                if c.G > 0.4 or (c.R < 0.1 and c.G > 0.3) then
+                                    v.Color = col
+                                    v.Transparency = 0.05 + math.abs(math.sin(tick()*2.2))*0.3
+                                end
+                            elseif v:IsA("UIStroke") then
+                                local c = v.Color
+                                if c.G > 0.4 then
+                                    v.Color = col
+                                    v.Transparency = 0.05 + math.abs(math.sin(tick()*2.2))*0.3
                                 end
                             end
                         end)
