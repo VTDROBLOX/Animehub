@@ -7,6 +7,8 @@ local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
+-- PlayerGui cho tuong thich Delta/Fluxus
+local _GuiParent = Player.PlayerGui
 
 local bearlib = {
     Themes = {
@@ -252,8 +254,9 @@ local GetFlag, SetFlag, CheckFlag do
     end)
 end
 
-local ScreenGui = Create("ScreenGui", CoreGui, {
+local ScreenGui = Create("ScreenGui", _GuiParent, {
     Name = "bear Library v8.1",
+    ResetOnSpawn = false,
 }, {
     Create("UIScale", {
         Scale = UIScale,
@@ -261,7 +264,7 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
     })
 })
 
-local ScreenFind = CoreGui:FindFirstChild(ScreenGui.Name)
+local ScreenFind = _GuiParent:FindFirstChild(ScreenGui.Name)
 if ScreenFind and ScreenFind ~= ScreenGui then
     ScreenFind:Destroy()
 end
@@ -1027,7 +1030,7 @@ function bearlib:MakeWindow(Configs)
             Text = "Đóng window ?",
             Options = {
                 {"Đóng", function()
-                    ScreenGui:Destroy()
+                    -- ScreenGui:Destroy() disabled
                     if ToggleGui then
                         ToggleGui:Destroy()
                     end
@@ -3032,7 +3035,11 @@ function bearlib:MakeWindow(Configs)
         task.wait(0.5)
         ToggleGui = Instance.new("ScreenGui")
         ToggleGui.Name = "BearHub_Toggle_Circle"
-        ToggleGui.Parent = CoreGui
+        ToggleGui.ResetOnSpawn = false
+        if not pcall(function() ToggleGui.Parent = CoreGui end) then
+            ToggleGui.Parent = Player.PlayerGui
+        end
+        if not ToggleGui.Parent then ToggleGui.Parent = Player.PlayerGui end
         
         ToggleButton = Instance.new("ImageButton")
         ToggleButton.Name = "ToggleButton"
