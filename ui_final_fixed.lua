@@ -760,7 +760,7 @@ function bearlib:MakeWindow(Configs)
         Position = UDim2.new(0, 0, 0.5),
         AnchorPoint = Vector2.new(0, 0.5),
         BackgroundTransparency = 1,
-        Image = "rbxassetid://76571437829227",
+        Image = "rbxassetid://91222518412026",
         ImageColor3 = Theme["Color Text"],
         Name = "MinimizedIcon"
     })
@@ -3205,7 +3205,7 @@ local function CreateNotification(Icon, Title, Message, Duration)
     IconImage.Size = UDim2.new(1, 0, 1, 0)
     IconImage.BackgroundTransparency = 1
     IconImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    IconImage.Image = Icon or "rbxassetid://76571437829227"
+    IconImage.Image = Icon or "rbxassetid://91222518412026"
     IconImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
     IconImage.ScaleType = Enum.ScaleType.Fit
     IconImage.BorderSizePixel = 0
@@ -3339,7 +3339,7 @@ end
 function bearlib:Notify(Configs)
     local Title = Configs.Title or Configs[1] or "Tay Hub"
     local Message = Configs.Message or Configs[2] or Configs.Text or ""
-    local Icon = Configs.Icon or "rbxassetid://76571437829227"
+    local Icon = Configs.Icon or "rbxassetid://91222518412026"
     local Duration = Configs.Duration or Configs.Time or 5
     
     table.insert(NotificationQueue, {
@@ -3594,11 +3594,7 @@ end
 
 task.spawn(function()
     task.wait(2)
-    bearlib:Notify({
-        Title = "tàyhub",
-        Message = "UI Tày hub",
-        Duration = 10
-    })
+    -- notify xoa
 end)
 
 return bearlib
