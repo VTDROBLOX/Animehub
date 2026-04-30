@@ -2658,7 +2658,7 @@ local function performClick()
     getgenv().AutoClickShootSettings.LastClickTime = currentTime
 end
 
-local bearlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/ui_final.txt"))()
+local bearlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/ui_final_fixed.lua"))()
 local Window = bearlib:MakeWindow({
     Title = "Tay Hub | BETA ",
     SubTitle = "- tungdepzai",
