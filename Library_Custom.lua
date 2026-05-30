@@ -1,3 +1,21 @@
+-- ════════════════════════════════════════════════════════════
+-- PREMIUM CLEAN DARK LIBRARY - Tày Custom
+-- Tone tím #7A5CFF → electric blue #18C8FF
+-- Có animation FX + sound tít tít + multi-page system
+-- API tương thích Antigravity gốc (vita6it/Antigravity)
+-- ════════════════════════════════════════════════════════════
+
+-- ════════════════════════════════════════════════════════════
+-- XOVA UI - PREMIUM DEMO (chạy thẳng, bố cục API Xova chuẩn)
+-- Window > Page > Section/Toggle/Slider/Button/Dropdown/Input
+-- ════════════════════════════════════════════════════════════
+
+-- ════════════════════════════════════════════════════════════
+-- ANTIGRAVITY LIBRARY - PREMIUM CLEAN DARK
+-- Tím (#7A5CFF) → Electric Blue (#18C8FF) trên đen sâu (#0F1117)
+-- Radius 16/12, glow dịu 0.35, viền mờ 0.55, shadow 0.72
+-- ════════════════════════════════════════════════════════════
+
 local Library = {}
 
 local Players = game:GetService('Players')
@@ -679,6 +697,240 @@ function Library:Window(Args)
                 BackgroundColor3 = origTabBG
             }):Play()
         end)
+
+        -- ════════════════════════════════════════════════════════════
+        -- DROPDOWN (alias: Select) - chọn 1 từ danh sách
+        -- ════════════════════════════════════════════════════════════
+        function Page:Dropdown(Args)
+            local Title = Args.Title or "Dropdown"
+            local Desc = Args.Desc or ""
+            local Options = Args.Options or Args.List or Args.Values or {}
+            local Default = Args.Default or Options[1] or ""
+            local Callback = Args.Callback or function() end
+
+            local Rows = Library:NewRows(PageScrolling_1, Title, Desc)
+            local Right = Rows.Vectorize.Right
+
+            local Box = Library:Create("Frame", {
+                Parent = Right, BackgroundColor3 = Color3.fromRGB(10, 12, 17),
+                BorderSizePixel = 0, Size = UDim2.new(0, 120, 0, 26)
+            })
+            Library:Create("UICorner", { Parent = Box, CornerRadius = UDim.new(0, 8) })
+            Library:Create("UIStroke", { Parent = Box, Color = THEME.STROKE_DARK, Thickness = 1, Transparency = 0.55 })
+
+            local ValText = Library:Create("TextLabel", {
+                Parent = Box, BackgroundTransparency = 1,
+                Position = UDim2.new(0, 10, 0, 0), Size = UDim2.new(1, -28, 1, 0),
+                Font = Enum.Font.GothamMedium, Text = tostring(Default),
+                TextColor3 = THEME.TEXT_BRIGHT, TextSize = 11,
+                TextXAlignment = Enum.TextXAlignment.Left, TextTruncate = Enum.TextTruncate.AtEnd
+            })
+
+            local Arrow = Library:Create("TextLabel", {
+                Parent = Box, BackgroundTransparency = 1,
+                Position = UDim2.new(1, -22, 0, 0), Size = UDim2.new(0, 18, 1, 0),
+                Font = Enum.Font.GothamBold, Text = "▼",
+                TextColor3 = THEME.PRIMARY, TextSize = 10
+            })
+
+            -- Container danh sách option
+            local OptContainer = Library:Create("Frame", {
+                Name = "Dropdown",   -- tên đúng để IsDropdownOpen nhận diện
+                Parent = PageScrolling_1,
+                BackgroundColor3 = Color3.fromRGB(18, 22, 30),
+                BorderSizePixel = 0,
+                Size = UDim2.new(1, 0, 0, 0),
+                ClipsDescendants = true, Visible = false,
+                LayoutOrder = Rows.LayoutOrder + 1
+            })
+            Library:Create("UICorner", { Parent = OptContainer, CornerRadius = UDim.new(0, 8) })
+            Library:Create("UIStroke", { Parent = OptContainer, Color = THEME.PRIMARY, Thickness = 1, Transparency = 0.6 })
+            Library:Create("UIListLayout", { Parent = OptContainer, Padding = UDim.new(0, 3), SortOrder = Enum.SortOrder.LayoutOrder })
+            Library:Create("UIPadding", { Parent = OptContainer, PaddingTop = UDim.new(0, 5), PaddingBottom = UDim.new(0, 5), PaddingLeft = UDim.new(0, 6), PaddingRight = UDim.new(0, 6) })
+
+            local isOpen = false
+            local function setOpen(state)
+                isOpen = state
+                OptContainer.Visible = state
+                local targetSize = state and UDim2.new(1, 0, 0, (#Options * 28) + 10) or UDim2.new(1, 0, 0, 0)
+                Library:Tween({ v = OptContainer, t = 0.2, s = "Quad", d = "Out", g = { Size = targetSize } }):Play()
+                Library:Tween({ v = Arrow, t = 0.2, s = "Quad", d = "Out", g = { Rotation = state and 180 or 0 } }):Play()
+            end
+
+            for _, opt in ipairs(Options) do
+                local OptBtn = Library:Create("TextButton", {
+                    Parent = OptContainer,
+                    BackgroundColor3 = Color3.fromRGB(28, 32, 42),
+                    BorderSizePixel = 0, Size = UDim2.new(1, 0, 0, 25),
+                    Font = Enum.Font.GothamMedium, Text = "  " .. tostring(opt),
+                    TextColor3 = THEME.TEXT_BRIGHT, TextSize = 11,
+                    TextXAlignment = Enum.TextXAlignment.Left
+                })
+                Library:Create("UICorner", { Parent = OptBtn, CornerRadius = UDim.new(0, 6) })
+
+                OptBtn.MouseEnter:Connect(function()
+                    TweenService:Create(OptBtn, TweenInfo.new(0.15), { BackgroundColor3 = THEME.BG_HOVER }):Play()
+                end)
+                OptBtn.MouseLeave:Connect(function()
+                    TweenService:Create(OptBtn, TweenInfo.new(0.15), { BackgroundColor3 = Color3.fromRGB(28, 32, 42) }):Play()
+                end)
+
+                OptBtn.MouseButton1Click:Connect(function()
+                    ValText.Text = tostring(opt)
+                    setOpen(false)
+                    pcall(Callback, opt)
+                end)
+            end
+
+            local Click = Library:Button(Box)
+            Click.MouseButton1Click:Connect(function() setOpen(not isOpen) end)
+
+            -- Fire callback với default lúc tạo
+            task.spawn(function() pcall(Callback, Default) end)
+
+            return {
+                Set = function(_, v) ValText.Text = tostring(v); pcall(Callback, v) end,
+                Refresh = function() end
+            }
+        end
+
+        -- Alias: Page:Select() = Page:Dropdown()
+        Page.Select = Page.Dropdown
+
+        -- ════════════════════════════════════════════════════════════
+        -- SLIDER - thanh kéo chỉnh số
+        -- ════════════════════════════════════════════════════════════
+        function Page:Slider(Args)
+            local Title = Args.Title or "Slider"
+            local Desc = Args.Desc or ""
+            local Min = Args.Min or 0
+            local Max = Args.Max or 100
+            local Default = Args.Value or Args.Default or Min
+            local Rounding = Args.Rounding
+            local Callback = Args.Callback or function() end
+
+            local Rows = Library:NewRows(PageScrolling_1, Title, Desc)
+            local Right = Rows.Vectorize.Right
+
+            -- Value label hiển thị số
+            local ValLabel = Library:Create("TextLabel", {
+                Parent = Right, BackgroundTransparency = 1,
+                Size = UDim2.new(0, 35, 0, 20),
+                Font = Enum.Font.GothamBold, Text = tostring(Default),
+                TextColor3 = THEME.SECONDARY, TextSize = 11,
+                TextXAlignment = Enum.TextXAlignment.Right
+            })
+
+            -- Thanh slider
+            local SlideFrame = Library:Create("Frame", {
+                Parent = Right, BackgroundColor3 = Color3.fromRGB(10, 12, 17),
+                BorderSizePixel = 0, Size = UDim2.new(0, 110, 0, 6)
+            })
+            Library:Create("UICorner", { Parent = SlideFrame, CornerRadius = UDim.new(1, 0) })
+            Library:Create("UIStroke", { Parent = SlideFrame, Color = THEME.STROKE_DARK, Thickness = 1, Transparency = 0.55 })
+
+            local Fill = Library:Create("Frame", {
+                Parent = SlideFrame, BackgroundColor3 = THEME.PRIMARY,
+                BorderSizePixel = 0,
+                Size = UDim2.new((Default - Min) / (Max - Min), 0, 1, 0)
+            })
+            Library:Create("UICorner", { Parent = Fill, CornerRadius = UDim.new(1, 0) })
+            Library:Create("UIGradient", {
+                Parent = Fill,
+                Color = ColorSequence.new{
+                    ColorSequenceKeypoint.new(0, THEME.PRIMARY),
+                    ColorSequenceKeypoint.new(1, THEME.SECONDARY)
+                }
+            })
+
+            local function setValue(input)
+                local snap = math.clamp((input.Position.X - SlideFrame.AbsolutePosition.X) / SlideFrame.AbsoluteSize.X, 0, 1)
+                local val = Min + (Max - Min) * snap
+                if Rounding then
+                    val = tonumber(string.format("%." .. Rounding .. "f", val))
+                else
+                    val = math.floor(val)
+                end
+                ValLabel.Text = tostring(val)
+                Fill.Size = UDim2.new(snap, 0, 1, 0)
+                pcall(Callback, val)
+            end
+
+            local SliderBtn = Library:Button(SlideFrame)
+            local conn
+            SliderBtn.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                    setValue(input)
+                    if conn then conn:Disconnect() end
+                    conn = UserInputService.InputChanged:Connect(function(inp)
+                        if inp.UserInputType == Enum.UserInputType.MouseMovement or inp.UserInputType == Enum.UserInputType.Touch then
+                            setValue(inp)
+                        end
+                    end)
+                    input.Changed:Connect(function()
+                        if input.UserInputState == Enum.UserInputState.End then
+                            if conn then conn:Disconnect(); conn = nil end
+                        end
+                    end)
+                end
+            end)
+
+            return {
+                Set = function(_, v)
+                    local snap = math.clamp((v - Min) / (Max - Min), 0, 1)
+                    Fill.Size = UDim2.new(snap, 0, 1, 0)
+                    ValLabel.Text = tostring(v)
+                    pcall(Callback, v)
+                end
+            }
+        end
+
+        -- ════════════════════════════════════════════════════════════
+        -- TEXTBOX / INPUT - ô nhập chữ
+        -- ════════════════════════════════════════════════════════════
+        function Page:Textbox(Args)
+            local Title = Args.Title or "Input"
+            local Desc = Args.Desc or ""
+            local Placeholder = Args.Placeholder or Args.Default or ""
+            local Callback = Args.Callback or function() end
+
+            local Rows = Library:NewRows(PageScrolling_1, Title, Desc)
+            local Right = Rows.Vectorize.Right
+
+            local Box = Library:Create("TextBox", {
+                Parent = Right, BackgroundColor3 = Color3.fromRGB(10, 12, 17),
+                BorderSizePixel = 0, Size = UDim2.new(0, 130, 0, 26),
+                Font = Enum.Font.GothamMedium, Text = "",
+                PlaceholderText = tostring(Placeholder),
+                PlaceholderColor3 = THEME.TEXT_DIM,
+                TextColor3 = THEME.TEXT_BRIGHT, TextSize = 11,
+                ClearTextOnFocus = false,
+                TextXAlignment = Enum.TextXAlignment.Left
+            })
+            Library:Create("UICorner", { Parent = Box, CornerRadius = UDim.new(0, 8) })
+            Library:Create("UIStroke", { Parent = Box, Color = THEME.STROKE_DARK, Thickness = 1, Transparency = 0.55 })
+            Library:Create("UIPadding", { Parent = Box, PaddingLeft = UDim.new(0, 8), PaddingRight = UDim.new(0, 8) })
+
+            Box.Focused:Connect(function()
+                TweenService:Create(Box:FindFirstChildOfClass("UIStroke"), TweenInfo.new(0.18), {
+                    Color = THEME.PRIMARY, Transparency = 0.2
+                }):Play()
+            end)
+            Box.FocusLost:Connect(function(enterPressed)
+                TweenService:Create(Box:FindFirstChildOfClass("UIStroke"), TweenInfo.new(0.18), {
+                    Color = THEME.STROKE_DARK, Transparency = 0.55
+                }):Play()
+                if enterPressed then pcall(Callback, Box.Text) end
+            end)
+
+            return {
+                Set = function(_, t) Box.Text = tostring(t) end,
+                Get = function() return Box.Text end
+            }
+        end
+
+        -- Alias: Input = Textbox
+        Page.Input = Page.Textbox
 
         Click.MouseButton1Click:Connect(OnChangPage)
         return Page
