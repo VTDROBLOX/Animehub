@@ -309,7 +309,7 @@ function Library:Window(Args)
         BackgroundTransparency = 1, BorderSizePixel = 0,
         Position = UDim2.new(0, 25, 0.5, 1),
         Size = UDim2.new(0, 27, 0, 27),
-        Image = "rbxassetid://96454140798208",
+        Image = "rbxassetid://130391877219356",
         ImageColor3 = THEME.PRIMARY, Visible = false
     })
     Library:Create("UIGradient", { Parent = Return_1, Rotation = 90, Color = GRADIENT_TITLE })
@@ -972,7 +972,7 @@ function Library:Window(Args)
                 BackgroundTransparency = 1, BorderSizePixel = 0,
                 Position = UDim2.new(0.5, 0, 0.5, 0),
                 Size = UDim2.new(0.5, 0, 0.5, 0),
-                Image = "rbxassetid://134528790539968",
+                Image = "rbxassetid://96454140798208",
                 ImageColor3 = THEME.PRIMARY,
                 Rotation = 0
             })
