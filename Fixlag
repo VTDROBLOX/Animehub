@@ -1,0 +1,67 @@
+local workspace = game:GetService("Workspace")
+local lighting = game:GetService("Lighting")
+local terrain = workspace.Terrain
+local repStorage = game:GetService("ReplicatedStorage")
+
+-- 1. Thử chặn hiệu ứng từ gốc (Sẽ tự động lướt qua nếu Executor yếu/không hỗ trợ)
+pcall(function()
+    local _Effect = repStorage:FindFirstChild('Effect')
+    if _Effect then _Effect = _Effect:FindFirstChild('Container') end
+    
+    if _Effect then
+        local _Death = _Effect:FindFirstChild('Death')
+        if _Death then
+            local v7, v8 = pcall(require, _Death)
+            if v7 and type(v8) == 'function' then
+                pcall(function() hookfunction(v8, function() end) end)
+            end
+        end
+
+        local _Respawn = _Effect:FindFirstChild('Respawn')
+        if _Respawn then
+            local v10, v11 = pcall(require, _Respawn)
+            if v10 and type(v11) == 'function' then
+                pcall(function() hookfunction(v11, function() end) end)
+            end
+        end
+    end
+end)
+
+-- 2. Phương án dự phòng: Quét và tiêu diệt rác đồ họa liên tục (Bao gồm lúc Reset)
+workspace.DescendantAdded:Connect(function(obj)
+    task.spawn(function()
+        pcall(function()
+            if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Explosion") or obj:IsA("Fire") or obj:IsA("Smoke") or obj:IsA("Sparkles") then
+                obj:Destroy()
+            end
+        end)
+    end)
+end)
+
+-- 3. Tối ưu hóa FPS an toàn
+pcall(function()
+    terrain.WaterWaveSize = 0
+    terrain.WaterWaveSpeed = 0
+    terrain.WaterReflectance = 0
+    terrain.WaterTransparency = 0
+    lighting.GlobalShadows = false
+    lighting.FogEnd = 9e9
+    lighting.Brightness = 0
+end)
+
+-- 4. Làm phẳng vật liệu và xóa Texture toàn map
+for _, v in pairs(workspace:GetDescendants()) do
+    pcall(function()
+        if v:IsA("BasePart") and not v:IsA("MeshPart") then
+            v.Material = Enum.Material.Plastic
+            v.Reflectance = 0
+        elseif v:IsA("Decal") or v:IsA("Texture") then
+            v.Transparency = 1
+        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v:Destroy()
+        end
+    end)
+end
+
+print("Đã kích hoạt Fix Lag & Chặn Hiệu Ứng an toàn!")
+
