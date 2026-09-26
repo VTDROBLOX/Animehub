@@ -573,7 +573,7 @@ function Library:Notify(Setting, bypass)
 	end
 end
 
-function Library:CreateWindow(Setting)
+function Library:CreateMain(Setting)
     local TitleNameMain = Setting.Title or "Night Mystic"
     getgenv().MainDesc = Setting.Desc or Setting.Subtitle or ""
     
