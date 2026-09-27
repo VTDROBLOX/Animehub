@@ -425,7 +425,7 @@ function Library.CreateMain(Setting)
 	maingui.Position = UDim2.new(0.5, 0, 0.5, 0)
 	maingui.Selectable = true
 	maingui.Size = UDim2.new(1, 30, 1, 30)
-	maingui.Image = "rbxassetid://129781592728096"
+	maingui.Image = "rbxassetid://96454140798208"
 	maingui.ScaleType = Enum.ScaleType.Slice
 	maingui.SliceCenter = Rect.new(15, 15, 175, 175)
 	maingui.SliceScale = 1.300
@@ -502,7 +502,7 @@ function Library.CreateMain(Setting)
 	Ruafimg.BackgroundTransparency = 1.000
 	Ruafimg.Position = UDim2.new(0, 5, 0, cache.T1 and 5 or 0)
 	Ruafimg.Size = UDim2.new(0, cache.T1 and 30 or 25, 0, cache.T1 and 15 or 25)
-	Ruafimg.Image = "rbxassetid://139680899478857"
+	Ruafimg.Image = "rbxassetid://96454140798208"
 
 
 	TextLabelMain.Name = "TextLabelMain"
