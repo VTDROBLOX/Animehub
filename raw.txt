@@ -12,41 +12,45 @@ local gg
 local adu
 local allfunc = {}
 local IndexUIColor = {
-    ["Border Color"] = Color3.fromRGB(130, 50, 230),   
-    ["Click Effect Color"] = Color3.fromRGB(150, 255, 60),  
+    ["Border Color"] = Color3.fromRGB(130, 50, 230),         -- Viền tím
+    ["Click Effect Color"] = Color3.fromRGB(180, 200, 255),  -- Xanh dương nhạt khi click
     ["Setting Icon Color"] = Color3.fromRGB(200, 200, 200),
     ["Logo Image"] = "rbxassetid://96454140798208",
-    ["Search Icon Color"] = Color3.fromRGB(230, 50, 230),      
-    ["Search Icon Highlight Color"] = Color3.fromRGB(150, 255, 60),
+    ["Search Icon Color"] = Color3.fromRGB(130, 50, 230),    -- Tím
+    ["Search Icon Highlight Color"] = Color3.fromRGB(180, 200, 255),  -- Xanh dương nhạt
     ["GUI Text Color"] = Color3.fromRGB(240, 240, 240),
     ["Text Color"] = Color3.fromRGB(240, 240, 240),
     ["Placeholder Text Color"] = Color3.fromRGB(150, 150, 150),
     ["Title Text Color"] = Color3.fromRGB(255, 255, 255),
+
+    -- Gradient: xanh mint (trái) → xanh dương pastel (phải)
+    ["Gradient Left Color"]  = Color3.fromRGB(200, 240, 200),   -- Xanh mint nhạt
+    ["Gradient Right Color"] = Color3.fromRGB(160, 190, 240),   -- Xanh dương pastel
     
-    ["Background Main Color"] = Color3.fromRGB(15, 10, 22),    
+    ["Background Main Color"] = Color3.fromRGB(15, 10, 22),
     ["Background 1 Color"] = Color3.fromRGB(22, 15, 32),
     ["Background 1 Transparency"] = 0.05,
     ["Background 2 Color"] = Color3.fromRGB(30, 20, 45),
     ["Background 3 Color"] = Color3.fromRGB(25, 18, 38),
     ["Background Image"] = "",
     
-    ["Page Selected Color"] = Color3.fromRGB(230, 50, 230),    
+    ["Page Selected Color"] = Color3.fromRGB(130, 50, 230),   -- Tím
     ["Section Text Color"] = Color3.fromRGB(255, 255, 255),
-    ["Section Underline Color"] = Color3.fromRGB(150, 255, 60), 
-    ["Toggle Border Color"] = Color3.fromRGB(130, 50, 230),
-    ["Toggle Checked Color"] = Color3.fromRGB(150, 255, 60),   
+    ["Section Underline Color"] = Color3.fromRGB(130, 50, 230), -- Tím
+    ["Toggle Border Color"] = Color3.fromRGB(130, 50, 230),   -- Tím
+    ["Toggle Checked Color"] = Color3.fromRGB(160, 190, 240), -- Xanh dương pastel
     ["Toggle Desc Color"] = Color3.fromRGB(180, 180, 190),
     
     ["Button Color"] = Color3.fromRGB(35, 22, 50),
     ["Label Color"] = Color3.fromRGB(28, 18, 40),
-    ["Dropdown Icon Color"] = Color3.fromRGB(230, 50, 230),
-    ["Dropdown Selected Color"] = Color3.fromRGB(150, 255, 60), 
+    ["Dropdown Icon Color"] = Color3.fromRGB(130, 50, 230),   -- Tím
+    ["Dropdown Selected Color"] = Color3.fromRGB(130, 50, 230), -- Tím
     ["Dropdown Selected Check Color"] = Color3.fromRGB(255, 255, 255),
     
-    ["Textbox Highlight Color"] = Color3.fromRGB(230, 50, 230),
-    ["Box Highlight Color"] = Color3.fromRGB(230, 50, 230),
+    ["Textbox Highlight Color"] = Color3.fromRGB(130, 50, 230), -- Tím
+    ["Box Highlight Color"] = Color3.fromRGB(160, 190, 240),   -- Xanh dương pastel
     ["Slider Line Color"] = Color3.fromRGB(60, 40, 80),
-    ["Slider Highlight Color"] = Color3.fromRGB(150, 255, 60), 
+    ["Slider Highlight Color"] = Color3.fromRGB(160, 190, 240),-- Xanh dương pastel
     
     ["Tween Animation 1 Speed"] = DisableAnimation and 0 or 0.25,
     ["Tween Animation 2 Speed"] = DisableAnimation and 0 or 0.5,
