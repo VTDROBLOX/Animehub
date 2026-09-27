@@ -180,7 +180,7 @@ local onff = Instance.new("ImageButton",Library_Function.HideGui);
 onff["BorderSizePixel"] = 0;
 onff["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 onff["AnchorPoint"] = Vector2.new(0, 1);
-onff["Image"] = [[rbxassetid://136103435617044]];
+onff["Image"] = [[rbxassetid://96454140798208]];
 onff["Size"] = UDim2.new(0, 50, 0, 50);
 onff["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 onff["Position"] = UDim2.new(0.01, 0, 0.99, 0);
@@ -266,7 +266,7 @@ local libCreateNoti = function(Setting)
 	local colorG = tostring(Library_Function.Getcolor(cache.UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(cache.UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-	TextLabelNoti.Text = "<font color=\"rgb(" .. color .. ")\">Teddy Hub</font> "..cache.TitleNameNoti
+	TextLabelNoti.Text = "<font color=\"rgb(" .. color .. ")\">Tay Hub</font> "..cache.TitleNameNoti
 
 	TextLabelNoti.Name = "TextLabelNoti"
 	TextLabelNoti.Parent = Topnoti
@@ -437,7 +437,7 @@ function Library.CreateMain(Setting)
 	local colorG = tostring(Library_Function.Getcolor(cache.UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(cache.UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-	local displayTitle = Setting.Title or "Teddy Hub"
+	local displayTitle = Setting.Title or "Tay Hub"
 	local displayDesc = Setting.Desc or ": Blox Fruits"
 	TextLabelMain.Text = "<font color=\"rgb("..color..")\">" .. displayTitle .. " </font> " .. displayDesc
 
@@ -522,7 +522,7 @@ function Library.CreateMain(Setting)
 	local colorG = tostring(Library_Function.Getcolor(cache.UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(cache.UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-	TextLabelMain.Text = "<font color=\"rgb("..color..")\">Teddy Hub </font> " .. ": Blox Fruits"
+	TextLabelMain.Text = "<font color=\"rgb("..color..")\">Tay Hub </font> " .. ": Blox Fruits"
 
 	PageControl.Name = "Background1"
 	PageControl.Parent = Concacmain
