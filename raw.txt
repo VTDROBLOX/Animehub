@@ -12,8 +12,8 @@ local gg
 local adu
 local allfunc = {}
 local IndexUIColor = {
-    ["Border Color"] = Color3.fromRGB(130, 50, 230),
-    ["Click Effect Color"] = Color3.fromRGB(160, 190, 240),
+    ["Border Color"] = Color3.fromRGB(160, 190, 240), 
+    ["Click Effect Color"] = Color3.fromRGB(200, 240, 200),
     ["Setting Icon Color"] = Color3.fromRGB(200, 200, 200),
     ["Logo Image"] = "rbxassetid://96454140798208",
     ["Search Icon Color"] = Color3.fromRGB(160, 190, 240),
@@ -33,7 +33,6 @@ local IndexUIColor = {
     ["Background 3 Color"] = Color3.fromRGB(25, 18, 38),
     ["Background Image"] = "",
 
-    -- ĐÃ THAY: Tím → Xanh dương pastel
     ["Page Selected Color"] = Color3.fromRGB(160, 190, 240),
     ["Section Text Color"] = Color3.fromRGB(255, 255, 255),
     ["Section Underline Color"] = Color3.fromRGB(160, 190, 240),
@@ -41,15 +40,15 @@ local IndexUIColor = {
     ["Toggle Checked Color"] = Color3.fromRGB(200, 240, 200),
     ["Toggle Desc Color"] = Color3.fromRGB(180, 180, 190),
 
-    ["Button Color"] = Color3.fromRGB(35, 22, 50),
-    ["Label Color"] = Color3.fromRGB(28, 18, 40),
+    ["Button Color"] = Color3.fromRGB(180, 210, 240),           
+    ["Label Color"] = Color3.fromRGB(180, 210, 240), 
     ["Dropdown Icon Color"] = Color3.fromRGB(160, 190, 240),
     ["Dropdown Selected Color"] = Color3.fromRGB(160, 190, 240),
     ["Dropdown Selected Check Color"] = Color3.fromRGB(255, 255, 255),
 
     ["Textbox Highlight Color"] = Color3.fromRGB(160, 190, 240),
     ["Box Highlight Color"] = Color3.fromRGB(160, 190, 240),
-    ["Slider Line Color"] = Color3.fromRGB(60, 40, 80),
+    ["Slider Line Color"] = Color3.fromRGB(100, 130, 180), 
     ["Slider Highlight Color"] = Color3.fromRGB(160, 190, 240),
 
     ["Tween Animation 1 Speed"] = DisableAnimation and 0 or 0.25,
